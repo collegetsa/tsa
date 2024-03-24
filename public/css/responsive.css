@@ -1,0 +1,171 @@
+@media (max-width: 600px) {
+    .search {
+        min-width: 70%;
+    }
+
+    .course-field-group {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-evenly;
+        margin: 50px 100px;
+        row-gap: 25px;
+        column-gap: 25px;
+    }
+
+    .course-field {
+        min-width: 150px;
+        width: 150px;
+    }
+
+    .Footer-section1 {
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+        margin-left: 20%;
+    }
+
+    .Footer-section3 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .home-content-group-field {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+    }
+
+    .center-page {
+        width: 90%;
+    }
+
+    .university {
+        width: 90%;
+    }
+
+    .university-card {
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 25px;
+    }
+
+    .contact-form {
+        width: 100%;
+    }
+
+    .why-aboard-group {
+        display: grid;
+        grid-template-columns: auto;
+    }
+
+}
+
+@media (min-width: 600px) {
+    .search {
+        min-width: 70%;
+    }
+
+    .course-field-group {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        justify-content: space-evenly;
+        margin: 50px 100px;
+        row-gap: 25px;
+        column-gap: 25px;
+    }
+
+    .center-page {
+        width: 80%;
+    }
+
+    .university-card {
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 25px;
+    }
+
+    .university {
+        width: 70%;
+    }
+
+    .contact-form {
+        width: 70%;
+    }
+}
+
+@media (min-width: 768px) {
+    .search {
+        min-width: 50%;
+    }
+
+    .course-field-group {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+    }
+
+    .center-page {
+        width: 80%;
+    }
+
+    .university-card {
+        display: grid;
+        grid-template-columns: auto auto;
+        row-gap: 25px;
+    }
+
+    .university {
+        width: 90%;
+    }
+
+    .contact-form {
+        width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .course-field-group {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+    }
+
+    .center-page {
+        width: 70%;
+    }
+
+    .contact-form {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .search {
+        min-width: 40%;
+    }
+
+    .course-field-group {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        row-gap: 40px;
+        column-gap: 20px;
+        margin: 50px 140px;
+    }
+
+    .center-page {
+        width: 50%;
+    }
+
+    .university-card {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        row-gap: 25px;
+    }
+
+    .contact-form {
+        width: 35%;
+    }
+}
