@@ -1,7 +1,13 @@
 "use client";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
-export default function Form() {
+export default function Form({ apply }: { apply: any }) {
+  const contact = () =>
+    toast.success("Congratulations! Our team contact you immediately");
+
+  const allField = () => toast.error("All fields are necessary!");
+
   const [data, setData] = useState({
     name: "",
     phone: "",
@@ -14,34 +20,47 @@ export default function Form() {
   };
 
   const apiURL =
-    "https://v1.nocodeapi.com/arunkumarkdeveloper/google_sheets/gKYBcXbMNXePLwBq?tabId=Sheet1";
+    "https://v1.nocodeapi.com/tsa/google_sheets/AsrSsaWgDORJztfq?tabId=Sheet1";
 
   const sendData = async () => {
-    const response = await fetch(apiURL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify([
-        [
-          data.name,
-          data.phone,
-          data.field,
-          data.message,
-          new Date().toLocaleString(),
-        ],
-      ]),
-    });
+    if (
+      data.name.length > 0 &&
+      data.phone.length > 0 &&
+      data.field.length > 0 &&
+      data.message.length > 0
+    ) {
+      const response = await fetch(apiURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify([
+          [
+            data.name,
+            data.phone,
+            data.field,
+            data.message,
+            new Date().toLocaleString(),
+          ],
+        ]),
+      });
 
-    if (response.ok) {
-      setData({ ...data, name: "", phone: "", field: "", message: "" });
+      if (response.ok) {
+        setData({ ...data, name: "", phone: "", field: "", message: "" });
+        contact();
+      }
+    } else {
+      allField();
     }
   };
 
   return (
     <div className="d-flex justify-content-center">
+      <Toaster position="top-center" />
       <div className="contact-form">
-        <h5 className="fw-700 text-center mb-20">FREE COUNSELLING</h5>
+        <h5 className="fw-700 text-center mb-20">
+          Apply Now (100% FREE COUNSELLING)
+        </h5>
         <span className="fw-600">Name</span>
         <input
           value={data.name}
@@ -52,6 +71,7 @@ export default function Form() {
         <span className="fw-600">Phone Number</span>
         <input
           value={data.phone}
+          type="number"
           name="phone"
           onChange={handleChange}
           className="form-input mb-20 mt-10"

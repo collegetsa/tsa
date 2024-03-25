@@ -22,8 +22,8 @@ export default function page() {
             />
             <p className="text-center">
               Studying MBBS abroad doesn't require paying a huge amount of fees.
-              When you apply via Eklavya, you can experience a low tuition fee
-              structure and minimal living cost
+              When you apply via <b>COLLEGETSA SERVICES</b>, you can experience
+              a low tuition fee structure and minimal living cost
             </p>
           </div>
           <div className="why-aboard">

@@ -32,7 +32,7 @@ export default function page() {
           <Image
             src="/image/ceo.webp"
             alt="collegetsa-ceo"
-            width={200}
+            width={250}
             height={250}
             className="mb-20"
           />

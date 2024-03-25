@@ -131,8 +131,8 @@ export default function Header() {
           <Image
             src="/image/close.png"
             alt="close"
-            width={30}
-            height={30}
+            width={25}
+            height={25}
             onClick={() => disPatch(isForm(false))}
             className="cursor-pointer"
           />

@@ -7,6 +7,14 @@ export default function Home() {
   const disPatch = useDispatch();
   return (
     <div className="home-bg d-flex flex-column justify-content-center align-items-center pb-100">
+      <div id="rssBlock">
+        <p className="cnnContents">
+          <span className="marqueeStyle">
+            TSA Services gives you several reasons to Study MBBS Abroad 2024
+            admission open!
+          </span>
+        </p>
+      </div>
       <h1 className="text mb-20" data-text="College TSA">
         College TSA
       </h1>
