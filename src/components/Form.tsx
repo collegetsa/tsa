@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function Form({ apply }: { apply: any }) {
+export default function Form() {
   const contact = () =>
     toast.success("Congratulations! Our team contact you immediately");
 
