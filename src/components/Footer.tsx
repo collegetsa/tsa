@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -35,13 +36,13 @@ export default function Footer() {
           <p>Machine learning</p>
           <p>Marketing management</p>
         </div>
-        <div>
-          <h6 className="fw-600 mb-20">Company</h6>
-          <p>About</p>
-          <p>Contact Us</p>
-          <p>Carrers</p>
-          <p>Privacy Policy</p>
-          <p>Terms & Conditions</p>
+        <div className="d-flex flex-column gap-3">
+          <h6 className="fw-600">Company</h6>
+          <Link href="/university">University</Link>
+          <Link href="/contact">Contact Us</Link>
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/careers">Careers</Link>
+          <Link href="/aboard">Why Aboard Education?</Link>
         </div>
       </div>
       <div className="d-flex justify-content-center">

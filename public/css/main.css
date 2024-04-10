@@ -998,3 +998,8 @@ h5 {
 h6 {
     line-height: 2 !important;
 }
+a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+}
