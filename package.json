@@ -1,5 +1,5 @@
 {
-  "name": "tsa",
+  "name": "new-tsa",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,22 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.1",
-    "bootstrap": "^5.3.3",
-    "next": "14.1.3",
+    "@reduxjs/toolkit": "^2.2.7",
+    "bcrypt": "^5.1.1",
+    "jose": "^5.8.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "mongoose": "^8.5.2",
+    "new-tsa": "file:",
+    "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "react-modal": "^3.16.1",
-    "react-redux": "^9.1.0"
+    "react-redux": "^9.1.2"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@types/react-modal": "^3.16.3",
+    "@types/node": "22.1.0",
+    "@types/react": "18.3.3",
     "eslint": "^8",
-    "eslint-config-next": "14.1.3",
-    "typescript": "^5"
+    "eslint-config-next": "14.2.3"
   }
 }
