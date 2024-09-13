@@ -1,7 +1,6 @@
 import { Database } from "@/backend/Database";
 import FreeCounsling from "@/backend/schema/FreeCounsling";
 import { NextResponse } from "next/server";
-import { verifyToken } from "@/utility/jwt";
 
 export const PUT = async (request, { params }) => {
   try {

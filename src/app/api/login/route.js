@@ -3,6 +3,7 @@ import { Database } from "@/backend/Database";
 import User from "@/backend/schema/User";
 const bcrypt = require("bcrypt");
 import jwt from "jsonwebtoken";
+import * as jose from "jose";
 
 const secretKey = process.env.JWT_SECRET_KEY || "collegetsainfo";
 

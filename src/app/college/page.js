@@ -1,38 +1,28 @@
-import "../../public/css/header.css";
-import "../../public/css/main.css";
-import "../../public/css/layout.css";
-import "../../public/css/responsive.css";
-import ReduxProvider from "@/frontend/redux/ReduxProvider";
 import dynamic from "next/dynamic";
-import { CookiesProvider } from "next-client-cookies/server";
-
-const Header = dynamic(() => import("@/frontend/section/Header"));
-const Footer = dynamic(() => import("@/frontend/section/Footer"));
+const CollegeList = dynamic(() => import("@/frontend/admin/CollegeList"));
 
 export const metadata = {
-  title: "College TSA - Find Your Best College, Course and Career Path",
+  title: "College | College TSA - Find Your best Colleges",
   description:
     "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
   keywords: [
     "collegetsa",
-    "collegetsa.com",
-    "admission",
-    "cutoff marks",
-    "college",
-    "course",
     `admission ${new Date().getFullYear()}-${new Date().getFullYear() + 1}`,
     "college admissions",
-    "top colleges in tamilnadu",
-    "career guidance",
-    "how to find the best college for my career",
-    "career advice for college students",
-    "how to choose the right college course",
-    `best courses in ${new Date().getFullYear()}-${
-      new Date().getFullYear() + 1
-    }`,
     `best colleges in ${new Date().getFullYear()}-${
       new Date().getFullYear() + 1
     }`,
+    "best colleges in tamilnadu",
+    "best engineering colleges in tamilnadu",
+    "best medical colleges in tamilnadu",
+    "best law colleges in tamilnadu",
+    "best mba colleges in tamilnadu",
+    "best nursing colleges in tamilnadu",
+    "best aeronautical engineering colleges in tamilnadu",
+    "best engineering colleges in tamilnadu with low fees",
+    "best agriculture college in tamilnadu",
+    "best architecture colleges in tamilnadu",
+    "best arts colleges in tamilnadu",
   ],
   robots: {
     index: true,
@@ -47,19 +37,20 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  metadataBase: new URL(`${process.env.NEXT_PUBLIC_API_URL}`),
+  metadataBase: new URL(`${process.env.NEXT_PUBLIC_API_URL}/college`),
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_API_URL}`,
+    canonical: `${process.env.NEXT_PUBLIC_API_URL}/college`,
     languages: {
-      "en-US": `${process.env.NEXT_PUBLIC_API_URL}/en-US`,
-      "de-DE": `${process.env.NEXT_PUBLIC_API_URL}/de-DE`,
+      "en-US": `${process.env.NEXT_PUBLIC_API_URL}/college/en-US`,
+      "de-DE": `${process.env.NEXT_PUBLIC_API_URL}/college/de-DE`,
     },
   },
   openGraph: {
-    title: "College TSA - Find Your Best College, Course and Career Path",
+    title:
+      "College | College TSA - Find Your best College, Course and Career Path",
     description:
       "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
-    url: `${process.env.NEXT_PUBLIC_API_URL}`,
+    url: `${process.env.NEXT_PUBLIC_API_URL}/college`,
     siteName: "collegetsa.com",
     type: "website",
     images: [
@@ -77,7 +68,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     site: "collegetsa.com",
-    title: "College TSA - Find Your Best College, Course and Career Path",
+    title:
+      "College | College TSA - Find Your best College, Course and Career Path",
     description:
       "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
     creator: "@collegetsa",
@@ -98,25 +90,19 @@ export const metadata = {
   category: "Education",
 };
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
-        <CookiesProvider>
-          <ReduxProvider>
-            <Header />
-            {children}
-            <Footer />
-          </ReduxProvider>
-        </CookiesProvider>
-      </body>
-    </html>
+const getCollegeList = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/college`,
+    {
+      cache: "no-store",
+    }
   );
+  if (response.ok) {
+    return response.json();
+  }
+};
+
+export default async function page() {
+  const CollegeLists = await getCollegeList();
+  return <CollegeList CollegeLists={CollegeLists} />;
 }

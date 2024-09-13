@@ -39,7 +39,7 @@ export default function Form() {
     studentPhone: "",
     markSheet: file,
     dateOfBirth: "",
-    appliedCourse: "",
+    appliedCourse: form.course,
     appliedCollege: form.title,
     fatherName: "",
     parentPhone: "",
@@ -72,6 +72,7 @@ export default function Form() {
     setAdmissionFormData({
       ...admissionFormData,
       ["appliedCollege"]: form.title,
+      ["appliedCourse"]: form.course,
     });
     if (document) {
       document.body.style.overflow = form.isForm ? "hidden" : "auto";
@@ -93,7 +94,6 @@ export default function Form() {
   const enterForm = () => toast.error("Enter all the details");
   const testPhone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const testEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
 
   const sendFreeCounsling = async () => {
     setIsData(true);
@@ -192,7 +192,13 @@ export default function Form() {
         style={{ display: "flex", justifyContent: "space-between" }}
         className="mb-10">
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <Image src="/images/logo.png" width={20} height={20} alt="" />
+          <Image
+            src="/images/logo.png"
+            width={20}
+            height={20}
+            alt=""
+            unoptimized
+          />
           <small>
             <b>Free Counsling 2024</b>
           </small>
@@ -211,7 +217,7 @@ export default function Form() {
         />
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <Image src={form.logo} width={30} height={30} alt="" />
+        <Image src={form.logo} width={30} height={30} alt="" unoptimized />
         <h3>{form.title}</h3>
       </div>
       {isValid ? (
@@ -343,7 +349,13 @@ export default function Form() {
             alignItems: "center",
             gap: "10px",
           }}>
-          <Image src="/images/logo.png" width={20} height={20} alt="" />
+          <Image
+            src="/images/logo.png"
+            width={20}
+            height={20}
+            alt=""
+            unoptimized
+          />
           <small>
             <b>Admission Form 2024</b>
           </small>
@@ -364,7 +376,7 @@ export default function Form() {
       <div
         style={{ display: "flex", alignItems: "center", gap: "10px" }}
         className="mb-10">
-        <Image src={form.logo} width={30} height={30} alt="" />
+        <Image src={form.logo} width={30} height={30} alt="" unoptimized />
         <h3>{form.title}</h3>
       </div>
       {isValid ? (

@@ -7,9 +7,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { setAuth } from "../redux/AppSlice";
-import toast, { Toaster } from "react-hot-toast"; 
+import toast, { Toaster } from "react-hot-toast";
+import { useCookies } from "next-client-cookies";
 
 function Header() {
+  const cookies = useCookies();
   const disPatch = useDispatch();
   const router = useRouter();
   const auth = useSelector((state) => state.app.auth);
@@ -17,13 +19,14 @@ function Header() {
 
   const logOut = () => toast.success("LogOut Successfully");
 
-   useEffect(() => {
-     const token = localStorage.getItem("token");
-     if (token) {
-       const decoded = jwtDecode(token);
+  useEffect(() => {
+    const jwtToken = cookies.get("jwtToken");
+     if (jwtToken) {
+       const decoded = jwtDecode(jwtToken);
        disPatch(setAuth(decoded));
      }
-   }, []);
+  }, []);
+  
   return (
     <React.Fragment>
       <Toaster />
@@ -64,11 +67,9 @@ function Header() {
               <li onClick={() => setShowNavbar(false)}>
                 <Link href="/">Home</Link>
               </li>
-              {auth?.email === "collegetsainfo@gmail.com" && (
-                <li onClick={() => setShowNavbar(false)}>
-                  <Link href="/admin">Admin</Link>
-                </li>
-              )}
+              <li onClick={() => setShowNavbar(false)}>
+                <Link href="/college">Colleges</Link>
+              </li>
               <li onClick={() => setShowNavbar(false)}>Updates</li>
               <li onClick={() => setShowNavbar(false)}>Exams</li>
               <li onClick={() => setShowNavbar(false)}>
@@ -100,7 +101,7 @@ function Header() {
                     <div className="dropdown-content">
                       <div
                         style={{ display: "flex", alignItems: "center" }}
-                        className="cursor-pointer mb-15"
+                        className="cursor-pointer mb-20"
                         onClick={() => setShowNavbar(false)}>
                         <span>
                           <Image
@@ -111,17 +112,66 @@ function Header() {
                             className="mr-10"
                           />
                         </span>
-                        <span>{auth?.userName}</span>
+                        <span>Hi, {auth?.userName}</span>
+                      </div>
+                      <div
+                        style={{ display: "flex", alignItems: "center" }}
+                        className="cursor-pointer mb-20"
+                        onClick={() => setShowNavbar(false)}>
+                        <Link href="/admin/free-counsling-list">
+                          <span>
+                            <Image
+                              src="/images/freecounsling.png"
+                              width={20}
+                              height={20}
+                              alt=""
+                              className="mr-10"
+                            />
+                          </span>
+                          <span>FreeCounsling</span>
+                        </Link>
+                      </div>
+                      <div
+                        style={{ display: "flex", alignItems: "center" }}
+                        className="cursor-pointer mb-20"
+                        onClick={() => setShowNavbar(false)}>
+                        <Link href="/admin/admission-list">
+                          <span>
+                            <Image
+                              src="/images/admission.png"
+                              width={20}
+                              height={20}
+                              alt=""
+                              className="mr-10"
+                            />
+                          </span>
+                          <span>Admission</span>
+                        </Link>
+                      </div>
+                      <div
+                        style={{ display: "flex", alignItems: "center" }}
+                        className="cursor-pointer mb-20"
+                        onClick={() => setShowNavbar(false)}>
+                        <Link href="/admin/college/create">
+                          <span>
+                            <Image
+                              src="/images/add.png"
+                              width={20}
+                              height={20}
+                              alt=""
+                              className="mr-10"
+                            />
+                          </span>
+                          <span>Create College</span>
+                        </Link>
                       </div>
                       <div
                         style={{ display: "flex", alignItems: "center" }}
                         className="cursor-pointer"
                         onClick={() => {
-                          localStorage.clear("token");
-                          // router.refresh();
+                          cookies.remove("jwtToken");
                           window.location.reload();
                           setShowNavbar(false);
-                          // logOut()
                         }}>
                         <span>
                           <Image

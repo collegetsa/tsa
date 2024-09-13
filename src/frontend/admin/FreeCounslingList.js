@@ -2,25 +2,31 @@
 import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { useCookies } from "next-client-cookies";
 
-export default function FreeCounslingList({ FreeCounslingLists }) {
+export default function FreeCounslingList({ data }) {
+  const cookies = useCookies();
   const router = useRouter()
   
   const editList = async (option, item) => {
+    const jwtToken = cookies.get("jwtToken");
     const response = await fetch(`/api/free-counsling/${item?._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${jwtToken}`,
       },
       body: JSON.stringify({ status: option }),
     });
   };
 
   const deleteList = async (item) => {
+    const jwtToken = cookies.get("jwtToken");
     const response = await fetch(`/api/free-counsling/${item?._id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${jwtToken}`,
       },
     });
     if (response.ok) {
@@ -42,7 +48,7 @@ export default function FreeCounslingList({ FreeCounslingLists }) {
             <th>Message</th>
             <th>Status</th>
           </tr>
-          {FreeCounslingLists?.map((item, index) => (
+          {data?.map((item, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{item?.studentName}</td>

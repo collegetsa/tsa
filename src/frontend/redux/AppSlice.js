@@ -10,6 +10,7 @@ const AppSlice = createSlice({
       title: "",
       type: "",
       logo: "",
+      course:"",
     },
   },
   reducers: {

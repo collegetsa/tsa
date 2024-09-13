@@ -6,8 +6,10 @@ import { useDispatch } from "react-redux";
 import { setAuth } from "../redux/AppSlice";
 import { jwtDecode } from "jwt-decode";
 import toast, { Toaster } from "react-hot-toast"; 
+import { useCookies } from "next-client-cookies";
 
 const AuthPage = ({ authType }) => {
+  const cookies = useCookies();
   const disPatch = useDispatch()
   const router = useRouter();
   const [userData, setUserData] = useState({
@@ -72,7 +74,7 @@ const AuthPage = ({ authType }) => {
     });
     const data = await response.json();
     if (response.ok) {
-      localStorage.setItem("token", data.token);
+      cookies.set("jwtToken", data.token);
       const decoded = jwtDecode(data.token);
       disPatch(setAuth(decoded));
       setUserData({
