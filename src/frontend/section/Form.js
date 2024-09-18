@@ -200,7 +200,7 @@ export default function Form() {
             unoptimized
           />
           <small>
-            <b>Free Counsling 2024</b>
+            <b>Free Counsling {new Date().getFullYear()}</b>
           </small>
         </div>
         <Image
@@ -357,7 +357,7 @@ export default function Form() {
             unoptimized
           />
           <small>
-            <b>Admission Form 2024</b>
+            <b>Admission Form {new Date().getFullYear()}</b>
           </small>
         </div>
         <Image
@@ -692,7 +692,9 @@ export default function Form() {
               />
             </a>
           </div>
-          <p className="font-12">Copyright © 2024 collegetsa.com</p>
+          <p className="font-12">
+            Copyright © {new Date().getFullYear()} collegetsa.com
+          </p>
         </div>
         {form?.type === "admission" ? admissionLayout : freeCounslingLayout}
       </div>

@@ -112,7 +112,7 @@ export default function RootLayout({ children }) {
         <CookiesProvider>
           <ReduxProvider>
             <Header />
-            {children}
+            <div style={{minHeight:"100vh"}}>{children}</div>
             <Footer />
           </ReduxProvider>
         </CookiesProvider>

@@ -298,7 +298,7 @@ export default function Table() {
             <th>#</th>
             <th>University lists in Tamilnadu</th>
             <th>Location</th>
-            <th>Application 2024</th>
+            <th>Application {new Date().getFullYear()}</th>
           </tr>
           {UniversityList.map((item) => (
             <tr

@@ -1105,7 +1105,7 @@ a {
 
 .select-search {
     width: 40%;
-    height: 300px;
+    max-height: 300px;
     background-color: #fff;
     position: absolute;
     border: #d9d9d9 1px solid;
@@ -1115,12 +1115,12 @@ a {
     display: none;
 }
 
-.select-search p {
-    padding: 10px;
+.select-search div {
+    /* padding: 10px; */
     cursor: pointer;
 }
 
-.select-search p:hover {
+.select-search div:hover {
     background-color: aliceblue;
 }
 
@@ -1142,10 +1142,10 @@ a {
 
 .loading-state {
     position: fixed;
-    top: 0;
+    top: 61px;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+        height: 75%;
     background-color: #fff;
     z-index: 9999;
     display: flex;
@@ -1166,4 +1166,17 @@ a {
     to {
         transform: rotate(360deg);
     }
+}
+.one-line-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical;
+}
+
+.two-line-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical;
 }

@@ -28,7 +28,6 @@ export async function middleware(request) {
   //   return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   // }
 
-
   // Client
   const clientToken = request.cookies.get("jwtToken")?.value;
   const jwtToken = clientToken && jwtDecode(clientToken);

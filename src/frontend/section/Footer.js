@@ -9,12 +9,12 @@ export default function Footer() {
       <div className="Footer-section1">
         <div>
           <h3 className="fw-600 mb-20">Top Exams</h3>
-          <p>JEE Main 2024</p>
-          <p>NEET 2024</p>
-          <p>Gate 2024</p>
-          <p>CAT 2024</p>
-          <p>CMAT 2024</p>
-          <p>CLAT 2024</p>
+          <p>JEE Main {new Date().getFullYear()}</p>
+          <p>NEET {new Date().getFullYear()}</p>
+          <p>Gate {new Date().getFullYear()}</p>
+          <p>CAT {new Date().getFullYear()}</p>
+          <p>CMAT {new Date().getFullYear()}</p>
+          <p>CLAT {new Date().getFullYear()}</p>
         </div>
         <div>
           <h3 className="fw-600 mb-20">Admission</h3>
@@ -88,8 +88,7 @@ export default function Footer() {
         </a>
         <a
           href="https://www.instagram.com/tsa_services_education_gudie?igsh=MTluN25yN2E0MDlzZg=="
-          target="_blank"
-        >
+          target="_blank">
           <Image
             src="/images/instagram.svg"
             alt="instagram-collegetsa"
@@ -139,7 +138,9 @@ export default function Footer() {
       <div className="d-flex justify-content-center">
         <hr style={{ width: "90%" }} />
       </div>
-      <p className="text-center mt-20">Copyright © 2024 collegetsa.com</p>
+      <p className="text-center mt-20">
+        Copyright © {new Date().getFullYear()} collegetsa.com
+      </p>
     </footer>
   );
 }

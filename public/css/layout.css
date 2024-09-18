@@ -274,7 +274,7 @@
     background-image: url(../images/form-bg.png);
     width: 400px;
     background-size: cover;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
     color: #000000;
     display: flex;
     flex-direction: column;
@@ -388,6 +388,7 @@ select.did-floating-select::-ms-expand {
     background-size: 12px;
     font-size: 12px;
     font-family: "Inter", sans-serif !important;
+    min-width: 200px
 }
 
 .social-group {
@@ -457,7 +458,6 @@ select.did-floating-select::-ms-expand {
     border: 1px solid #d9d9d9;
     padding: 10px;
     padding-left: 25px;
-    /* text-align: center; */
 }
 
 #customers tr:nth-child(even) {
@@ -557,6 +557,12 @@ input[type=file]::file-selector-button {
 /* College Page */
 .college-page {
     width: 100%;
+    -webkit-user-select: none;
+        /* Safari */
+        -ms-user-select: none;
+        /* IE 10 and IE 11 */
+        user-select: none;
+        /* Standard syntax */
 }
 
 .template {
@@ -599,16 +605,14 @@ input[type=file]::file-selector-button {
     margin-bottom: 20px;
 }
 
-.one-line-text{
-    overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 1 !important;
-        -webkit-box-orient: vertical;
+.separete-line {
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    color: #919191;
 }
 
-.two-line-text {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical;
+.college-filter-group-select {
+    display: flex;
+    align-items: baseline;
 }

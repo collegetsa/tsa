@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { setForm } from "../redux/AppSlice";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const ViewCollege = ({
   data,
@@ -10,9 +12,23 @@ const ViewCollege = ({
   deleteCollege,
   type,
 }) => {
+  const router = useRouter();
   const disPatch = useDispatch();
   const form = useSelector((state) => state.app.form);
   const auth = useSelector((state) => state.app.auth);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     disPatch(
+  //       setForm({
+  //         isForm: true,
+  //         title: data?.collegeName,
+  //         type: "counsling",
+  //         logo: data?.logo,
+  //       })
+  //     );
+  //   }, 5000);
+  // }, []);
 
   return (
     <div
@@ -51,7 +67,6 @@ const ViewCollege = ({
               )}
             </div>
           )}
-
           <div
             className="content-page"
             style={{
@@ -61,11 +76,13 @@ const ViewCollege = ({
             <Image src={data?.logo} width={50} height={50} alt="" unoptimized />
             <div className="ml-20">
               <h1 className="two-line-text">
-                {data?.collegeName}: Admission 2024, Cutoff, Courses, Fees,
-                Placement, Ranking
+                {data?.collegeName}: Admission {new Date().getFullYear()},
+                Cutoff, Courses, Fees, Placement, Ranking
               </h1>
               <div className="mt-10 template-icons-group">
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="mt-10">
                   <Image
                     src="/images/address.png"
                     width={17}
@@ -73,10 +90,12 @@ const ViewCollege = ({
                     alt=""
                     className="template-icons"
                   />
-                  <span className="one-line-text ml-5">{data?.location}</span>
+                  <span className="one-line-text ml-10">{data?.location}</span>
                 </div>
-                <div className="ml-15 mr-15">|</div>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div className="separete-line">|</div>
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="mt-10">
                   <Image
                     src="/images/ownership.png"
                     width={17}
@@ -84,10 +103,12 @@ const ViewCollege = ({
                     alt=""
                     className="template-icons"
                   />
-                  <span className="one-line-text ml-5">{data?.ownership}</span>{" "}
+                  <span className="one-line-text ml-10">{data?.ownership}</span>{" "}
                 </div>
-                <div className="ml-15 mr-15">|</div>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div className="separete-line">|</div>
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="mt-10">
                   <Image
                     src="/images/college.png"
                     width={17}
@@ -95,10 +116,14 @@ const ViewCollege = ({
                     alt=""
                     className="template-icons"
                   />
-                  <span className="one-line-text ml-5">{data?.university}</span>
+                  <span className="one-line-text ml-10">
+                    {data?.university}
+                  </span>
                 </div>
-                <div className="ml-15 mr-15">|</div>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div className="separete-line">|</div>
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="mt-10">
                   <Image
                     src="/images/category.png"
                     width={17}
@@ -106,7 +131,7 @@ const ViewCollege = ({
                     alt=""
                     className="template-icons"
                   />
-                  <span className="one-line-text ml-5">
+                  <span className="one-line-text ml-10">
                     {data?.collegeType}
                   </span>
                 </div>
@@ -140,15 +165,22 @@ const ViewCollege = ({
                   })
                 );
               }}>
-              <u>Addmission 2024-25</u>
+              <u>Addmission {new Date().getFullYear()}</u>
             </span>
-            {/* <span
+            <span
               className="ml-20 cursor-pointer"
               onClick={() =>
-                document.getElementById("course-list")?.scrollIntoView()
+                document
+                  .getElementById("course-list")
+                  ?.scrollIntoView({ behavior: "smooth" })
               }>
               <u>Courses</u>
-            </span> */}
+            </span>
+            <span
+              className="ml-20 cursor-pointer"
+              onClick={() => router.push("/college")}>
+              <u>Get More Colleges...</u>
+            </span>
           </div>
         </div>
         <div
@@ -161,49 +193,51 @@ const ViewCollege = ({
           <div
             className="mt-20 content-page"
             dangerouslySetInnerHTML={{ __html: data?.content }}></div>
-          <div
-            className="content-page"
-            id="course-list"
-            style={{
-              overflowY: "auto",
-              scrollbarWidth: "thin",
-              textWrap: "nowrap",
-            }}>
-            <table id="customers">
-              <tbody>
-                <tr>
-                  <th>#</th>
-                  <th>Available Courses</th>
-                  <th>Fees</th>
-                  <th>Addmission 2024-2025</th>
-                </tr>
-                {data?.course?.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="cursor-pointer"
-                    onClick={() => {
-                      disPatch(
-                        setForm({
-                          isForm: true,
-                          title: data?.collegeName,
-                          type: "admission",
-                          logo: data?.logo,
-                          course: item?.courseName,
-                        })
-                      );
-                    }}>
-                    <td>{index + 1}</td>
-                    <td>{item.courseName}</td>
-                    <td>{item.fees}</td>
-                    <td>Apply Now</td>
+          {data?.course?.length > 0 && (
+            <div
+              className="content-page"
+              id="course-list"
+              style={{
+                overflowY: "auto",
+                scrollbarWidth: "thin",
+                textWrap: "nowrap",
+              }}>
+              <table id="customers">
+                <tbody>
+                  <tr>
+                    <th>#</th>
+                    <th>Available Courses</th>
+                    <th>Fees</th>
+                    <th>Addmission {new Date().getFullYear()}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                  {data?.course?.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="cursor-pointer"
+                      onClick={() => {
+                        disPatch(
+                          setForm({
+                            isForm: true,
+                            title: data?.collegeName,
+                            type: "admission",
+                            logo: data?.logo,
+                            course: item?.courseName,
+                          })
+                        );
+                      }}>
+                      <td>{index + 1}</td>
+                      <td>{item?.courseName}</td>
+                      <td>{item?.fees?.length > 0 ? item?.fees : "NA"}</td>
+                      <td>Apply Now</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
-      {/* <Image
+      <Image
         src="/images/top.png"
         width={30}
         height={30}
@@ -216,10 +250,12 @@ const ViewCollege = ({
           borderRadius: "100px",
           cursor: "pointer",
         }}
-        onClick={() =>
-          document.getElementById("college-page")?.scrollIntoView()
-        }
-      /> */}
+        onClick={() => {
+          document
+            .getElementById("college-page")
+            ?.scrollIntoView({ behavior: "smooth" });
+        }}
+      />
     </div>
   );
 };

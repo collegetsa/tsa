@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import Form from "./Form";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { setAuth } from "../redux/AppSlice";
 import toast, { Toaster } from "react-hot-toast";
@@ -13,11 +12,8 @@ import { useCookies } from "next-client-cookies";
 function Header() {
   const cookies = useCookies();
   const disPatch = useDispatch();
-  const router = useRouter();
   const auth = useSelector((state) => state.app.auth);
   const [showNavbar, setShowNavbar] = useState(false);
-
-  const logOut = () => toast.success("LogOut Successfully");
 
   useEffect(() => {
     const jwtToken = cookies.get("jwtToken");
@@ -70,6 +66,30 @@ function Header() {
               <li onClick={() => setShowNavbar(false)}>
                 <Link href="/college">Colleges</Link>
               </li>
+              {/* <li>
+                <div className="did-floating-label-content mb-0">
+                  <select className="did-floating-select" name="interest">
+                    <option value="Engineering">Engineering</option>
+                    <option value="Arts &amp; Science">
+                      Arts &amp; Science
+                    </option>
+                    <option value="Medical">Medical</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Law">Law</option>
+                    <option value="Commerce">Commerce</option>
+                    <option value="Hotel Managemen">Hotel Management</option>
+                    <option value="Computer">Computer</option>
+                    <option value="Design">Design</option>
+                    <option value="Pharmacy">Pharmacy</option>
+                    <option value="Management">Management</option>
+                    <option value="Animation">Animation</option>
+                    <option value="Architecture">Architecture</option>
+                    <option value="Dental">Dental</option>
+                    <option value="Education">Education</option>
+                    <option value="Pharamedical">Pharamedical</option>
+                  </select>
+                </div>
+              </li> */}
               <li onClick={() => setShowNavbar(false)}>Updates</li>
               <li onClick={() => setShowNavbar(false)}>Exams</li>
               <li onClick={() => setShowNavbar(false)}>
@@ -114,57 +134,61 @@ function Header() {
                         </span>
                         <span>Hi, {auth?.userName}</span>
                       </div>
-                      <div
-                        style={{ display: "flex", alignItems: "center" }}
-                        className="cursor-pointer mb-20"
-                        onClick={() => setShowNavbar(false)}>
-                        <Link href="/admin/free-counsling-list">
-                          <span>
-                            <Image
-                              src="/images/freecounsling.png"
-                              width={20}
-                              height={20}
-                              alt=""
-                              className="mr-10"
-                            />
-                          </span>
-                          <span>FreeCounsling</span>
-                        </Link>
-                      </div>
-                      <div
-                        style={{ display: "flex", alignItems: "center" }}
-                        className="cursor-pointer mb-20"
-                        onClick={() => setShowNavbar(false)}>
-                        <Link href="/admin/admission-list">
-                          <span>
-                            <Image
-                              src="/images/admission.png"
-                              width={20}
-                              height={20}
-                              alt=""
-                              className="mr-10"
-                            />
-                          </span>
-                          <span>Admission</span>
-                        </Link>
-                      </div>
-                      <div
-                        style={{ display: "flex", alignItems: "center" }}
-                        className="cursor-pointer mb-20"
-                        onClick={() => setShowNavbar(false)}>
-                        <Link href="/admin/college/create">
-                          <span>
-                            <Image
-                              src="/images/add.png"
-                              width={20}
-                              height={20}
-                              alt=""
-                              className="mr-10"
-                            />
-                          </span>
-                          <span>Create College</span>
-                        </Link>
-                      </div>
+                      {auth?.email === "collegetsainfo@gmail.com" && (
+                        <React.Fragment>
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                            className="cursor-pointer mb-20"
+                            onClick={() => setShowNavbar(false)}>
+                            <Link href="/admin/free-counsling-list">
+                              <span>
+                                <Image
+                                  src="/images/freecounsling.png"
+                                  width={20}
+                                  height={20}
+                                  alt=""
+                                  className="mr-10"
+                                />
+                              </span>
+                              <span>FreeCounsling</span>
+                            </Link>
+                          </div>
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                            className="cursor-pointer mb-20"
+                            onClick={() => setShowNavbar(false)}>
+                            <Link href="/admin/admission-list">
+                              <span>
+                                <Image
+                                  src="/images/admission.png"
+                                  width={20}
+                                  height={20}
+                                  alt=""
+                                  className="mr-10"
+                                />
+                              </span>
+                              <span>Admission</span>
+                            </Link>
+                          </div>
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                            className="cursor-pointer mb-20"
+                            onClick={() => setShowNavbar(false)}>
+                            <Link href="/admin/college/create">
+                              <span>
+                                <Image
+                                  src="/images/add.png"
+                                  width={20}
+                                  height={20}
+                                  alt=""
+                                  className="mr-10"
+                                />
+                              </span>
+                              <span>Create College</span>
+                            </Link>
+                          </div>
+                        </React.Fragment>
+                      )}
                       <div
                         style={{ display: "flex", alignItems: "center" }}
                         className="cursor-pointer"

@@ -1,6 +1,6 @@
 @media (max-width: 600px) {
     .home-bg {
-        background-image: url(../images/home2.jpg);
+        background-image: url(../images/home2.png);
     }
 
     .ReactModal__Content {
@@ -98,11 +98,15 @@
         flex-direction: column;
         align-items: start;
     }
+
+    .separete-line {
+        display: none;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 768px) {
     .home-bg {
-        background-image: url(../images/home2.jpg);
+        background-image: url(../images/home2.png);
     }
 
     .input-search-select {
@@ -130,9 +134,9 @@
         margin: 0 5%;
     }
 
-        .content-page {
-            width: 90%;
-        }
+    .content-page {
+        width: 90%;
+    }
 
     .template {
         padding: 40px 5%;
@@ -146,6 +150,10 @@
 
     .template h1 {
         font-size: 18px;
+    }
+
+    .separete-line {
+        display: none;
     }
 }
 
@@ -171,9 +179,9 @@
         width: 350px;
     }
 
-        .content-page {
-            width: 90%;
-        }
+    .content-page {
+        width: 90%;
+    }
 
     .table {
         margin: 0 5%;
@@ -186,7 +194,7 @@
         grid-template-columns: auto auto auto auto auto;
     }
 
-        .content-page {
-            width: 80%;
-        }
+    .content-page {
+        width: 80%;
+    }
 }
