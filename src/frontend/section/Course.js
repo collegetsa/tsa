@@ -99,8 +99,8 @@ export default function Course({ CourseLists }) {
   return (
     <div className="course-field-group">
       {courseType.map((field, index) => (
-        <Link href={`/course/${field?.pageUrl}`}>
-          <div className="course-field" key={index}>
+        <Link key={index} href={`/course/${field?.pageUrl}`}>
+          <div className="course-field">
             <Image
               src={field?.img}
               alt=""
