@@ -289,7 +289,7 @@ export default function Table() {
     },
   ];
 
-  const disPatch=useDispatch()
+  const disPatch = useDispatch();
   return (
     <div className="table mb-30 mt-30">
       <table id="customers">

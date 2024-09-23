@@ -988,19 +988,19 @@ h2 {
 }
 
 h3 {
-    line-height: 2 !important;
+    line-height: 1.5 !important;
 }
 
 h4 {
-    line-height: 2 !important;
+    line-height: 1.5 !important;
 }
 
 h5 {
-    line-height: 2 !important;
+    line-height: 1.5 !important;
 }
 
 h6 {
-    line-height: 2 !important;
+    line-height: 1.5 !important;
 }
 
 .color-white {
@@ -1179,4 +1179,12 @@ a {
     display: -webkit-box;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical;
+}
+.disabled {
+    opacity: 10%;
+    cursor: auto !important;
+}
+
+.table a {
+    color: #000 !important;
 }

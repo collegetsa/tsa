@@ -7,40 +7,46 @@ import ViewCollege from "../section/ViewCollege";
 import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 import Keywords from "./Keywords";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsPreview } from "../redux/AppSlice";
+
+const createData = {
+  collegeData: {
+    logo: "",
+    collegeName: "",
+    university: "",
+    collegeType: "",
+    location: "",
+    ownership: "",
+    course: [],
+    content: "",
+  },
+  keywords: [],
+  pageUrl: "",
+};
 
 const CreateCollege = ({ type, editData }) => {
   const cookies = useCookies();
   const router = useRouter();
-  const createData = {
-    collegeData: {
-      logo: "",
-      collegeName: "",
-      university: "",
-      collegeType: [],
-      location: "",
-      ownership: "",
-      course: [],
-      content: "",
-    },
-    keywords: [],
-    pageUrl: "",
-  };
+  const disPatch = useDispatch();
 
-  const originalData = type === "edit" ? editData : createData;
+  const originalData = type === "create" ? createData : editData;
 
   const [data, setData] = useState(originalData?.collegeData);
   const [data2, setData2] = useState(originalData?.keywords);
 
-  const [isPreview, setIsPreview] = useState(false);
+  const isPreview = useSelector((state) => state.app.isPreview);
   const [isEditCourse, setIsEditCourse] = useState(false);
   const [courseList, setCourseList] = useState({ courseName: "", fees: "" });
-
-  console.log(data?.collegeType);
+  const [isEditKeyword, setIsEditKeyword] = useState(false);
 
   const addedCollege = () => toast.success("College Created");
+  const existCollege = () => toast.error("College Already Exist");
   const updatedCollege = () => toast.success("College Updated");
   const deletedCollege = () => toast.success("College Deleted");
   const EnterCourse = () => toast.error("Give a Course");
+  const EnterCollege = () => toast.error("Give a College Data");
+  const EnterKeywords = () => toast.error("Give a Keywords for college");
 
   const handleChange = (e) => {
     setData((prev) => {
@@ -55,11 +61,11 @@ const CreateCollege = ({ type, editData }) => {
   };
 
   const addField = (e) => {
-    let temp = [...data?.collegeType];
+    let temp = data?.collegeType;
 
     setData((prev) => {
       if (!temp?.includes(e.target.value) && e.target.value !== "") {
-        return { ...prev, [e.target.name]: [...temp, e.target.value] };
+        return { ...prev, [e.target.name]: temp + " " + e.target.value };
       } else {
         return { ...prev, [e.target.name]: temp };
       }
@@ -107,18 +113,33 @@ const CreateCollege = ({ type, editData }) => {
   const addCollege = async () => {
     const jwtToken = cookies.get("jwtToken");
     if (type === "create") {
-      const response = await fetch("/api/college", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtToken}`,
-        },
-        body: JSON.stringify({ collegeData: data, keywords: data2, pageUrl }),
-      });
-      if (response.ok) {
-        addedCollege();
-        router.push("/college");
-        router.refresh();
+      if (pageUrl && data2?.length >= 1) {
+        const response = await fetch("/api/college", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+          body: JSON.stringify({
+            collegeData: data,
+            keywords: data2,
+            pageUrl,
+          }),
+        });
+        if (response.ok) {
+          addedCollege();
+          router.push("/college");
+          router.refresh();
+        } else if (!response.ok) {
+          existCollege();
+        }
+      } else {
+        if (!pageUrl) {
+          EnterCollege();
+        }
+        if (data2?.length === 0) {
+          EnterKeywords();
+        }
       }
     } else if (type === "edit") {
       const response = await fetch(`/api/college/${editData?.pageUrl}`, {
@@ -153,8 +174,6 @@ const CreateCollege = ({ type, editData }) => {
     }
   };
 
-  const [isEditKeyword, setIsEditKeyword] = useState(false);
-
   return (
     <React.Fragment>
       {!isPreview ? (
@@ -167,6 +186,7 @@ const CreateCollege = ({ type, editData }) => {
             />
           ) : (
             <div className="table mb-30 mt-20">
+              <div style={{ overflowX: "auto" }}></div>
               <table id="customers" className="mb-0">
                 <tbody>
                   <tr>
@@ -200,7 +220,7 @@ const CreateCollege = ({ type, editData }) => {
                             alignItems: "center",
                           }}
                           className="cursor-pointer"
-                          onClick={() => setIsPreview(true)}>
+                          onClick={() => disPatch(setIsPreview(true))}>
                           <Image
                             src="/images/preview.png"
                             width={20}
@@ -214,7 +234,7 @@ const CreateCollege = ({ type, editData }) => {
                     </th>
                   </tr>
                   <tr>
-                    <td>
+                    <td style={{ width: "50%" }}>
                       <div className="did-floating-label-content mb-0">
                         <input
                           className="did-floating-input"
@@ -229,7 +249,7 @@ const CreateCollege = ({ type, editData }) => {
                         </label>
                       </div>
                     </td>
-                    <td>
+                    <td style={{ width: "50%" }}>
                       <div className="did-floating-label-content mb-0">
                         <input
                           className="did-floating-input"
@@ -263,14 +283,18 @@ const CreateCollege = ({ type, editData }) => {
                     </td>
                     <td>
                       <div className="did-floating-label-content mb-0">
-                        <input
-                          className="did-floating-input"
-                          type="text"
-                          placeholder=""
-                          value={data?.ownership}
-                          onChange={handleChange}
+                        <select
+                          className="did-floating-select"
                           name="ownership"
-                        />
+                          value={data?.ownership}
+                          onChange={handleChange}>
+                          <option value="">Select</option>
+                          <option value="private">Private</option>
+                          <option value="government">Government</option>
+                          <option value="self-finance">
+                            Self finance/Affiliated
+                          </option>
+                        </select>
                         <label className="did-floating-label input-ownership">
                           Ownership*
                         </label>
@@ -280,69 +304,73 @@ const CreateCollege = ({ type, editData }) => {
                   <tr>
                     <td>
                       <div className="did-floating-label-content mb-0">
-                        <input
-                          className="did-floating-input"
-                          type="text"
-                          placeholder=""
-                          value={data?.university}
-                          onChange={handleChange}
+                        <select
+                          className="did-floating-select"
                           name="university"
-                        />
-                        <label className="did-floating-label input-college">
-                          University*
+                          value={data?.university}
+                          onChange={handleChange}>
+                          <option value="">Select</option>
+                          <option value="deemed">
+                            Deemed to be University
+                          </option>
+                          <option value="autonomous ">Autonomous</option>
+                          <option value="affiliate">Affiliated</option>
+                          <option value="central">Central University</option>
+                          <option value="state">State University</option>
+                          <option value="open">Open University</option>
+                        </select>
+                        <label className="did-floating-label input-ownership">
+                          University Type*
                         </label>
                       </div>
                     </td>
                     <td>
-                      <div className="did-floating-label-content mb-0">
-                        <input
-                          className="did-floating-input"
-                          type="text"
-                          placeholder=""
-                          value={data?.collegeType}
-                          onChange={handleChange}
-                          name="collegeType"
-                        />
-                        <label className="did-floating-label input-college">
-                          College Type*
-                        </label>
+                      <div style={{ display: "flex" }}>
+                        <div className="did-floating-label-content mb-0">
+                          <select
+                            style={{
+                              width: "max-content",
+                            }}
+                            className="did-floating-select"
+                            name="collegeType"
+                            value={data?.collegeType}
+                            onChange={addField}>
+                            <option value="">Select</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="arts-science">Arts & Science</option>
+                            <option value="medical">Medical</option>
+                            <option value="agriculture">Agriculture</option>
+                            <option value="law">Law</option>
+                            <option value="design">Design</option>
+                            <option value="hotel-management">
+                              Hotel Management
+                            </option>
+                            <option value="animation">Animation</option>
+                            <option value="marine">Marine</option>
+                            <option value="dental">Dental</option>
+                            <option value="education">Education</option>
+                            <option value="management">Management</option>
+                            <option value="commerce">Commerce</option>
+                            <option value="pharmacy">Pharmacy</option>
+                          </select>
+                          <label className="did-floating-label input-course">
+                            Available Fields*
+                          </label>
+                        </div>
+                        <div className="did-floating-label-content ml-10 mb-0">
+                          <input
+                            className="did-floating-input"
+                            type="text"
+                            placeholder=""
+                            value={data?.collegeType}
+                            onChange={handleChange}
+                            name="collegeType"
+                          />
+                          {/* <label className="did-floating-label input-college">
+                            College Type*
+                          </label> */}
+                        </div>
                       </div>
-                      {/* <div className="did-floating-label-content mb-0">
-                        <select
-                          style={{
-                            width: "max-content",
-                          }}
-                          className="did-floating-select"
-                          name="collegeType"
-                          // value={data?.collegeType}
-                          onChange={addField}>
-                          <option value="">Select</option>
-                          <option value="Engineering">Engineering</option>
-                          <option value="Arts">Arts & Science</option>
-                          <option value="Medical">Medical</option>
-                          <option value="Agriculture">Agriculture</option>
-                          <option value="Law">Law</option>
-                          <option value="Commerce">Commerce</option>
-                          <option value="Hotel Managemen">
-                            Hotel Management
-                          </option>
-                          <option value="Computer">Computer</option>
-                          <option value="Design">Design</option>
-                          <option value="Pharmacy">Pharmacy</option>
-                          <option value="Management">Management</option>
-                          <option value="Animation">Animation</option>
-                          <option value="Architecture">Architecture</option>
-                          <option value="Dental">Dental</option>
-                          <option value="Education">Education</option>
-                          <option value="Pharamedical">Pharamedical</option>
-                        </select>
-                        <label className="did-floating-label input-course">
-                          Available Fields*
-                        </label>
-                      </div>
-                      {data?.collegeType?.map((item, index) => (
-                        <p>{item}</p>
-                      ))} */}
                     </td>
                   </tr>
                   <tr>
@@ -455,7 +483,6 @@ const CreateCollege = ({ type, editData }) => {
       ) : (
         <ViewCollege
           data={data}
-          setIsPreview={setIsPreview}
           addCollege={addCollege}
           deleteCollege={deleteCollege}
           type={type}

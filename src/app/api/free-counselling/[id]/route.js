@@ -1,5 +1,5 @@
 import { Database } from "@/backend/Database";
-import FreeCounsling from "@/backend/schema/FreeCounsling";
+import FreeCounselling from "@/backend/schema/FreeCounselling";
 import { NextResponse } from "next/server";
 
 export const PUT = async (request, { params }) => {
@@ -7,10 +7,10 @@ export const PUT = async (request, { params }) => {
     await Database();
     const id = params.id;
     const { status } = await request.json();
-    const data = await FreeCounsling.findById(id);
+    const data = await FreeCounselling.findById(id);
     if (data) {
       const updatedData = { ...data?._doc, ["status"]: status };
-      await FreeCounsling.findByIdAndUpdate(id, updatedData);
+      await FreeCounselling.findByIdAndUpdate(id, updatedData);
       return NextResponse.json(
         { message: "Student data updated" },
         { status: 201 }
@@ -28,9 +28,9 @@ export const DELETE = async (request, { params }) => {
   try {
     await Database();
     const id = params.id;
-    const data = await FreeCounsling.findById(id);
+    const data = await FreeCounselling.findById(id);
     if (data) {
-      await FreeCounsling.findByIdAndDelete(id);
+      await FreeCounselling.findByIdAndDelete(id);
       return NextResponse.json(
         { message: "Student data deleted" },
         { status: 200 }

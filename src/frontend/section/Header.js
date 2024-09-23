@@ -5,7 +5,7 @@ import Link from "next/link";
 import Form from "./Form";
 import { useSelector, useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
-import { setAuth } from "../redux/AppSlice";
+import { setAuth, setCourseField, setIsPreview } from "../redux/AppSlice";
 import toast, { Toaster } from "react-hot-toast";
 import { useCookies } from "next-client-cookies";
 
@@ -17,12 +17,12 @@ function Header() {
 
   useEffect(() => {
     const jwtToken = cookies.get("jwtToken");
-     if (jwtToken) {
-       const decoded = jwtDecode(jwtToken);
-       disPatch(setAuth(decoded));
-     }
+    if (jwtToken) {
+      const decoded = jwtDecode(jwtToken);
+      disPatch(setAuth(decoded));
+    }
   }, []);
-  
+
   return (
     <React.Fragment>
       <Toaster />
@@ -63,33 +63,13 @@ function Header() {
               <li onClick={() => setShowNavbar(false)}>
                 <Link href="/">Home</Link>
               </li>
-              <li onClick={() => setShowNavbar(false)}>
+              <li
+                onClick={() => {
+                  setShowNavbar(false);
+                  disPatch(setCourseField(""));
+                }}>
                 <Link href="/college">Colleges</Link>
               </li>
-              {/* <li>
-                <div className="did-floating-label-content mb-0">
-                  <select className="did-floating-select" name="interest">
-                    <option value="Engineering">Engineering</option>
-                    <option value="Arts &amp; Science">
-                      Arts &amp; Science
-                    </option>
-                    <option value="Medical">Medical</option>
-                    <option value="Agriculture">Agriculture</option>
-                    <option value="Law">Law</option>
-                    <option value="Commerce">Commerce</option>
-                    <option value="Hotel Managemen">Hotel Management</option>
-                    <option value="Computer">Computer</option>
-                    <option value="Design">Design</option>
-                    <option value="Pharmacy">Pharmacy</option>
-                    <option value="Management">Management</option>
-                    <option value="Animation">Animation</option>
-                    <option value="Architecture">Architecture</option>
-                    <option value="Dental">Dental</option>
-                    <option value="Education">Education</option>
-                    <option value="Pharamedical">Pharamedical</option>
-                  </select>
-                </div>
-              </li> */}
               <li onClick={() => setShowNavbar(false)}>Updates</li>
               <li onClick={() => setShowNavbar(false)}>Exams</li>
               <li onClick={() => setShowNavbar(false)}>
@@ -140,17 +120,17 @@ function Header() {
                             style={{ display: "flex", alignItems: "center" }}
                             className="cursor-pointer mb-20"
                             onClick={() => setShowNavbar(false)}>
-                            <Link href="/admin/free-counsling-list">
+                            <Link href="/admin/free-counselling-list">
                               <span>
                                 <Image
-                                  src="/images/freecounsling.png"
+                                  src="/images/freecounselling.png"
                                   width={20}
                                   height={20}
                                   alt=""
                                   className="mr-10"
                                 />
                               </span>
-                              <span>FreeCounsling</span>
+                              <span>FreeCounselling</span>
                             </Link>
                           </div>
                           <div
@@ -173,7 +153,10 @@ function Header() {
                           <div
                             style={{ display: "flex", alignItems: "center" }}
                             className="cursor-pointer mb-20"
-                            onClick={() => setShowNavbar(false)}>
+                            onClick={() => {
+                              setShowNavbar(false);
+                              disPatch(setIsPreview(false));
+                            }}>
                             <Link href="/admin/college/create">
                               <span>
                                 <Image
@@ -185,6 +168,23 @@ function Header() {
                                 />
                               </span>
                               <span>Create College</span>
+                            </Link>
+                          </div>
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                            className="cursor-pointer mb-20"
+                            onClick={() => setShowNavbar(false)}>
+                            <Link href="/admin/course/create">
+                              <span>
+                                <Image
+                                  src="/images/add.png"
+                                  width={20}
+                                  height={20}
+                                  alt=""
+                                  className="mr-10"
+                                />
+                              </span>
+                              <span>Create Course</span>
                             </Link>
                           </div>
                         </React.Fragment>

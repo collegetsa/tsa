@@ -1,34 +1,45 @@
 "use client";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setForm } from "../redux/AppSlice";
+import { setForm, setIsPreview } from "../redux/AppSlice";
 import Course from "./Course";
 import Table from "./Table";
 import Footer from "./Footer";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-export default function Home({ CollegeLists }) {
+export default function Home({ CollegeLists, CourseLists }) {
   const router = useRouter();
   const disPatch = useDispatch();
+  const auth = useSelector((state) => state.app.auth);
   const [search, setSearch] = useState("");
 
-  const filterdSearchList = CollegeLists?.filter((item) => {
-    return (
-      item?.collegeData?.collegeName
+  const filterdSearchList =
+    CollegeLists &&
+    CollegeLists?.filter((item) => {
+      return (
+        item?.collegeData?.collegeName
+          ?.toLowerCase()
+          ?.includes(search?.toLowerCase()) ||
+        item?.collegeData?.content
+          ?.toLowerCase()
+          ?.includes(search?.toLowerCase()) ||
+        item?.collegeData?.location
+          ?.toLowerCase()
+          ?.includes(search?.toLowerCase()) ||
+        item?.collegeData?.collegeType
+          ?.toLowerCase()
+          ?.includes(search?.toLowerCase())
+      );
+    });
+  
+  const filterdSearchCourse =
+    CourseLists &&
+    CourseLists?.filter((item) => {
+      return item?.courseData?.courseName
         ?.toLowerCase()
-        .includes(search?.toLowerCase()) ||
-      item?.collegeData?.content
-        ?.toLowerCase()
-        .includes(search?.toLowerCase()) ||
-      item?.collegeData?.location
-        ?.toLowerCase()
-        .includes(search?.toLowerCase()) ||
-      item?.collegeData?.collegeType
-        ?.toLowerCase()
-        .includes(search?.toLowerCase())
-    );
-  });
+        ?.includes(search?.toLowerCase());
+    });
 
   return (
     <React.Fragment>
@@ -65,7 +76,12 @@ export default function Home({ CollegeLists }) {
                 key={index}
                 onClick={(e) => {
                   setSearch(item?.collegeData?.collegeName);
-                  router.push(`/college/${item?.pageUrl}`);
+                  if (auth && auth?.email === "collegetsainfo@gmail.com") {
+                    disPatch(setIsPreview(true));
+                    router.push(`/admin/college/edit/${item?.pageUrl}`);
+                  } else {
+                    router.push(`/college/${item?.pageUrl}`);
+                  }
                 }}>
                 <span>
                   <Image
@@ -79,6 +95,34 @@ export default function Home({ CollegeLists }) {
                 <span className="ml-10">{item?.collegeData?.collegeName}</span>
               </div>
             ))}
+            {filterdSearchCourse?.map((item, index) => (
+              <div
+                style={{ display: "flex", alignItems: "center" }}
+                className="pl-10 pr-10 pt-10 pb-10"
+                key={index}
+                onClick={(e) => {
+                  setSearch(item?.courseData?.courseName);
+                  router.push(`/course/${item?.field}`);
+                }}>
+                <span>
+                  <Image
+                    src={`/images/${item?.field}.png`}
+                    width={20}
+                    height={20}
+                    alt={item?.courseData?.courseName}
+                    unoptimized
+                  />
+                </span>
+                <span className="ml-10">{item?.courseData?.courseName}</span>
+              </div>
+            ))}
+            {/* {filterdSearchList?.length === 0 && (
+              <div
+                style={{ display: "flex", alignItems: "center" }}
+                className="pl-10 pr-10 pt-10 pb-10">
+                <span>No results found!</span>
+              </div>
+            )} */}
           </div>
         </div>
         <div className="mt-20">
@@ -88,13 +132,13 @@ export default function Home({ CollegeLists }) {
               disPatch(
                 setForm({
                   isForm: true,
-                  title: `Free Counsling ${new Date().getFullYear()}`,
-                  type: "counsling",
+                  title: `Free Counselling ${new Date().getFullYear()}`,
+                  type: "counselling",
                   logo: "/images/logo.png",
                 })
               );
             }}>
-            Free Counsling
+            Free Counselling
           </button>
           <button
             className="btn home-btn ml-20"
@@ -112,7 +156,7 @@ export default function Home({ CollegeLists }) {
           </button>
         </div>
       </div>
-      <Course />
+      <Course CourseLists={CourseLists} />
       <div className="text-image-group">
         <div>
           <h2>

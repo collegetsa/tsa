@@ -1,39 +1,117 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Course() {
+export default function Course({ CourseLists }) {
+  const courseCount = (filed) => {
+    return CourseLists?.filter((item) => item?.field === filed);
+  };
+
   const courseType = [
-    { id: "1", img: "/images/engineering.png", text: "Engineering" },
-    { id: "2", img: "/images/arts.png", text: "Arts & Science" },
-    { id: "3", img: "/images/medical.png", text: "Medical" },
-    { id: "4", img: "/images/agriculture.png", text: "Agriculture" },
-    { id: "5", img: "/images/commerce.png", text: "Commerce" },
-    { id: "6", img: "/images/law.png", text: "Law" },
-    { id: "7", img: "/images/hotel.png", text: "Hotel Management" },
-    { id: "8", img: "/images/computer.png", text: "Computer" },
-    { id: "9", img: "/images/design.png", text: "Design" },
-    { id: "10", img: "/images/pharmecy.png", text: "Pharmecy" },
-    { id: "11", img: "/images/management.png", text: "Management" },
-    { id: "12", img: "/images/animation.png", text: "Animation" },
-    { id: "13", img: "/images/archtecture.png", text: "Archtecture" },
-    { id: "14", img: "/images/dental.png", text: "Dental" },
-    { id: "15", img: "/images/education.png", text: "Education" },
-    { id: "16", img: "/images/paramedical.png", text: "Pharamedical" },
+    {
+      img: "/images/engineering.png",
+      text: "Engineering",
+      pageUrl: "engineering",
+      count: courseCount("engineering"),
+    },
+    {
+      img: "/images/arts-science.png",
+      text: "Arts & Science",
+      pageUrl: "arts-science",
+      count: courseCount("arts-science"),
+    },
+    {
+      img: "/images/medical.png",
+      text: "Medical",
+      pageUrl: "medical",
+      count: courseCount("medical"),
+    },
+    {
+      img: "/images/agriculture.png",
+      text: "Agriculture",
+      pageUrl: "agriculture",
+      count: courseCount("agriculture"),
+    },
+
+    {
+      img: "/images/law.png",
+      text: "Law",
+      pageUrl: "law",
+      count: courseCount("law"),
+    },
+    {
+      img: "/images/design.png",
+      text: "Design",
+      pageUrl: "design",
+      count: courseCount("design"),
+    },
+    {
+      img: "/images/hotel-management.png",
+      text: "Hotel Management",
+      pageUrl: "hotel-management",
+      count: courseCount("hotel-management"),
+    },
+    {
+      img: "/images/animation.png",
+      text: "Animation",
+      pageUrl: "animation",
+      count: courseCount("animation"),
+    },
+    {
+      img: "/images/marine.png",
+      text: "Marine",
+      pageUrl: "marine",
+      count: courseCount("marine"),
+    },
+    {
+      img: "/images/dental.png",
+      text: "Dental",
+      pageUrl: "dental",
+      count: courseCount("dental"),
+    },
+    {
+      img: "/images/education.png",
+      text: "Education",
+      pageUrl: "education",
+      count: courseCount("education"),
+    },
+    {
+      img: "/images/management.png",
+      text: "Management",
+      pageUrl: "management",
+      count: courseCount("management"),
+    },
+    {
+      img: "/images/commerce.png",
+      text: "Commerce",
+      pageUrl: "commerce",
+      count: courseCount("commerce"),
+    },
+    {
+      img: "/images/pharmecy.png",
+      text: "Pharmecy",
+      pageUrl: "pharmecy",
+      count: courseCount("pharmecy"),
+    },
   ];
+
   return (
     <div className="course-field-group">
-      {courseType.map((field) => (
-        <div className="course-field" id={field.id} key={field.id}>
-          <Image
-            src={field.img}
-            alt={field.text}
-            title={field.text}
-            width={50}
-            height={50}
-            className="mb-15"
-          />
-          <p>{field.text}</p>
-        </div>
+      {courseType.map((field, index) => (
+        <Link href={`/course/${field?.pageUrl}`}>
+          <div className="course-field" key={index}>
+            <Image
+              src={field?.img}
+              alt=""
+              width={50}
+              height={50}
+              className="mb-15"
+            />
+            <p>{field?.text}</p>
+            <small>{field?.count?.length} Courses</small>
+          </div>
+        </Link>
       ))}
     </div>
   );

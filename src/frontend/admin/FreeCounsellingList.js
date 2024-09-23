@@ -4,13 +4,13 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 
-export default function FreeCounslingList({ data }) {
+export default function FreeCounsellingList({ data }) {
   const cookies = useCookies();
-  const router = useRouter()
-  
+  const router = useRouter();
+
   const editList = async (option, item) => {
     const jwtToken = cookies.get("jwtToken");
-    const response = await fetch(`/api/free-counsling/${item?._id}`, {
+    const response = await fetch(`/api/free-counselling/${item?._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export default function FreeCounslingList({ data }) {
 
   const deleteList = async (item) => {
     const jwtToken = cookies.get("jwtToken");
-    const response = await fetch(`/api/free-counsling/${item?._id}`, {
+    const response = await fetch(`/api/free-counselling/${item?._id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -52,8 +52,16 @@ export default function FreeCounslingList({ data }) {
             <tr key={index}>
               <td>{index + 1}</td>
               <td>{item?.studentName}</td>
-              <td>{item?.phone}</td>
-              <td>{item?.email}</td>
+              <td>
+                <a href={`tel:${item?.phone}`}>
+                  <span>{item?.phone}</span>
+                </a>
+              </td>
+              <td>
+                <a href={`mailto:${item?.email}`}>
+                  <span>{item?.email}</span>
+                </a>
+              </td>
               <td>{item?.interest}</td>
               <td>{item?.appliedDate}</td>
               <td>{item?.message}</td>

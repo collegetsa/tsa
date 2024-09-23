@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-const CollegeList = dynamic(() => import("@/frontend/admin/CollegeList"));
+const CollegeList = dynamic(() => import("@/frontend/section/CollegeList"));
 
 export const metadata = {
   title: "College | College TSA - Find Your best Colleges",

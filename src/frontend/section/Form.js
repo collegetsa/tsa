@@ -28,7 +28,7 @@ export default function Form() {
     studentName: "",
     email: "",
     phone: "",
-    interest: "Engineering",
+    interest: form.course,
     message: "",
     status: "Not start",
   });
@@ -69,11 +69,13 @@ export default function Form() {
   }, [file]);
 
   useEffect(() => {
+    setFormData({ ...formData, ["interest"]: form.interest });
     setAdmissionFormData({
       ...admissionFormData,
       ["appliedCollege"]: form.title,
       ["appliedCourse"]: form.course,
     });
+
     if (document) {
       document.body.style.overflow = form.isForm ? "hidden" : "auto";
     }
@@ -95,17 +97,17 @@ export default function Form() {
   const testPhone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const testEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const sendFreeCounsling = async () => {
+  const sendFreeCounselling = async () => {
     setIsData(true);
-    const isSendFreeCounsling =
+    const isSendFreeCounselling =
       testPhone.test(formData.phone) &&
       testEmail.test(formData.email) &&
-      formData.studentName.length > 1 &&
-      formData.interest.length > 1;
-    
-    if (isSendFreeCounsling) {
+      formData.studentName?.length > 1 &&
+      formData.interest?.length > 1;
+
+    if (isSendFreeCounselling) {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/free-counsling", {
+      const response = await fetch("/api/free-counselling", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -137,18 +139,18 @@ export default function Form() {
   const sendAdmission = async () => {
     setIsData(true);
     const isSendAdmission =
-      admissionFormData.studentName.length > 1 &&
+      admissionFormData.studentName?.length > 1 &&
       testEmail.test(admissionFormData.email) &&
       testPhone.test(admissionFormData.studentPhone) &&
-      admissionFormData.markSheet.length > 1 &&
-      admissionFormData.appliedCourse.length > 1 &&
-      admissionFormData.appliedCollege.length > 1 &&
-      admissionFormData.dateOfBirth.length > 1 &&
-      admissionFormData.fatherName.length > 1 &&
+      admissionFormData.markSheet?.length > 1 &&
+      admissionFormData.appliedCourse?.length > 1 &&
+      admissionFormData.appliedCollege?.length > 1 &&
+      admissionFormData.dateOfBirth?.length > 1 &&
+      admissionFormData.fatherName?.length > 1 &&
       testPhone.test(admissionFormData.parentPhone) &&
-      admissionFormData.religion.length > 1 &&
-      admissionFormData.community.length > 1 &&
-      admissionFormData.address.length > 1; 
+      admissionFormData.religion?.length > 1 &&
+      admissionFormData.community?.length > 1 &&
+      admissionFormData.address?.length > 1;
     if (isSendAdmission) {
       const token = localStorage.getItem("token");
       const response = await fetch("/api/admission", {
@@ -186,7 +188,7 @@ export default function Form() {
     }
   };
 
-  const freeCounslingLayout = (
+  const freeCounsellingLayout = (
     <div className="form-right">
       <div
         style={{ display: "flex", justifyContent: "space-between" }}
@@ -200,7 +202,7 @@ export default function Form() {
             unoptimized
           />
           <small>
-            <b>Free Counsling {new Date().getFullYear()}</b>
+            <b>Free Counselling {new Date().getFullYear()}</b>
           </small>
         </div>
         <Image
@@ -240,7 +242,7 @@ export default function Form() {
             />
             <label
               className={`did-floating-label input-student ${
-                !isData || formData.studentName.length > 1 ? "" : "color-red"
+                !isData || formData.studentName?.length > 1 ? "" : "color-red"
               }`}>
               Student Name*
             </label>
@@ -282,7 +284,7 @@ export default function Form() {
               }`}>
               Phone Number*
             </label>
-            {!testPhone.test(formData.phone) && formData.phone.length > 6 && (
+            {!testPhone.test(formData.phone) && formData.phone?.length > 6 && (
               <span style={{ color: "red", fontSize: "10px" }}>
                 Enter a valid Phone Number
               </span>
@@ -291,25 +293,24 @@ export default function Form() {
           <div className="did-floating-label-content">
             <select
               className="did-floating-select"
-              onChange={handleChange}
               value={formData.interest}
+              onChange={handleChange}
               name="interest">
-              <option value="Engineering">Engineering</option>
-              <option value="Arts & Science">Arts & Science</option>
-              <option value="Medical">Medical</option>
-              <option value="Agriculture">Agriculture</option>
-              <option value="Law">Law</option>
-              <option value="Commerce">Commerce</option>
-              <option value="Hotel Managemen">Hotel Management</option>
-              <option value="Computer">Computer</option>
-              <option value="Design">Design</option>
-              <option value="Pharmacy">Pharmacy</option>
-              <option value="Management">Management</option>
-              <option value="Animation">Animation</option>
-              <option value="Architecture">Architecture</option>
-              <option value="Dental">Dental</option>
-              <option value="Education">Education</option>
-              <option value="Pharamedical">Pharamedical</option>
+              <option value="">Select</option>
+              <option value="engineering">Engineering</option>
+              <option value="arts-science">Arts & Science</option>
+              <option value="medical">Medical</option>
+              <option value="agriculture">Agriculture</option>
+              <option value="law">Law</option>
+              <option value="design">Design</option>
+              <option value="hotel-management">Hotel Management</option>
+              <option value="animation">Animation</option>
+              <option value="marine">Marine</option>
+              <option value="dental">Dental</option>
+              <option value="education">Education</option>
+              <option value="management">Management</option>
+              <option value="commerce">Commerce</option>
+              <option value="pharmacy">Pharmacy</option>
             </select>
             <label className="did-floating-label input-course">
               Field of Interest*
@@ -326,7 +327,7 @@ export default function Form() {
             />
             <label className="did-floating-label input-message">Message</label>
           </div>
-          <button onClick={sendFreeCounsling} className="btn">
+          <button onClick={sendFreeCounselling} className="btn">
             Submit
           </button>
         </React.Fragment>
@@ -414,7 +415,7 @@ export default function Form() {
               />
               <label
                 className={`did-floating-label input-student ${
-                  !isData || admissionFormData.studentName.length > 1
+                  !isData || admissionFormData.studentName?.length > 1
                     ? ""
                     : "color-red"
                 }`}>
@@ -696,7 +697,7 @@ export default function Form() {
             Copyright © {new Date().getFullYear()} collegetsa.com
           </p>
         </div>
-        {form?.type === "admission" ? admissionLayout : freeCounslingLayout}
+        {form?.type === "admission" ? admissionLayout : freeCounsellingLayout}
       </div>
     </Modal>
   );

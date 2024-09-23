@@ -413,7 +413,7 @@ select.did-floating-select::-ms-expand {
 .course-field-group {
     grid-row-gap: 40px;
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto auto;
     justify-content: space-between;
     margin: 5% 10%;
     row-gap: 40px;
@@ -424,20 +424,21 @@ select.did-floating-select::-ms-expand {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-color: #f2f7ff;
+        border: 1px solid #d9d9d9;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+        /* box-shadow: 0 1px 6px rgba(0, 0, 0, .1); */
     color: #232323;
     cursor: pointer;
-    padding-top: 20px;
+    padding: 20px 0px;
     text-align: center;
     text-decoration: none;
     min-width: 140px;
     width: 140px;
+    /* font-size: 12px !important; */
 }
 
 .course-field:hover {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 6px #d9d9d9;
 }
 
 /* Table design */
@@ -465,7 +466,7 @@ select.did-floating-select::-ms-expand {
 }
 
 #customers tr:hover {
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
 }
 
 #customers th {
@@ -591,13 +592,11 @@ input[type=file]::file-selector-button {
     align-items: center;
     color: #e3e3e3;
 }
-
 .template-action-group {
     overflow-x: auto;
     scrollbar-width: thin;
     text-wrap: nowrap;
 }
-
 .template-action-icons{
     position: fixed;
     top: 70px;
@@ -606,7 +605,12 @@ input[type=file]::file-selector-button {
 }
 
 .separete-line {
-    margin-top: 10px;
+    margin-left: 15px;
+        margin-right: 15px;
+        color: #919191;
+    }
+    
+    .separete-line2 {
     margin-left: 15px;
     margin-right: 15px;
     color: #919191;
@@ -615,4 +619,15 @@ input[type=file]::file-selector-button {
 .college-filter-group-select {
     display: flex;
     align-items: baseline;
+}
+.head-template {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    padding-bottom: 30px;
+}
+
+.sticky-header {
+    position: sticky !important;
+    top: 60px;
+    z-index: 90;
 }

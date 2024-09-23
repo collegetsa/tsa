@@ -1,17 +1,11 @@
 "use client";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { setForm } from "../redux/AppSlice";
+import { setCourseField, setForm } from "../redux/AppSlice";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { setIsPreview } from "../redux/AppSlice";
 
-const ViewCollege = ({
-  data,
-  setIsPreview,
-  addCollege,
-  deleteCollege,
-  type,
-}) => {
+const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
   const router = useRouter();
   const disPatch = useDispatch();
   const form = useSelector((state) => state.app.form);
@@ -23,7 +17,7 @@ const ViewCollege = ({
   //       setForm({
   //         isForm: true,
   //         title: data?.collegeName,
-  //         type: "counsling",
+  //         type: "counselling",
   //         logo: data?.logo,
   //       })
   //     );
@@ -44,7 +38,7 @@ const ViewCollege = ({
                 width={20}
                 height={20}
                 alt=""
-                onClick={() => setIsPreview(false)}
+                onClick={() => disPatch(setIsPreview(false))}
                 className="cursor-pointer template-icons"
               />
               <Image
@@ -92,7 +86,7 @@ const ViewCollege = ({
                   />
                   <span className="one-line-text ml-10">{data?.location}</span>
                 </div>
-                <div className="separete-line">|</div>
+                <div className="separete-line mt-10">|</div>
                 <div
                   style={{ display: "flex", alignItems: "center" }}
                   className="mt-10">
@@ -105,7 +99,7 @@ const ViewCollege = ({
                   />
                   <span className="one-line-text ml-10">{data?.ownership}</span>{" "}
                 </div>
-                <div className="separete-line">|</div>
+                <div className="separete-line mt-10">|</div>
                 <div
                   style={{ display: "flex", alignItems: "center" }}
                   className="mt-10">
@@ -120,7 +114,7 @@ const ViewCollege = ({
                     {data?.university}
                   </span>
                 </div>
-                <div className="separete-line">|</div>
+                <div className="separete-line mt-10">|</div>
                 <div
                   style={{ display: "flex", alignItems: "center" }}
                   className="mt-10">
@@ -146,12 +140,12 @@ const ViewCollege = ({
                   setForm({
                     isForm: true,
                     title: data?.collegeName,
-                    type: "counsling",
+                    type: "counselling",
                     logo: data?.logo,
                   })
                 );
               }}>
-              <u>Get FreeCounsling</u>
+              <u>Get FreeCounselling</u>
             </span>
             <span
               className="ml-20 cursor-pointer"
@@ -178,7 +172,10 @@ const ViewCollege = ({
             </span>
             <span
               className="ml-20 cursor-pointer"
-              onClick={() => router.push("/college")}>
+              onClick={() => {
+                router.push("/college");
+                disPatch(setCourseField(""));
+              }}>
               <u>Get More Colleges...</u>
             </span>
           </div>
