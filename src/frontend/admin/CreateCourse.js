@@ -23,14 +23,9 @@ const CreateCourse = ({ type, editData }) => {
   const [data, setData] = useState(originalData?.courseData);
   const [data2, setData2] = useState(originalData?.field);
 
-  const pageUrl = data?.courseName
-    ?.match(/[^!@#$%^&*?{},.;:/+~()<>]/g)
-    ?.join("")
-    ?.toLocaleLowerCase()
-    ?.replaceAll(" ", "-");
-
   const addedCourse = () => toast.success("Course Created");
   const updatedCourse = () => toast.success("Course Updated");
+  const EnterCourse = () => toast.error("Give Course Data");
 
   const handleChange = (e) => {
     setData((prev) => {
@@ -41,27 +36,31 @@ const CreateCourse = ({ type, editData }) => {
   const AddCourse = async () => {
     const jwtToken = cookies.get("jwtToken");
     if (type === "create") {
-      const response = await fetch("/api/course", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtToken}`,
-        },
-        body: JSON.stringify({
-          courseData: data,
-          field: data2,
-        }),
-      });
-      if (response.ok) {
-        addedCourse();
-        setData({
-          courseName: "",
-          duration: "",
-          level: "",
-          elgibility: "",
-          mode: "",
+      if (data?.courseName?.length > 0 && data2?.length > 0) {
+        const response = await fetch("/api/course", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwtToken}`,
+          },
+          body: JSON.stringify({
+            courseData: data,
+            field: data2,
+          }),
         });
-        router.refresh();
+        if (response.ok) {
+          addedCourse();
+          setData({
+            courseName: "",
+            duration: "",
+            level: "",
+            elgibility: "",
+            mode: "",
+          });
+          router.refresh();
+        }
+      } else {
+        EnterCourse();
       }
     } else if (type === "edit") {
       const response = await fetch(`/api/course/${editData?._id}`, {

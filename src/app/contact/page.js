@@ -117,14 +117,19 @@ const Page = () => {
           placements/ carrier guidance/ entrance coaching in various competitive
           exams/ tution for +2 students.
         </p>
-        <div style={{display:"flex" , flexDirection:"column",alignItems:"center"}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}>
           <Image src="/images/ceo.webp" width={200} height={200} alt="ceo" />
           <h4>Aravind Thennarasu - CEO of CollegeTSA</h4>
         </div>
         <h3>Our Services include:</h3>
         <ul>
           <li>
-            Free Educational Counselling to Students & Parents regarding all
+            Free Educational Counseling to Students & Parents regarding all
             courses.
           </li>
           <li>We Guide & Prefer recognised & Well known Institutions only.</li>
@@ -138,7 +143,7 @@ const Page = () => {
             Dishes
           </li>
           <li>Well Qualified & Experienced Faculty Members.</li>
-          <li>Career counselling</li>
+          <li>Career counseling</li>
           <li>Career Mapping.</li>
           <li>Physcometric test.</li>
           <li>Intelligence Test.etc by Expert counsellor.</li>

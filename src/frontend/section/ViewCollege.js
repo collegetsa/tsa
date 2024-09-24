@@ -17,12 +17,19 @@ const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
   //       setForm({
   //         isForm: true,
   //         title: data?.collegeName,
-  //         type: "counselling",
+  //         type: "counseling",
   //         logo: data?.logo,
   //       })
   //     );
   //   }, 5000);
   // }, []);
+
+  const capitalizeWords = (str) => {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
 
   return (
     <div
@@ -126,7 +133,7 @@ const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
                     className="template-icons"
                   />
                   <span className="one-line-text ml-10">
-                    {data?.collegeType}
+                    {capitalizeWords(data?.collegeType)}
                   </span>
                 </div>
               </div>
@@ -140,12 +147,12 @@ const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
                   setForm({
                     isForm: true,
                     title: data?.collegeName,
-                    type: "counselling",
+                    type: "counseling",
                     logo: data?.logo,
                   })
                 );
               }}>
-              <u>Get FreeCounselling</u>
+              <u>Get FreeCounseling</u>
             </span>
             <span
               className="ml-20 cursor-pointer"
@@ -248,9 +255,7 @@ const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
           cursor: "pointer",
         }}
         onClick={() => {
-          document
-            .getElementById("college-page")
-            ?.scrollIntoView({ behavior: "smooth" });
+          window.scrollTo(0, 0);
         }}
       />
     </div>

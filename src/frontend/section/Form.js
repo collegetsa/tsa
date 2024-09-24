@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { setForm } from "../redux/AppSlice";
 import toast, { Toaster } from "react-hot-toast";
+import Link from "next/link";
 
 const customStyles = {
   content: {
@@ -24,6 +25,8 @@ export default function Form() {
   const [file, setFile] = useState();
   const [isValid, setISvalid] = useState(false);
   const [isData, setIsData] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
   const [formData, setFormData] = useState({
     studentName: "",
     email: "",
@@ -97,17 +100,18 @@ export default function Form() {
   const testPhone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   const testEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const sendFreeCounselling = async () => {
+  const sendFreeCounseling = async () => {
     setIsData(true);
-    const isSendFreeCounselling =
+    const isSendFreeCounseling =
       testPhone.test(formData.phone) &&
       testEmail.test(formData.email) &&
       formData.studentName?.length > 1 &&
-      formData.interest?.length > 1;
+      formData.interest?.length > 1 &&
+      isChecked;
 
-    if (isSendFreeCounselling) {
+    if (isSendFreeCounseling) {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/free-counselling", {
+      const response = await fetch("/api/free-counseling", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,6 +123,7 @@ export default function Form() {
       if (response.ok) {
         setIsData(false);
         setISvalid(true);
+        setIsChecked(false);
         setFormData({
           studentName: "",
           phone: "",
@@ -150,7 +155,8 @@ export default function Form() {
       testPhone.test(admissionFormData.parentPhone) &&
       admissionFormData.religion?.length > 1 &&
       admissionFormData.community?.length > 1 &&
-      admissionFormData.address?.length > 1;
+      admissionFormData.address?.length > 1 &&
+      isChecked;
     if (isSendAdmission) {
       const token = localStorage.getItem("token");
       const response = await fetch("/api/admission", {
@@ -165,6 +171,7 @@ export default function Form() {
       if (response.ok) {
         setIsData(true);
         setISvalid(true);
+        setIsChecked(false);
         setAdmissionFormData({
           studentName: "",
           dateOfBirth: "",
@@ -188,7 +195,7 @@ export default function Form() {
     }
   };
 
-  const freeCounsellingLayout = (
+  const freeCounselingLayout = (
     <div className="form-right">
       <div
         style={{ display: "flex", justifyContent: "space-between" }}
@@ -202,7 +209,7 @@ export default function Form() {
             unoptimized
           />
           <small>
-            <b>Free Counselling {new Date().getFullYear()}</b>
+            <b>Free Counseling Form {new Date().getFullYear()}</b>
           </small>
         </div>
         <Image
@@ -218,9 +225,11 @@ export default function Form() {
           }}
         />
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <div
+        style={{ display: "flex", alignItems: "start", gap: "10px" }}
+        className="mt-15">
         <Image src={form.logo} width={30} height={30} alt="" unoptimized />
-        <h3>{form.title}</h3>
+        <h3 className="mt-0 mb-20">{form.title}</h3>
       </div>
       {isValid ? (
         <React.Fragment>
@@ -231,103 +240,130 @@ export default function Form() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <div className="did-floating-label-content mt-25">
+          <div
+            style={{
+              overflowY: "auto",
+              scrollbarWidth: "thin",
+              paddingTop: "10px",
+              marginBottom: "20px",
+            }}>
+            <div className="did-floating-label-content">
+              <input
+                className="did-floating-input"
+                type="text"
+                placeholder=""
+                value={formData.studentName}
+                onChange={handleChange}
+                name="studentName"
+              />
+              <label
+                className={`did-floating-label input-student ${
+                  !isData || formData.studentName?.length > 1 ? "" : "color-red"
+                }`}>
+                Student Name*
+              </label>
+            </div>
+            <div className="did-floating-label-content">
+              <input
+                className="did-floating-input"
+                type="email"
+                placeholder=""
+                value={formData.email}
+                onChange={handleChange}
+                name="email"
+              />
+              <label
+                className={`did-floating-label input-email ${
+                  !isData || testEmail.test(formData.email) ? "" : "color-red"
+                }`}>
+                Email Address*
+              </label>
+              {!testEmail.test(formData?.email) &&
+                formData?.email?.length > 4 && (
+                  <span style={{ color: "red", fontSize: "10px" }}>
+                    Enter a valid Email Address
+                  </span>
+                )}
+            </div>
+            <div className="did-floating-label-content">
+              <input
+                className="did-floating-input"
+                type="tel"
+                placeholder=""
+                value={formData.phone}
+                onChange={handleChange}
+                name="phone"
+              />
+              <label
+                className={`did-floating-label input-phone ${
+                  !isData || testPhone.test(formData.phone) ? "" : "color-red"
+                }`}>
+                Phone Number*
+              </label>
+              {!testPhone.test(formData.phone) &&
+                formData.phone?.length > 6 && (
+                  <span style={{ color: "red", fontSize: "10px" }}>
+                    Enter a valid Phone Number
+                  </span>
+                )}
+            </div>
+            <div className="did-floating-label-content">
+              <select
+                className="did-floating-select"
+                value={formData.interest}
+                onChange={handleChange}
+                name="interest">
+                {/* <option value="">Select</option> */}
+                <option value="engineering">Engineering</option>
+                <option value="arts-science">Arts & Science</option>
+                <option value="medical">Medical</option>
+                <option value="agriculture">Agriculture</option>
+                <option value="law">Law</option>
+                <option value="design">Design</option>
+                <option value="hotel-management">Hotel Management</option>
+                <option value="animation">Animation</option>
+                <option value="marine">Marine</option>
+                <option value="dental">Dental</option>
+                <option value="education">Education</option>
+                <option value="management">Management</option>
+                <option value="commerce">Commerce</option>
+                <option value="pharmacy">Pharmacy</option>
+              </select>
+              <label className="did-floating-label input-course">
+                Field of Interest*
+              </label>
+            </div>
+            <div className="did-floating-label-content mb-0">
+              <textarea
+                className="did-floating-input"
+                type="text"
+                placeholder=""
+                value={formData.message}
+                onChange={handleChange}
+                name="message"
+              />
+              <label className="did-floating-label input-message">
+                Message
+              </label>
+            </div>
+          </div>
+          <div
+            className="mb-20"
+            style={{ display: "flex", alignItems: "start" }}>
             <input
-              className="did-floating-input"
-              type="text"
-              placeholder=""
-              value={formData.studentName}
-              onChange={handleChange}
-              name="studentName"
+              type="checkbox"
+              checked={isChecked}
+              onChange={() => setIsChecked(!isChecked)}
             />
-            <label
-              className={`did-floating-label input-student ${
-                !isData || formData.studentName?.length > 1 ? "" : "color-red"
-              }`}>
-              Student Name*
-            </label>
+            <small
+              className={`ml-10 ${!isData || isChecked ? "" : "color-red"}`}>
+              I agree to CollegeTSA{" "}
+              <Link href="/privacy-policy">Privacy Policy</Link> and{" "}
+              <Link href="/privacy-policy">Terms</Link> and provide consent to
+              be contacted for promotion via e-mail, phone, etc.
+            </small>
           </div>
-          <div className="did-floating-label-content">
-            <input
-              className="did-floating-input"
-              type="email"
-              placeholder=""
-              value={formData.email}
-              onChange={handleChange}
-              name="email"
-            />
-            <label
-              className={`did-floating-label input-email ${
-                !isData || testEmail.test(formData.email) ? "" : "color-red"
-              }`}>
-              Email Address*
-            </label>
-            {!testEmail.test(formData?.email) &&
-              formData?.email?.length > 4 && (
-                <span style={{ color: "red", fontSize: "10px" }}>
-                  Enter a valid Email Address
-                </span>
-              )}
-          </div>
-          <div className="did-floating-label-content">
-            <input
-              className="did-floating-input"
-              type="tel"
-              placeholder=""
-              value={formData.phone}
-              onChange={handleChange}
-              name="phone"
-            />
-            <label
-              className={`did-floating-label input-phone ${
-                !isData || testPhone.test(formData.phone) ? "" : "color-red"
-              }`}>
-              Phone Number*
-            </label>
-            {!testPhone.test(formData.phone) && formData.phone?.length > 6 && (
-              <span style={{ color: "red", fontSize: "10px" }}>
-                Enter a valid Phone Number
-              </span>
-            )}
-          </div>
-          <div className="did-floating-label-content">
-            <select
-              className="did-floating-select"
-              value={formData.interest}
-              onChange={handleChange}
-              name="interest">
-              <option value="">Select</option>
-              <option value="engineering">Engineering</option>
-              <option value="arts-science">Arts & Science</option>
-              <option value="medical">Medical</option>
-              <option value="agriculture">Agriculture</option>
-              <option value="law">Law</option>
-              <option value="design">Design</option>
-              <option value="hotel-management">Hotel Management</option>
-              <option value="animation">Animation</option>
-              <option value="marine">Marine</option>
-              <option value="dental">Dental</option>
-              <option value="education">Education</option>
-              <option value="management">Management</option>
-              <option value="commerce">Commerce</option>
-              <option value="pharmacy">Pharmacy</option>
-            </select>
-            <label className="did-floating-label input-course">
-              Field of Interest*
-            </label>
-          </div>
-          <div className="did-floating-label-content">
-            <textarea
-              className="did-floating-input"
-              type="text"
-              placeholder=""
-              value={formData.message}
-              onChange={handleChange}
-              name="message"
-            />
-            <label className="did-floating-label input-message">Message</label>
-          </div>
-          <button onClick={sendFreeCounselling} className="btn">
+          <button onClick={sendFreeCounseling} className="btn">
             Submit
           </button>
         </React.Fragment>
@@ -375,10 +411,10 @@ export default function Form() {
         />
       </div>
       <div
-        style={{ display: "flex", alignItems: "center", gap: "10px" }}
-        className="mb-10">
+        style={{ display: "flex", alignItems: "start", gap: "10px" }}
+        className="mt-15">
         <Image src={form.logo} width={30} height={30} alt="" unoptimized />
-        <h3>{form.title}</h3>
+        <h3 className="mt-0 mb-20">{form.title}</h3>
       </div>
       {isValid ? (
         <React.Fragment>
@@ -602,7 +638,7 @@ export default function Form() {
                 Address*
               </label>
             </div>
-            <div className="did-floating-label-content">
+            <div className="did-floating-label-content mb-0">
               <textarea
                 className="did-floating-input"
                 type="text"
@@ -614,6 +650,22 @@ export default function Form() {
               <label className="did-floating-label input-message">
                 Message
               </label>
+            </div>
+            <div
+              className="mt-20"
+              style={{ display: "flex", alignItems: "start" }}>
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+              />
+              <small
+                className={`ml-10 ${!isData || isChecked ? "" : "color-red"}`}>
+                I agree to CollegeTSA{" "}
+                <Link href="/privacy-policy">Privacy Policy</Link> and{" "}
+                <Link href="/privacy-policy">Terms</Link> and provide consent to
+                be contacted for promotion via e-mail, phone, etc.
+              </small>
             </div>
           </div>
           <button onClick={sendAdmission} className="btn">
@@ -640,7 +692,7 @@ export default function Form() {
             <li>Confidence Building</li>
             <li>Job Placement Assistance</li>
             <li>Personalized Guidance</li>
-            <li>24/7 Free Counselling</li>
+            <li>24/7 Free Counseling</li>
           </ul> */}
           <div className="social-group mb-15 mt-30">
             <a href="https://www.facebook.com/Tsaservices" target="_blank">
@@ -697,7 +749,7 @@ export default function Form() {
             Copyright © {new Date().getFullYear()} collegetsa.com
           </p>
         </div>
-        {form?.type === "admission" ? admissionLayout : freeCounsellingLayout}
+        {form?.type === "admission" ? admissionLayout : freeCounselingLayout}
       </div>
     </Modal>
   );

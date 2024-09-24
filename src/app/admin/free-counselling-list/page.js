@@ -1,9 +1,9 @@
 import React from "react";
-import FreeCounsellingList from "@/frontend/admin/FreeCounsellingList";
+import FreeCounselingList from "@/frontend/admin/FreeCounselingList";
 
-const getFreeCounsellingList = async () => {
+const getFreeCounselingList = async () => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/free-counselling`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/free-counseling`,
     {
       cache: "no-store",
     }
@@ -14,6 +14,6 @@ const getFreeCounsellingList = async () => {
 };
 
 export default async function page() {
-  const FreeCounsellingLists = await getFreeCounsellingList();
-  return <FreeCounsellingList data={FreeCounsellingLists} />;
+  const FreeCounselingLists = await getFreeCounselingList();
+  return <FreeCounselingList data={FreeCounselingLists} />;
 }

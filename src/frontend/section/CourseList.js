@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsPreview, setForm, setCourseField } from "../redux/AppSlice";
@@ -23,6 +23,10 @@ const CourseList = ({ data, fieldText }) => {
     elgibility: "",
     mode: "",
   });
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page
+  }, []);
 
   const filtered =
     data &&
@@ -219,7 +223,7 @@ const CourseList = ({ data, fieldText }) => {
           </div>
         </div>
       </div>
-      <div className="table mb-30">
+      <div className="table">
         <div style={{ display: "flex", alignItems: "center" }}>
           <Image
             src="/images/filter.png"
@@ -324,6 +328,8 @@ const CourseList = ({ data, fieldText }) => {
             }}
           />
         </div>
+      </div>
+      <div className="table mb-30">
         <table id="customers" className="mt-20">
           <tbody>
             <tr>
@@ -339,15 +345,17 @@ const CourseList = ({ data, fieldText }) => {
                 key={index}
                 className="cursor-pointer"
                 onClick={() => {
-                  disPatch(
-                    setForm({
-                      isForm: true,
-                      title: item?.courseData?.courseName,
-                      type: "counselling",
-                      logo: `/images/${item?.field}.png`,
-                      interest: item?.field,
-                    })
-                  );
+                  if (!auth || auth?.email !== "collegetsainfo@gmail.com") {
+                    disPatch(
+                      setForm({
+                        isForm: true,
+                        title: item?.courseData?.courseName,
+                        type: "counseling",
+                        logo: `/images/${item?.field}.png`,
+                        interest: item?.field,
+                      })
+                    );
+                  }
                 }}>
                 <td>{index + 1}</td>
                 <td>

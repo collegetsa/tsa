@@ -120,17 +120,17 @@ function Header() {
                             style={{ display: "flex", alignItems: "center" }}
                             className="cursor-pointer mb-20"
                             onClick={() => setShowNavbar(false)}>
-                            <Link href="/admin/free-counselling-list">
+                            <Link href="/admin/free-counseling-list">
                               <span>
                                 <Image
-                                  src="/images/freecounselling.png"
+                                  src="/images/freecounseling.png"
                                   width={20}
                                   height={20}
                                   alt=""
                                   className="mr-10"
                                 />
                               </span>
-                              <span>FreeCounselling</span>
+                              <span>FreeCounseling</span>
                             </Link>
                           </div>
                           <div
@@ -160,7 +160,7 @@ function Header() {
                             <Link href="/admin/college/create">
                               <span>
                                 <Image
-                                  src="/images/add.png"
+                                  src="/images/college.png"
                                   width={20}
                                   height={20}
                                   alt=""
@@ -177,7 +177,7 @@ function Header() {
                             <Link href="/admin/course/create">
                               <span>
                                 <Image
-                                  src="/images/add.png"
+                                  src="/images/course.png"
                                   width={20}
                                   height={20}
                                   alt=""

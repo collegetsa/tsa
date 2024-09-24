@@ -88,7 +88,7 @@ export default function Home({ CollegeLists, CourseLists }) {
                     src={item?.collegeData?.logo}
                     width={20}
                     height={20}
-                    alt={item?.collegeData?.collegeName}
+                    alt=""
                     unoptimized
                   />
                 </span>
@@ -109,7 +109,7 @@ export default function Home({ CollegeLists, CourseLists }) {
                     src={`/images/${item?.field}.png`}
                     width={20}
                     height={20}
-                    alt={item?.courseData?.courseName}
+                    alt=""
                     unoptimized
                   />
                 </span>
@@ -132,13 +132,13 @@ export default function Home({ CollegeLists, CourseLists }) {
               disPatch(
                 setForm({
                   isForm: true,
-                  title: `Free Counselling ${new Date().getFullYear()}`,
-                  type: "counselling",
-                  logo: "/images/logo.png",
+                  title: `Get Free Counseling for Your Best Future`,
+                  type: "counseling",
+                  logo: "/images/freecounseling.png",
                 })
               );
             }}>
-            Free Counselling
+            Free Counseling
           </button>
           <button
             className="btn home-btn ml-20"
@@ -146,9 +146,9 @@ export default function Home({ CollegeLists, CourseLists }) {
               disPatch(
                 setForm({
                   isForm: true,
-                  title: `Admission Form ${new Date().getFullYear()}`,
+                  title: `Apply for Your Best Future & Career`,
                   type: "admission",
-                  logo: "/images/logo.png",
+                  logo: "/images/admission.png",
                 })
               );
             }}>

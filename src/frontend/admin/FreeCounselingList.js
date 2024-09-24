@@ -4,13 +4,13 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 
-export default function FreeCounsellingList({ data }) {
+export default function FreeCounselingList({ data }) {
   const cookies = useCookies();
   const router = useRouter();
 
   const editList = async (option, item) => {
     const jwtToken = cookies.get("jwtToken");
-    const response = await fetch(`/api/free-counselling/${item?._id}`, {
+    const response = await fetch(`/api/free-counseling/${item?._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export default function FreeCounsellingList({ data }) {
 
   const deleteList = async (item) => {
     const jwtToken = cookies.get("jwtToken");
-    const response = await fetch(`/api/free-counselling/${item?._id}`, {
+    const response = await fetch(`/api/free-counseling/${item?._id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -7,7 +7,7 @@ export default async function robots() {
       userAgent: "*",
       allow: "/",
       disallow: [
-        "/admin/free-counselling-list",
+        "/admin/free-counseling-list",
         "/admin/admission-list",
         "/admin/college/create",
         "/admin/college/edit/id",

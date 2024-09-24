@@ -1,5 +1,5 @@
 import { Database } from "@/backend/Database";
-import FreeCounselling from "@/backend/schema/FreeCounselling";
+import FreeCounseling from "@/backend/schema/FreeCounseling";
 import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
@@ -10,7 +10,7 @@ export const POST = async (request) => {
     const date = new Date();
     const newDate =
       date.getDate() + "/" + [date.getMonth() + 1] + "/" + date.getFullYear();
-    await FreeCounselling.create({
+    await FreeCounseling.create({
       studentName,
       email,
       phone,
@@ -34,7 +34,7 @@ export const POST = async (request) => {
 export const GET = async (request) => {
   try {
     await Database();
-    const list = await FreeCounselling.find();
+    const list = await FreeCounseling.find();
     return NextResponse.json(list, { status: 200 });
   } catch (error) {
     return NextResponse.json(

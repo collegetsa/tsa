@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const FreeCounselling = new mongoose.Schema({
+const FreeCounseling = new mongoose.Schema({
   studentName: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: Number, required: true },
@@ -10,6 +10,6 @@ const FreeCounselling = new mongoose.Schema({
   appliedDate: { type: Object },
 });
 
-export default mongoose.models.FreeCounselling ||
-  mongoose.model("FreeCounselling", FreeCounselling);
+export default mongoose.models.FreeCounseling ||
+  mongoose.model("FreeCounseling", FreeCounseling);
  
