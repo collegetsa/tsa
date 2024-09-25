@@ -185,299 +185,302 @@ const CreateCollege = ({ type, editData }) => {
               setIsEditKeyword={setIsEditKeyword}
             />
           ) : (
-            <div className="table mb-30 mt-20">
-              <div style={{ overflowX: "auto" }}></div>
-              <table id="customers" className="mb-0">
-                <tbody>
-                  <tr>
-                    <th colSpan={2}>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                        }}>
-                        <span> # Create New College</span>
-                        <span
+            <React.Fragment>
+              <div className="table mt-20">
+                <table id="customers" className="mb-0">
+                  <tbody>
+                    <tr>
+                      <th colSpan={2}>
+                        <div
                           style={{
                             display: "flex",
                             alignItems: "center",
-                          }}
-                          className="cursor-pointer"
-                          onClick={() => setIsEditKeyword(true)}>
+                            justifyContent: "space-between",
+                          }}>
+                          <span> # Create New College</span>
+                          <span
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                            className="cursor-pointer"
+                            onClick={() => setIsEditKeyword(true)}>
+                            <Image
+                              src="/images/edit.png"
+                              width={20}
+                              height={20}
+                              alt=""
+                              className="template-icons ml-30"
+                            />
+                            <span className="ml-10">SEO Keywords</span>
+                          </span>
+                          <span
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                            className="cursor-pointer"
+                            onClick={() => disPatch(setIsPreview(true))}>
+                            <Image
+                              src="/images/preview.png"
+                              width={20}
+                              height={20}
+                              alt=""
+                              className="template-icons ml-30"
+                            />
+                            <span className="ml-10">Preview</span>
+                          </span>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td style={{ width: "50%" }}>
+                        <div className="did-floating-label-content mb-0">
+                          <input
+                            className="did-floating-input"
+                            type="text"
+                            placeholder=""
+                            value={data?.logo}
+                            onChange={handleChange}
+                            name="logo"
+                          />
+                          <label className="did-floating-label input-image">
+                            College Logo*
+                          </label>
+                        </div>
+                      </td>
+                      <td style={{ width: "50%" }}>
+                        <div className="did-floating-label-content mb-0">
+                          <input
+                            className="did-floating-input"
+                            type="text"
+                            placeholder=""
+                            value={data?.collegeName}
+                            onChange={handleChange}
+                            name="collegeName"
+                          />
+                          <label className="did-floating-label input-college">
+                            College Name*
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div className="did-floating-label-content mb-0">
+                          <input
+                            className="did-floating-input"
+                            type="text"
+                            placeholder=""
+                            value={data?.location}
+                            onChange={handleChange}
+                            name="location"
+                          />
+                          <label className="did-floating-label input-address">
+                            Location*
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="did-floating-label-content mb-0">
+                          <select
+                            className="did-floating-select"
+                            name="ownership"
+                            value={data?.ownership}
+                            onChange={handleChange}>
+                            <option value="">Select</option>
+                            <option value="private">Private</option>
+                            <option value="government">Government</option>
+                            <option value="self-finance">
+                              Self finance/Affiliated
+                            </option>
+                          </select>
+                          <label className="did-floating-label input-ownership">
+                            Ownership*
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div className="did-floating-label-content mb-0">
+                          <select
+                            className="did-floating-select"
+                            name="university"
+                            value={data?.university}
+                            onChange={handleChange}>
+                            <option value="">Select</option>
+                            <option value="deemed">
+                              Deemed to be University
+                            </option>
+                            <option value="autonomous ">Autonomous</option>
+                            <option value="affiliate">Affiliated</option>
+                            <option value="central">Central University</option>
+                            <option value="state">State University</option>
+                            <option value="open">Open University</option>
+                          </select>
+                          <label className="did-floating-label input-ownership">
+                            University Type*
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <div style={{ display: "flex" }}>
+                          <div className="did-floating-label-content mb-0">
+                            <select
+                              style={{
+                                width: "max-content",
+                              }}
+                              className="did-floating-select"
+                              name="collegeType"
+                              value={data?.collegeType}
+                              onChange={addField}>
+                              <option value="">Select</option>
+                              <option value="engineering">Engineering</option>
+                              <option value="arts-science">
+                                Arts & Science
+                              </option>
+                              <option value="medical">Medical</option>
+                              <option value="agriculture">Agriculture</option>
+                              <option value="law">Law</option>
+                              <option value="design">Design</option>
+                              <option value="hotel-management">
+                                Hotel Management
+                              </option>
+                              <option value="animation">Animation</option>
+                              <option value="marine">Marine</option>
+                              <option value="dental">Dental</option>
+                              <option value="education">Education</option>
+                              <option value="management">Management</option>
+                              <option value="commerce">Commerce</option>
+                              <option value="pharmacy">Pharmacy</option>
+                            </select>
+                            <label className="did-floating-label input-course">
+                              Available Fields*
+                            </label>
+                          </div>
+                          <div className="did-floating-label-content ml-10 mb-0">
+                            <input
+                              className="did-floating-input"
+                              type="text"
+                              placeholder=""
+                              value={data?.collegeType}
+                              onChange={handleChange}
+                              name="collegeType"
+                            />
+                            {/* <label className="did-floating-label input-college">
+                            College Type*
+                          </label> */}
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div className="did-floating-label-content mb-0">
+                          <input
+                            className="did-floating-input"
+                            type="text"
+                            placeholder=""
+                            value={courseList?.courseName}
+                            onChange={handleChange2}
+                            name="courseName"
+                          />
+                          <label className="did-floating-label input-ownership">
+                            Course*
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <div
+                          className="did-floating-label-content mb-0"
+                          style={{ display: "flex", alignItems: "center" }}>
+                          <input
+                            className="did-floating-input mr-10"
+                            type="text"
+                            placeholder=""
+                            value={courseList?.fees}
+                            onChange={handleChange2}
+                            name="fees"
+                          />
+                          <Image
+                            src="/images/add.png"
+                            width={20}
+                            height={20}
+                            alt=""
+                            onClick={addCourse}
+                            className="cursor-pointer"
+                          />
                           <Image
                             src="/images/edit.png"
                             width={20}
                             height={20}
                             alt=""
-                            className="template-icons ml-30"
+                            onClick={() => setIsEditCourse(!isEditCourse)}
+                            className="cursor-pointer ml-10"
                           />
-                          <span className="ml-10">SEO Keywords</span>
-                        </span>
-                        <span
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                          }}
-                          className="cursor-pointer"
-                          onClick={() => disPatch(setIsPreview(true))}>
-                          <Image
-                            src="/images/preview.png"
-                            width={20}
-                            height={20}
-                            alt=""
-                            className="template-icons ml-30"
-                          />
-                          <span className="ml-10">Preview</span>
-                        </span>
-                      </div>
-                    </th>
-                  </tr>
-                  <tr>
-                    <td style={{ width: "50%" }}>
-                      <div className="did-floating-label-content mb-0">
-                        <input
-                          className="did-floating-input"
-                          type="text"
-                          placeholder=""
-                          value={data?.logo}
-                          onChange={handleChange}
-                          name="logo"
-                        />
-                        <label className="did-floating-label input-image">
-                          College Logo*
-                        </label>
-                      </div>
-                    </td>
-                    <td style={{ width: "50%" }}>
-                      <div className="did-floating-label-content mb-0">
-                        <input
-                          className="did-floating-input"
-                          type="text"
-                          placeholder=""
-                          value={data?.collegeName}
-                          onChange={handleChange}
-                          name="collegeName"
-                        />
-                        <label className="did-floating-label input-college">
-                          College Name*
-                        </label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="did-floating-label-content mb-0">
-                        <input
-                          className="did-floating-input"
-                          type="text"
-                          placeholder=""
-                          value={data?.location}
-                          onChange={handleChange}
-                          name="location"
-                        />
-                        <label className="did-floating-label input-address">
-                          Location*
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="did-floating-label-content mb-0">
-                        <select
-                          className="did-floating-select"
-                          name="ownership"
-                          value={data?.ownership}
-                          onChange={handleChange}>
-                          <option value="">Select</option>
-                          <option value="private">Private</option>
-                          <option value="government">Government</option>
-                          <option value="self-finance">
-                            Self finance/Affiliated
-                          </option>
-                        </select>
-                        <label className="did-floating-label input-ownership">
-                          Ownership*
-                        </label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="did-floating-label-content mb-0">
-                        <select
-                          className="did-floating-select"
-                          name="university"
-                          value={data?.university}
-                          onChange={handleChange}>
-                          <option value="">Select</option>
-                          <option value="deemed">
-                            Deemed to be University
-                          </option>
-                          <option value="autonomous ">Autonomous</option>
-                          <option value="affiliate">Affiliated</option>
-                          <option value="central">Central University</option>
-                          <option value="state">State University</option>
-                          <option value="open">Open University</option>
-                        </select>
-                        <label className="did-floating-label input-ownership">
-                          University Type*
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <div style={{ display: "flex" }}>
-                        <div className="did-floating-label-content mb-0">
-                          <select
-                            style={{
-                              width: "max-content",
-                            }}
-                            className="did-floating-select"
-                            name="collegeType"
-                            value={data?.collegeType}
-                            onChange={addField}>
-                            <option value="">Select</option>
-                            <option value="engineering">Engineering</option>
-                            <option value="arts-science">Arts & Science</option>
-                            <option value="medical">Medical</option>
-                            <option value="agriculture">Agriculture</option>
-                            <option value="law">Law</option>
-                            <option value="design">Design</option>
-                            <option value="hotel-management">
-                              Hotel Management
-                            </option>
-                            <option value="animation">Animation</option>
-                            <option value="marine">Marine</option>
-                            <option value="dental">Dental</option>
-                            <option value="education">Education</option>
-                            <option value="management">Management</option>
-                            <option value="commerce">Commerce</option>
-                            <option value="pharmacy">Pharmacy</option>
-                          </select>
-                          <label className="did-floating-label input-course">
-                            Available Fields*
+                          <label className="did-floating-label input-ownership">
+                            Fees*
                           </label>
                         </div>
-                        <div className="did-floating-label-content ml-10 mb-0">
-                          <input
-                            className="did-floating-input"
-                            type="text"
-                            placeholder=""
-                            value={data?.collegeType}
-                            onChange={handleChange}
-                            name="collegeType"
-                          />
-                          {/* <label className="did-floating-label input-college">
-                            College Type*
-                          </label> */}
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="did-floating-label-content mb-0">
-                        <input
-                          className="did-floating-input"
-                          type="text"
-                          placeholder=""
-                          value={courseList?.courseName}
-                          onChange={handleChange2}
-                          name="courseName"
-                        />
-                        <label className="did-floating-label input-ownership">
-                          Course*
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <div
-                        className="did-floating-label-content mb-0"
-                        style={{ display: "flex", alignItems: "center" }}>
-                        <input
-                          className="did-floating-input mr-10"
-                          type="text"
-                          placeholder=""
-                          value={courseList?.fees}
-                          onChange={handleChange2}
-                          name="fees"
-                        />
-                        <Image
-                          src="/images/add.png"
-                          width={20}
-                          height={20}
-                          alt=""
-                          onClick={addCourse}
-                          className="cursor-pointer"
-                        />
-                        <Image
-                          src="/images/edit.png"
-                          width={20}
-                          height={20}
-                          alt=""
-                          onClick={() => setIsEditCourse(!isEditCourse)}
-                          className="cursor-pointer ml-10"
-                        />
-                        <label className="did-floating-label input-ownership">
-                          Fees*
-                        </label>
-                      </div>
-                    </td>
-                  </tr>
-                  {isEditCourse &&
-                    data?.course?.map((item, index) => (
-                      <tr key={index}>
-                        <td>
-                          <div className="did-floating-label-content mb-0">
-                            <input
-                              className="did-floating-input"
-                              type="text"
-                              placeholder=""
-                              value={item?.courseName}
-                              onChange={(e) => editCourse(e, index)}
-                              name="courseName"
-                            />
-                            <label className="did-floating-label input-ownership">
-                              Course*
-                            </label>
-                          </div>
-                        </td>
-                        <td>
-                          <div
-                            className="did-floating-label-content mb-0"
-                            style={{ display: "flex", alignItems: "center" }}>
-                            <input
-                              className="did-floating-input mr-10"
-                              type="text"
-                              placeholder=""
-                              value={item?.fees}
-                              onChange={(e) => editCourse(e, index)}
-                              name="fees"
-                            />
-                            <Image
-                              src="/images/delete.png"
-                              width={15}
-                              height={15}
-                              alt=""
-                              onClick={() => deleteCourse(index)}
-                              className="cursor-pointer"
-                            />
-                            <label className="did-floating-label input-ownership">
-                              Fees*
-                            </label>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-              <div style={{ overflowX: "auto", scrollbarWidth: "thin" }}>
+                      </td>
+                    </tr>
+                    {isEditCourse &&
+                      data?.course?.map((item, index) => (
+                        <tr key={index}>
+                          <td>
+                            <div className="did-floating-label-content mb-0">
+                              <input
+                                className="did-floating-input"
+                                type="text"
+                                placeholder=""
+                                value={item?.courseName}
+                                onChange={(e) => editCourse(e, index)}
+                                name="courseName"
+                              />
+                              <label className="did-floating-label input-ownership">
+                                Course*
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <div
+                              className="did-floating-label-content mb-0"
+                              style={{ display: "flex", alignItems: "center" }}>
+                              <input
+                                className="did-floating-input mr-10"
+                                type="text"
+                                placeholder=""
+                                value={item?.fees}
+                                onChange={(e) => editCourse(e, index)}
+                                name="fees"
+                              />
+                              <Image
+                                src="/images/delete.png"
+                                width={15}
+                                height={15}
+                                alt=""
+                                onClick={() => deleteCourse(index)}
+                                className="cursor-pointer"
+                              />
+                              <label className="did-floating-label input-ownership">
+                                Fees*
+                              </label>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="table mb-30">
                 <EditorQuill
                   handleChange={handleChange}
                   data={data}
                   setData={setData}
                 />
               </div>
-            </div>
+            </React.Fragment>
           )}
         </React.Fragment>
       ) : (

@@ -175,7 +175,12 @@ export default function Home({ CollegeLists, CourseLists }) {
             successful career for the student.
           </p>
         </div>
-        <Image src="/images/step-by-step.png" width={200} height={200} alt="" />
+        <Image
+          src="/images/step-by-step.webp"
+          width={200}
+          height={200}
+          alt=""
+        />
       </div>
       <Table />
     </React.Fragment>

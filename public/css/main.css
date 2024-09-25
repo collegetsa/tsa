@@ -1021,7 +1021,7 @@ a {
 }
 
 .home-bg {
-    background-image: url(../images/home.png);
+    background-image: url(../images/home.webp);
     background-size: cover !important;
     width: 100%;
     height: 441px;

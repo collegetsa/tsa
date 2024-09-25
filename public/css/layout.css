@@ -271,7 +271,7 @@
 }
 
 .form-left {
-    background-image: url(../images/form-bg.png);
+    background-image: url(../images/form-bg.webp);
     width: 400px;
     background-size: cover;
     background-color: #f9f9f9;
@@ -568,7 +568,7 @@ input[type=file]::file-selector-button {
 
 .template {
     color: #fff !important;
-    background-image: url(../images/template.png);
+    background-image: url(../images/template.webp);
     background-size: cover;
     padding: 40px 0px;
     display: flex;

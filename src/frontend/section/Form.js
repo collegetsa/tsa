@@ -313,7 +313,7 @@ export default function Form() {
                 value={formData.interest}
                 onChange={handleChange}
                 name="interest">
-                {/* <option value="">Select</option> */}
+                <option value="">Select</option>
                 <option value="engineering">Engineering</option>
                 <option value="arts-science">Arts & Science</option>
                 <option value="medical">Medical</option>

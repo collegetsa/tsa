@@ -1,6 +1,6 @@
 @media (max-width: 600px) {
     .home-bg {
-        background-image: url(../images/home2.png);
+        background-image: url(../images/home2.webp);
     }
 
     .ReactModal__Content {
@@ -106,7 +106,7 @@
 
 @media (min-width: 600px) and (max-width: 768px) {
     .home-bg {
-        background-image: url(../images/home2.png);
+        background-image: url(../images/home2.webp);
     }
 
     .input-search-select {

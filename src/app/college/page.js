@@ -23,6 +23,8 @@ export const metadata = {
     "best agriculture college in tamilnadu",
     "best architecture colleges in tamilnadu",
     "best arts colleges in tamilnadu",
+    "best marine colleges in tamilnadu",
+    "best hotel management colleges in tamilnadu",
   ],
   robots: {
     index: true,

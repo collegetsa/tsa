@@ -343,7 +343,11 @@ const CourseList = ({ data, fieldText }) => {
             {filtered?.map((item, index) => (
               <tr
                 key={index}
-                className="cursor-pointer"
+                className={`${
+                  auth?.email !== "collegetsainfo@gmail.com"
+                    ? "cursor-pointer"
+                    : ""
+                }`}
                 onClick={() => {
                   if (!auth || auth?.email !== "collegetsainfo@gmail.com") {
                     disPatch(
