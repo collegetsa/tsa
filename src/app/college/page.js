@@ -92,9 +92,18 @@ export const metadata = {
   category: "Education",
 };
 
-const getCollegeList = async () => {
+const getCollegeList = async (searchParams) => {
+  const search = searchParams?.search || "";
+  const collegetype = searchParams?.collegetype || "";
+  const location = searchParams?.location || "";
+  const ownership = searchParams?.ownership || "";
+  const university = searchParams?.university || "";
+  const offset = searchParams?.offset || "";
+  const limit = searchParams?.limit || "";
+  const query = `type=view-list&search=${search}&collegetype=${collegetype}&location=${location}&ownership=${ownership}&university=${university}&offset=${offset}&limit=${limit}`;
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/college`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/college?${query}`,
     {
       cache: "no-store",
     }
@@ -104,7 +113,9 @@ const getCollegeList = async () => {
   }
 };
 
-export default async function page() {
-  const CollegeLists = await getCollegeList();
-  return <CollegeList CollegeLists={CollegeLists} />;
+export default async function page({ searchParams }) {
+  const CollegeLists = await getCollegeList(searchParams);
+  return (
+    <CollegeList CollegeLists={CollegeLists} searchParams={searchParams} />
+  );
 }

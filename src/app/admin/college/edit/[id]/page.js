@@ -5,7 +5,7 @@ const CreateCollege = dynamic(() => import("@/frontend/admin/CreateCollege"), {
 
 const getCollege = async (id) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/college/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/college?pageUrl=${id}`,
     { cache: "no-store" }
   );
   if (response.ok) {
@@ -15,5 +15,5 @@ const getCollege = async (id) => {
 
 export default async function page({ params }) {
   const College = await getCollege(params.id);
-  return <CreateCollege type="edit" editData={College} />;
+  return <CreateCollege type="edit" editData={College[0]} />;
 }

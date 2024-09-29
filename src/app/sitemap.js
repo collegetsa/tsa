@@ -1,14 +1,17 @@
 import { unstable_noStore as noStore } from "next/cache";
 
 export default async function sitemap() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/college`, {
-    cache: "no-store",
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/college?type=sitemap`,
+    {
+      cache: "no-store",
+    }
+  );
   noStore();
   const colleges = await response.json();
 
-  const postEntries = colleges.map(({ pageUrl }) => ({
-    url: `${process.env.NEXT_PUBLIC_API_URL}/college/${pageUrl}`,
+  const postEntries = colleges.map((item) => ({
+    url: `${process.env.NEXT_PUBLIC_API_URL}/college/${item?._id?.pageUrl}`,
     lastModified: new Date(),
   }));
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setForm, setIsPreview } from "../redux/AppSlice";
 import Course from "./Course";
@@ -17,33 +17,86 @@ export default function Home({ CollegeLists, CourseLists }) {
   const filterdSearchList =
     CollegeLists &&
     CollegeLists?.filter((item) => {
-      return (
-        item?.collegeData?.collegeName
-          ?.toLowerCase()
-          ?.includes(search?.toLowerCase()) ||
-        item?.collegeData?.content
-          ?.toLowerCase()
-          ?.includes(search?.toLowerCase()) ||
-        item?.collegeData?.location
-          ?.toLowerCase()
-          ?.includes(search?.toLowerCase()) ||
-        item?.collegeData?.collegeType
-          ?.toLowerCase()
-          ?.includes(search?.toLowerCase())
-      );
-    });
-  
-  const filterdSearchCourse =
-    CourseLists &&
-    CourseLists?.filter((item) => {
-      return item?.courseData?.courseName
+      return item?._id?.collegeName
         ?.toLowerCase()
         ?.includes(search?.toLowerCase());
     });
 
+  const filterdSearchCourse =
+    CourseLists &&
+    CourseLists?.filter((item) => {
+      return item?._id?.courseName
+        ?.toLowerCase()
+        ?.includes(search?.toLowerCase());
+    });
   return (
     <React.Fragment>
       <div className="home-bg">
+        <div
+          className="social-group mb-15 mt-30"
+          style={{ position: "absolute", right: "20px", top: "50px" }}>
+          <a href="tel:9677869617">
+            <span>
+              <Image
+                src="/images/phone.png"
+                width={15}
+                height={15}
+                alt="collegetsa-call"
+                className="template-icons"
+              />
+            </span>
+            <span className="call-text color-white">+91 9677869617</span>
+          </a>
+          <a href="https://www.facebook.com/Tsaservices" target="_blank">
+            <Image
+              src="/images/facebook.svg"
+              alt="telegram-collegetsa"
+              title="telegram-collegetsa"
+              width={20}
+              height={20}
+            />
+          </a>
+          <a href="https://t.me/tsaservices" target="_blank">
+            <Image
+              src="/images/telegram.svg"
+              alt="telegram-collegetsa"
+              title="telegram-collegetsa"
+              width={20}
+              height={20}
+            />
+          </a>
+          <a
+            href="https://www.youtube.com/@TSASERVICES/featured"
+            target="_blank">
+            <Image
+              src="/images/youtube.svg"
+              alt="youtube-collegetsa"
+              title="youtube-collegetsa"
+              width={20}
+              height={20}
+            />
+          </a>
+          <a
+            href="https://www.instagram.com/tsa_services_education_gudie?igsh=MTluN25yN2E0MDlzZg=="
+            target="_blank">
+            <Image
+              src="/images/instagram.svg"
+              alt="instagram-collegetsa"
+              title="instagram-collegetsa"
+              width={20}
+              height={20}
+            />
+          </a>
+          <a href="https://wa.me/qr/XAKKC4YOZ5OBG1" target="_blank">
+            <Image
+              src="/images/whatsapp.svg"
+              alt="whatsapp-collegetsa"
+              title="whatsapp-collegetsa"
+              width={20}
+              height={20}
+            />
+          </a>
+        </div>
         <main className="container-txt">
           <section className="animation">
             <div>
@@ -75,24 +128,24 @@ export default function Home({ CollegeLists, CourseLists }) {
                 className="pl-10 pr-10 pt-10 pb-10"
                 key={index}
                 onClick={(e) => {
-                  setSearch(item?.collegeData?.collegeName);
+                  setSearch(item?._id?.collegeName);
                   if (auth && auth?.email === "collegetsainfo@gmail.com") {
                     disPatch(setIsPreview(true));
-                    router.push(`/admin/college/edit/${item?.pageUrl}`);
+                    router.push(`/admin/college/edit/${item?._id?.pageUrl}`);
                   } else {
-                    router.push(`/college/${item?.pageUrl}`);
+                    router.push(`/college/${item?._id?.pageUrl}`);
                   }
                 }}>
                 <span>
                   <Image
-                    src={item?.collegeData?.logo}
+                    src={item?._id?.logo}
                     width={20}
                     height={20}
                     alt=""
                     unoptimized
                   />
                 </span>
-                <span className="ml-10">{item?.collegeData?.collegeName}</span>
+                <span className="ml-10">{item?._id?.collegeName}</span>
               </div>
             ))}
             {filterdSearchCourse?.map((item, index) => (
@@ -101,28 +154,29 @@ export default function Home({ CollegeLists, CourseLists }) {
                 className="pl-10 pr-10 pt-10 pb-10"
                 key={index}
                 onClick={(e) => {
-                  setSearch(item?.courseData?.courseName);
-                  router.push(`/course/${item?.field}`);
+                  setSearch(item?._id?.courseName);
+                  router.push(`/course/${item?._id?.field}`);
                 }}>
                 <span>
                   <Image
-                    src={`/images/${item?.field}.png`}
+                    src={`/images/${item?._id?.field}.png`}
                     width={20}
                     height={20}
                     alt=""
                     unoptimized
                   />
                 </span>
-                <span className="ml-10">{item?.courseData?.courseName}</span>
+                <span className="ml-10">{item?._id?.courseName}</span>
               </div>
             ))}
-            {/* {filterdSearchList?.length === 0 && (
-              <div
-                style={{ display: "flex", alignItems: "center" }}
-                className="pl-10 pr-10 pt-10 pb-10">
-                <span>No results found!</span>
-              </div>
-            )} */}
+            {filterdSearchList?.length === 0 &&
+              filterdSearchCourse?.length === 0 && (
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="pl-10 pr-10 pt-10 pb-10">
+                  <span>No results found!</span>
+                </div>
+              )}
           </div>
         </div>
         <div className="mt-20">
@@ -132,7 +186,7 @@ export default function Home({ CollegeLists, CourseLists }) {
               disPatch(
                 setForm({
                   isForm: true,
-                  title: `Get Free Counseling for Your Best Future`,
+                  title: `Get Free Counseling For Best College & Course`,
                   type: "counseling",
                   logo: "/images/freecounseling.png",
                 })
@@ -146,7 +200,7 @@ export default function Home({ CollegeLists, CourseLists }) {
               disPatch(
                 setForm({
                   isForm: true,
-                  title: `Apply for Your Best Future & Career`,
+                  title: `Apply for Your Best College & Course`,
                   type: "admission",
                   logo: "/images/admission.png",
                 })

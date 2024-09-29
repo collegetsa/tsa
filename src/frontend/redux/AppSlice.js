@@ -13,6 +13,10 @@ const AppSlice = createSlice({
       course: "",
       interest: "",
     },
+    confirmForm: {
+      isForm: false,
+      deleteId: "",
+    },
     isPreview: false,
     courseField: "",
   },
@@ -29,9 +33,17 @@ const AppSlice = createSlice({
     setCourseField: (state, action) => {
       state.courseField = action.payload;
     },
+    setConfirmForm: (state, action) => {
+      state.confirmForm = action.payload;
+    },
   },
 });
 
-export const { setAuth, setForm, setIsPreview, setCourseField } =
-  AppSlice.actions;
+export const {
+  setAuth,
+  setForm,
+  setIsPreview,
+  setCourseField,
+  setConfirmForm,
+} = AppSlice.actions;
 export default AppSlice.reducer;

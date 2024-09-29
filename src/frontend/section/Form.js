@@ -6,19 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setForm } from "../redux/AppSlice";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
+import { useCookies } from "next-client-cookies";
+import { customStyles } from "../utility";
 
 export default function Form() {
+  const cookies = useCookies();
   const disPatch = useDispatch();
   const form = useSelector((state) => state.app.form);
 
@@ -110,12 +102,12 @@ export default function Form() {
       isChecked;
 
     if (isSendFreeCounseling) {
-      const token = localStorage.getItem("token");
+      const jwtToken = cookies.get("jwtToken");
       const response = await fetch("/api/free-counseling", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${jwtToken}`,
         },
         body: JSON.stringify(formData),
       });
@@ -158,12 +150,12 @@ export default function Form() {
       admissionFormData.address?.length > 1 &&
       isChecked;
     if (isSendAdmission) {
-      const token = localStorage.getItem("token");
+      const jwtToken = cookies.get("jwtToken");
       const response = await fetch("/api/admission", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${jwtToken}`,
         },
         body: JSON.stringify(admissionFormData),
       });
@@ -686,14 +678,6 @@ export default function Form() {
         <div className="form-left">
           <h2 className="mt-70">WHY COLLEGE TSA?</h2>
           <span>For your best Course, College, Exams & Future</span>
-          {/* <ul className="mb-30">
-            <li>Educational Planning</li>
-            <li>Clarification of Goals</li>
-            <li>Confidence Building</li>
-            <li>Job Placement Assistance</li>
-            <li>Personalized Guidance</li>
-            <li>24/7 Free Counseling</li>
-          </ul> */}
           <div className="social-group mb-15 mt-30">
             <a href="https://www.facebook.com/Tsaservices" target="_blank">
               <Image

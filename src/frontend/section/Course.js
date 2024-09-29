@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Course({ CourseLists }) {
   const courseCount = (filed) => {
-    return CourseLists?.filter((item) => item?.field === filed);
+    return CourseLists?.filter((item) => item?._id?.field === filed);
   };
 
   const courseType = [

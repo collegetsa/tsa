@@ -82,6 +82,8 @@ const CreateCourse = ({ type, editData }) => {
     }
   };
 
+  console.log("DURATION", data?.duration);
+
   return (
     <div className="table mb-30 mt-20">
       <table id="customers" className="mb-0">
@@ -168,14 +170,14 @@ const CreateCourse = ({ type, editData }) => {
                   value={data?.duration}
                   onChange={handleChange}>
                   <option value="">Select</option>
-                  <option value="1">1 Year</option>
-                  <option value="2">2 Years</option>
-                  <option value="3">3 Years</option>
-                  <option value="4">4 Years</option>
-                  <option value="5">5 Years</option>
-                  <option value="6">6 Years</option>
-                  <option value="7">7 Years</option>
-                  <option value="8">8 Years</option>
+                  <option value="1 Year">1 Year</option>
+                  <option value="2 Years">2 Years</option>
+                  <option value="3 Years">3 Years</option>
+                  <option value="4 Years">4 Years</option>
+                  <option value="5 Years">5 Years</option>
+                  <option value="6 Years">6 Years</option>
+                  <option value="7 Years">7 Years</option>
+                  <option value="8 Years">8 Years</option>
                 </select>
                 <label className="did-floating-label input-course">
                   Course Duration*
@@ -190,12 +192,12 @@ const CreateCourse = ({ type, editData }) => {
                   value={data?.level}
                   onChange={handleChange}>
                   <option value="">Select</option>
-                  <option value="ug">Under Graduate [UG]</option>
-                  <option value="pg">Post Graduate [PG]</option>
-                  <option value="phd">PhD</option>
-                  <option value="diploma">Diploma</option>
-                  <option value="post-diploma">Post Diploma</option>
-                  <option value="certificate">Certificate Course</option>
+                  <option value="Under Graduate[UG]">Under Graduate[UG]</option>
+                  <option value="Post Graduate[PG]">Post Graduate[PG]</option>
+                  <option value="PhD">PhD</option>
+                  <option value="Diploma">Diploma</option>
+                  <option value="Post Diploma">Post Diploma</option>
+                  <option value="Certificate Course">Certificate Course</option>
                 </select>
                 <label className="did-floating-label input-address">
                   Course Level*
@@ -212,10 +214,10 @@ const CreateCourse = ({ type, editData }) => {
                   value={data?.elgibility}
                   onChange={handleChange}>
                   <option value="">Select</option>
-                  <option value="10">10th Pass</option>
-                  <option value="12">12th Pass</option>
-                  <option value="graduate">Graduate</option>
-                  <option value="post-graduate">Post Graduate</option>
+                  <option value="10th Pass">10th Pass</option>
+                  <option value="12th Pass">12th Pass</option>
+                  <option value="Graduate">Graduate</option>
+                  <option value="Post Graduate">Post Graduate</option>
                 </select>
                 <label className="did-floating-label input-ownership">
                   Eligibility*
@@ -230,11 +232,11 @@ const CreateCourse = ({ type, editData }) => {
                   value={data?.mode}
                   onChange={handleChange}>
                   <option value="">Select</option>
-                  <option value="full-time">Full Time</option>
-                  <option value="part-time">Part Time</option>
-                  <option value="distance">Distance</option>
-                  <option value="on-campus">On Campus</option>
-                  <option value="off-campus">Off Campus</option>
+                  <option value="Full Time">Full Time</option>
+                  <option value="Part Time">Part Time</option>
+                  <option value="Distance">Distance</option>
+                  <option value="On Campus">On Campus</option>
+                  <option value="Off Campus">Off Campus</option>
                 </select>
                 <label className="did-floating-label input-ownership">
                   Mode

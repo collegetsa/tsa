@@ -393,6 +393,7 @@ select.did-floating-select::-ms-expand {
 
 .social-group {
     display: flex;
+    align-items: center;
     column-gap: 15px;
 }
 
@@ -447,6 +448,9 @@ select.did-floating-select::-ms-expand {
     overflow-x: auto;
     scrollbar-width: thin;
     text-wrap: nowrap !important;
+        -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
 }
 
 #customers {
@@ -559,11 +563,8 @@ input[type=file]::file-selector-button {
 .college-page {
     width: 100%;
     -webkit-user-select: none;
-        /* Safari */
         -ms-user-select: none;
-        /* IE 10 and IE 11 */
         user-select: none;
-        /* Standard syntax */
 }
 
 .template {
@@ -630,4 +631,34 @@ input[type=file]::file-selector-button {
     position: sticky !important;
     top: 60px;
     z-index: 90;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.pagination span {
+    cursor: pointer;
+    text-align: center;
+    background-color: aliceblue;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.pagination span:hover {
+    background-color: #034a6a;
+    padding: 10px 15px;
+    color: #fff;
+}
+
+.confirm {
+    width: max-content;
+    height: max-content;
+    padding: 50px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    /* border: #d9d9d9 1px solid; */
+
 }

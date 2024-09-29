@@ -2,8 +2,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Footer() {
+  const router = useRouter();
   return (
     <footer className="Footer">
       <div className="Footer-section1">
@@ -39,7 +41,7 @@ export default function Footer() {
         <div>
           <h3 className="fw-600">Company</h3>
           <p>
-            <Link href="/">University</Link>
+            <Link href="/university">University</Link>
           </p>
           <p>
             <Link href="/contact">Contact Us</Link>
@@ -48,7 +50,7 @@ export default function Footer() {
             <Link href="/privacy-policy">Privacy Policy</Link>
           </p>
           <p>
-            <Link href="/">Careers</Link>
+            <Link href="/college">Top Colleges</Link>
           </p>
           <p>
             <Link href="/aboard">Why Aboard Education?</Link>

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
@@ -291,7 +292,7 @@ export default function Table() {
 
   const disPatch = useDispatch();
   return (
-    <div className="table mb-30 mt-30">
+    <div id="university-list" className="table mb-30 mt-30">
       <table id="customers">
         <tbody>
           <tr>

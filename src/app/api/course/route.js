@@ -22,7 +22,27 @@ export const POST = async (request) => {
 export const GET = async (request) => {
   try {
     await Database();
-    const data = await Course.find();
+    const getQueryParam = (param, defaultValue = "") => {
+      const value = request?.nextUrl?.searchParams?.get(param);
+      return value ? value : defaultValue;
+    };
+
+    let data;
+    const type = getQueryParam("type");
+    if (type === "course-count") {
+      data = await Course.aggregate([
+        {
+          $group: {
+            _id: {
+              field: "$field",
+              courseName: "$courseData.courseName",
+            },
+          },
+        },
+      ]);
+    } else {
+      data = await Course.find();
+    }
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json(

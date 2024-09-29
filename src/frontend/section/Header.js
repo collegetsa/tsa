@@ -73,6 +73,9 @@ function Header() {
               <li onClick={() => setShowNavbar(false)}>Updates</li>
               <li onClick={() => setShowNavbar(false)}>Exams</li>
               <li onClick={() => setShowNavbar(false)}>
+                <Link href="/university">University</Link>
+              </li>
+              <li onClick={() => setShowNavbar(false)}>
                 <Link href="/aboard">Aboard</Link>
               </li>
               {auth?.email ? (

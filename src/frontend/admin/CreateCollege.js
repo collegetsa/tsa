@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 import Keywords from "./Keywords";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsPreview } from "../redux/AppSlice";
+import { setIsPreview, setConfirmForm } from "../redux/AppSlice";
 
 const createData = {
   collegeData: {
@@ -168,6 +168,7 @@ const CreateCollege = ({ type, editData }) => {
       },
     });
     if (response.ok) {
+      disPatch(setConfirmForm({ isForm: false, deleteId: "" }));
       deletedCollege();
       router.push("/college");
       router.refresh();

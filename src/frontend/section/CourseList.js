@@ -2,17 +2,25 @@
 import React, { useLayoutEffect, useState } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsPreview, setForm, setCourseField } from "../redux/AppSlice";
+import {
+  setIsPreview,
+  setForm,
+  setCourseField,
+  setConfirmForm,
+} from "../redux/AppSlice";
 import { useRouter } from "next/navigation";
 import { useCookies } from "next-client-cookies";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
+import { customStyles } from "../utility";
+import Modal from "react-modal";
 
 const CourseList = ({ data, fieldText }) => {
   const cookies = useCookies();
   const router = useRouter();
   const disPatch = useDispatch();
   const auth = useSelector((state) => state.app.auth);
+  const confirmForm = useSelector((state) => state.app.confirmForm);
 
   const deletedCourse = () => toast.success("Course Deleted");
   const [text, setText] = useState(0);
@@ -53,9 +61,9 @@ const CourseList = ({ data, fieldText }) => {
     });
   };
 
-  const deleteCourse = async (item) => {
+  const deleteCourse = async (id) => {
     const jwtToken = cookies.get("jwtToken");
-    const response = await fetch(`/api/course/${item?._id}`, {
+    const response = await fetch(`/api/course/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -63,10 +71,34 @@ const CourseList = ({ data, fieldText }) => {
       },
     });
     if (response.ok) {
+      disPatch(setConfirmForm({ isForm: false, deleteId: "" }));
       deletedCourse();
       router.refresh();
     }
   };
+
+  function openForm(item) {
+    if (!auth || auth?.email !== "collegetsainfo@gmail.com") {
+      disPatch(
+        setForm({
+          isForm: true,
+          title: item?.courseData?.courseName,
+          type: "counseling",
+          logo: `/images/${item?.field}.png`,
+          interest: item?.field,
+        })
+      );
+    }
+  }
+
+  function getColleges(data) {
+    const array = data?.toLowerCase()?.split(" ");
+    if (!array[0]?.includes(".")) {
+      return array[0];
+    } else {
+      return array[1];
+    }
+  }
 
   let textShow;
   if (fieldText?.includes("engineering")) {
@@ -266,11 +298,11 @@ const CourseList = ({ data, fieldText }) => {
                   value={select.level}
                   onChange={handleChange}>
                   <option value="">Select</option>
-                  <option value="ug">Under Graduate [UG]</option>
-                  <option value="pg">Post Graduate [PG]</option>
+                  <option value="ug">Under Graduate[UG]</option>
+                  <option value="pg">Post Graduate[PG]</option>
                   <option value="phd">PhD</option>
                   <option value="diploma">Diploma</option>
-                  <option value="post-diploma">Post Diploma</option>
+                  <option value="post">Post Diploma</option>
                   <option value="certificate">Certificate Course</option>
                 </select>
                 <label className="did-floating-label input-address">
@@ -287,7 +319,7 @@ const CourseList = ({ data, fieldText }) => {
                   <option value="10">10th Pass</option>
                   <option value="12">12th Pass</option>
                   <option value="graduate">Graduate</option>
-                  <option value="post-graduate">Post Graduate</option>
+                  <option value="post">Post Graduate</option>
                 </select>
                 <label className="did-floating-label input-ownership">
                   Eligibility*
@@ -300,11 +332,11 @@ const CourseList = ({ data, fieldText }) => {
                   value={select.mode}
                   onChange={handleChange}>
                   <option value="">Select</option>
-                  <option value="full-time">Full Time</option>
-                  <option value="part-time">Part Time</option>
+                  <option value="full">Full Time</option>
+                  <option value="part">Part Time</option>
                   <option value="distance">Distance</option>
-                  <option value="on-campus">On Campus</option>
-                  <option value="off-campus">Off Campus</option>
+                  <option value="on">On Campus</option>
+                  <option value="off">Off Campus</option>
                 </select>
                 <label className="did-floating-label input-ownership">
                   Mode
@@ -312,11 +344,8 @@ const CourseList = ({ data, fieldText }) => {
               </div>
             </div>
           </div>
-          <Image
-            src="/images/reset.png"
-            width={20}
-            height={20}
-            alt=""
+          <div
+            style={{ display: "flex", alignItems: "center" }}
             className="ml-20 cursor-pointer"
             onClick={() => {
               setSelect({
@@ -325,8 +354,10 @@ const CourseList = ({ data, fieldText }) => {
                 elgibility: "",
                 mode: "",
               });
-            }}
-          />
+            }}>
+            <Image src="/images/reset.png" width={20} height={20} alt="" />
+            <span className="ml-7">Clear All</span>
+          </div>
         </div>
       </div>
       <div className="table mb-30">
@@ -339,6 +370,7 @@ const CourseList = ({ data, fieldText }) => {
               <th>Course Level</th>
               <th>Eligibility</th>
               <th>Mode</th>
+              <th>Top Colleges</th>
             </tr>
             {filtered?.map((item, index) => (
               <tr
@@ -347,25 +379,12 @@ const CourseList = ({ data, fieldText }) => {
                   auth?.email !== "collegetsainfo@gmail.com"
                     ? "cursor-pointer"
                     : ""
-                }`}
-                onClick={() => {
-                  if (!auth || auth?.email !== "collegetsainfo@gmail.com") {
-                    disPatch(
-                      setForm({
-                        isForm: true,
-                        title: item?.courseData?.courseName,
-                        type: "counseling",
-                        logo: `/images/${item?.field}.png`,
-                        interest: item?.field,
-                      })
-                    );
-                  }
-                }}>
-                <td>{index + 1}</td>
-                <td>
+                }`}>
+                <td onClick={() => openForm(item)}>{index + 1}</td>
+                <td onClick={() => openForm(item)}>
                   <div
                     className="hide-text pt-7 pb-7"
-                    style={{ width: "500px" }}>
+                    style={{ width: "450px" }}>
                     {item?.courseData?.courseName}
                   </div>
                   {auth && auth?.email === "collegetsainfo@gmail.com" && (
@@ -391,14 +410,19 @@ const CourseList = ({ data, fieldText }) => {
                         className="cursor-pointer ml-20"
                         onClick={() => {
                           if (auth?.email === "collegetsainfo@gmail.com") {
-                            deleteCourse(item);
+                            disPatch(
+                              setConfirmForm({
+                                isForm: true,
+                                deleteId: item?._id,
+                              })
+                            );
                           }
                         }}
                       />
                     </React.Fragment>
                   )}
                 </td>
-                <td>
+                <td onClick={() => openForm(item)}>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Image
                       src="/images/duration.png"
@@ -409,7 +433,7 @@ const CourseList = ({ data, fieldText }) => {
                     <span className="ml-7">{item?.courseData?.duration}</span>
                   </div>
                 </td>
-                <td>
+                <td onClick={() => openForm(item)}>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Image
                       src="/images/level.png"
@@ -420,7 +444,7 @@ const CourseList = ({ data, fieldText }) => {
                     <span className="ml-7">{item?.courseData?.level}</span>
                   </div>
                 </td>
-                <td>
+                <td onClick={() => openForm(item)}>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Image
                       src="/images/elgibility.png"
@@ -431,7 +455,7 @@ const CourseList = ({ data, fieldText }) => {
                     <span className="ml-7">{item?.courseData?.elgibility}</span>
                   </div>
                 </td>
-                <td>
+                <td onClick={() => openForm(item)}>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Image
                       src="/images/mode.png"
@@ -440,6 +464,24 @@ const CourseList = ({ data, fieldText }) => {
                       alt=""
                     />
                     <span className="ml-7">{item?.courseData?.mode}</span>
+                  </div>
+                </td>
+                <td
+                  onClick={() => {
+                    router?.push(
+                      `/college?search=${getColleges(
+                        item?.courseData?.courseName
+                      )}`
+                    );
+                  }}>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Image
+                      src="/images/college.png"
+                      width={15}
+                      height={15}
+                      alt=""
+                    />
+                    <span className="ml-7">Get Colleges</span>
                   </div>
                 </td>
               </tr>
@@ -454,6 +496,29 @@ const CourseList = ({ data, fieldText }) => {
           </tbody>
         </table>
       </div>
+      <Modal
+        isOpen={confirmForm?.isForm}
+        style={customStyles}
+        contentLabel="Example Modal"
+        ariaHideApp={false}>
+        <div className="confirm">
+          <p className="mb-20">Are you confirm to delete?</p>
+          <div>
+            <button
+              className="btn"
+              onClick={() => deleteCourse(confirmForm?.deleteId)}>
+              Delete
+            </button>
+            <button
+              className="btn ml-20"
+              onClick={() => {
+                disPatch(setConfirmForm({ isForm: false, deleteId: "" }));
+              }}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      </Modal>
     </React.Fragment>
   );
 };

@@ -3,7 +3,7 @@ const ViewCollege = dynamic(() => import("@/frontend/section/ViewCollege"));
 
 const getCollege = async (id) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/college/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/college?pageUrl=${id}`,
     { cache: "no-store" }
   );
   if (response.ok) {
@@ -12,7 +12,8 @@ const getCollege = async (id) => {
 };
 
 export async function generateMetadata({ params }) {
-  const data = await getCollege(params?.id);
+  const _data = await getCollege(params?.id);
+  const data = _data[0];
   return {
     title: data?.collegeData?.collegeName,
     description: data?.collegeData?.content?.slice(0, 159),
@@ -84,5 +85,5 @@ export async function generateMetadata({ params }) {
 
 export default async function page({ params }) {
   const College = await getCollege(params.id);
-  return <ViewCollege data={College?.collegeData} />;
+  return <ViewCollege data={College[0]?.collegeData} />;
 }

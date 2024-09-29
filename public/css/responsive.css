@@ -105,6 +105,10 @@
 }
 
 @media (min-width: 600px) and (max-width: 768px) {
+    .menu-icon {
+            display: block;
+            cursor: pointer;
+        }
     .home-bg {
         background-image: url(../images/home2.webp);
     }

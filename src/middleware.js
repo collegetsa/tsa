@@ -6,50 +6,61 @@ import { jwtDecode } from "jwt-decode";
 export async function middleware(request) {
   const authHeader = request.headers.get("Authorization");
   const token = authHeader && authHeader.split(" ")[1];
+  const clientToken = request.cookies.get("jwtToken")?.value;
   const path = request.nextUrl.pathname;
   const method = request.method;
-  // let auth;
-  //   try {
-  //     auth = await jose.jwtVerify(token, secretKey);
-  //   } catch (error) {
-  //     auth = null;
-  //   }
-  //   if (path?.includes("/api/college")) {
-  //     if (method === "POST" || method === "PUT" || method === "DELETE") {
-  //       if (auth?.payload?.email === "collegetsainfo@gmail.com") {
-  //         return NextResponse.next();
-  //       } else {
-  //         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  //       }
-  //     }
-  //   } else if (
-  //     path?.includes("/api/free-counseling") ||
-  //     path?.includes("/api/admission")
-  //   ) {
-  //     if (method === "GET" || method === "PUT" || method === "DELETE") {
-  //       if (auth?.payload?.email === "collegetsainfo@gmail.com") {
-  //         return NextResponse.next();
-  //       } else {
-  //         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  //       }
-  //     }
-  //   }
-  //   // Client
-  const clientToken = request.cookies.get("jwtToken")?.value;
+  // Decode and verify server token once
+  let serverAuth = null;
+  if (token) {
+    try {
+      serverAuth = await jose.jwtVerify(token, secretKey);
+    } catch (error) {}
+  }
+
   const jwtToken = clientToken && jwtDecode(clientToken);
-  if (jwtToken?.email !== "collegetsainfo@gmail.com") {
-    if (path === "/admin/college/create") {
-      return NextResponse.redirect(new URL("/", request.url));
-    } else if (path?.includes("/admin/college/edit/")) {
-      return NextResponse.redirect(new URL("/", request.url));
-    } else if (path === "/admin/free-counseling-list") {
-      return NextResponse.redirect(new URL("/", request.url));
-    } else if (path === "/admin/admission-list") {
+
+  const isAdmin =
+    serverAuth?.payload?.email === "collegetsainfo@gmail.com" ||
+    jwtToken?.email === "collegetsainfo@gmail.com";
+
+  if (
+    (path.includes("/api/college") &&
+      ["POST", "PUT", "DELETE"].includes(method)) ||
+    (path.includes("/api/course") && ["POST", "PUT", "DELETE"].includes(method))
+  ) {
+    if (!isAdmin) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+  }
+
+  if (
+    (path.includes("/api/free-counseling") &&
+      ["GET", "PUT", "DELETE"].includes(method)) ||
+    (path.includes("/api/admission") &&
+      ["GET", "PUT", "DELETE"].includes(method))
+  ) {
+    if (!isAdmin) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+  }
+
+  // client-side
+  if (!isAdmin) {
+    const restrictedAdminPaths = [
+      "/admin/free-counseling-list",
+      "/admin/admission-list",
+      "/admin/college/create",
+      "/admin/course/create",
+    ];
+
+    if (
+      restrictedAdminPaths.includes(path) ||
+      path.startsWith("/admin/college/edit/") ||
+      path.startsWith("/admin/course/edit/")
+    ) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
-}
 
-export const config = {
-  // matcher: ["/api/college", "/api/admission"],
-};
+  return NextResponse.next();
+}

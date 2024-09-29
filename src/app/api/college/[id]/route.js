@@ -40,16 +40,16 @@ export const DELETE = async (request, { params }) => {
   }
 };
 
-export const GET = async (request, { params }) => {
-  try {
-    await Database();
-    const id = params.id;
-    const output = await College.findOne({ pageUrl: id });
-    return NextResponse.json(output, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    );
-  }
-}
+// export const GET = async (request, { params }) => {
+//   try {
+//     await Database();
+//     const id = params.id;
+//     const output = await College.findOne({ pageUrl: id });
+//     return NextResponse.json(output, { status: 200 });
+//   } catch (error) {
+//     return NextResponse.json(
+//       { message: "Internal server error" },
+//       { status: 500 }
+//     );
+//   }
+// }
