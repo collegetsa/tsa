@@ -61,10 +61,10 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      site: "collegetsa.com",
+      site: "@collegetsainfo",
       title: data?.collegeData?.collegeName,
       description: data?.collegeData?.content?.slice(0, 159),
-      creator: "@collegetsa",
+      creator: "@collegetsainfo",
       images: {
         url: `${process.env.NEXT_PUBLIC_API_URL}/images/logo.png`,
         alt: "Preview image for College TSA",

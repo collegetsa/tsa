@@ -1,8 +1,11 @@
+const myTitle =
+  "Privacy and Policy | College TSA - Find Your Best College, Course and Career Path";
+const myDescription =
+  "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!";
+
 export const metadata = {
-  title:
-    "Privacy and Policy | College TSA - Find Your Best College, Course and Career Path",
-  description:
-    "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
+  title: myTitle,
+  description: myDescription,
   keywords: [
     "collegetsa",
     "collegetsa.com",
@@ -46,10 +49,8 @@ export const metadata = {
     },
   },
   openGraph: {
-    title:
-      "Privacy and Policy | College TSA - Find Your Best College, Course and Career Path",
-    description:
-      "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
+    title: myTitle,
+    description: myDescription,
     url: `${process.env.NEXT_PUBLIC_API_URL}/privacy-policy`,
     siteName: "collegetsa.com",
     type: "website",
@@ -67,12 +68,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "collegetsa.com",
-    title:
-      "Privacy and Policy | College TSA - Find Your Best College, Course and Career Path",
-    description:
-      "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
-    creator: "@collegetsa",
+    site: "@collegetsainfo",
+    title: myTitle,
+    description: myDescription,
+    creator: "@collegetsainfo",
     images: {
       url: `${process.env.NEXT_PUBLIC_API_URL}/images/logo.png`,
       alt: "Preview image for College TSA",

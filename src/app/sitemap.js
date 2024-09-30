@@ -21,6 +21,10 @@ export default async function sitemap() {
       lastModified: new Date(),
     },
     {
+      url: `${process.env.NEXT_PUBLIC_API_URL}/university`,
+      lastModified: new Date(),
+    },
+    {
       url: `${process.env.NEXT_PUBLIC_API_URL}/aboard`,
       lastModified: new Date(),
     },

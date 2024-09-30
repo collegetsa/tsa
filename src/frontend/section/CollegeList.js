@@ -22,7 +22,6 @@ const CollegeList = ({ CollegeLists, searchParams }) => {
   });
 
   const [locations, setLocations] = useState([]);
-  console.log(locations);
   const [page, setPage] = useState(0);
   const [_search] = useDebounce(search, 1000);
   const [_page] = useDebounce(page, 500);

@@ -82,8 +82,6 @@ const CreateCourse = ({ type, editData }) => {
     }
   };
 
-  console.log("DURATION", data?.duration);
-
   return (
     <div className="table mb-30 mt-20">
       <table id="customers" className="mb-0">

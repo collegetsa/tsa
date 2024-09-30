@@ -488,7 +488,7 @@ const CourseList = ({ data, fieldText }) => {
             ))}
             {filtered?.length === 0 && (
               <tr className="cursor-pointer">
-                <td colSpan={6}>
+                <td colSpan={7}>
                   <div className="text-center pt-10 pb-10">No data found!</div>
                 </td>
               </tr>

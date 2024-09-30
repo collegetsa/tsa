@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 import { useSelector } from "react-redux";
 
 export default function Page() {
-   const auth = useSelector((state) => state.app.auth);
-   if (auth) {
-     redirect("/");
-   }
+  const auth = useSelector((state) => state.app.auth);
+  if (auth) {
+    redirect("/");
+  }
   return <AuthPage authType="register" />;
 }

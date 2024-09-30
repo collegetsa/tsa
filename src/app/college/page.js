@@ -1,10 +1,13 @@
 import dynamic from "next/dynamic";
 const CollegeList = dynamic(() => import("@/frontend/section/CollegeList"));
 
+const myTitle = `List of Colleges in ${new Date().getFullYear()} | College TSA - Find Your best Colleges`;
+const myDescription =
+  "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!";
+
 export const metadata = {
-  title: "College | College TSA - Find Your best Colleges",
-  description:
-    "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
+  title: myTitle,
+  description: myDescription,
   keywords: [
     "collegetsa",
     `admission ${new Date().getFullYear()}-${new Date().getFullYear() + 1}`,
@@ -48,10 +51,8 @@ export const metadata = {
     },
   },
   openGraph: {
-    title:
-      "College | College TSA - Find Your best College, Course and Career Path",
-    description:
-      "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
+    title: myTitle,
+    description: myDescription,
     url: `${process.env.NEXT_PUBLIC_API_URL}/college`,
     siteName: "collegetsa.com",
     type: "website",
@@ -69,12 +70,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "collegetsa.com",
-    title:
-      "College | College TSA - Find Your best College, Course and Career Path",
-    description:
-      "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
-    creator: "@collegetsa",
+    site: "@collegetsainfo",
+    title: myTitle,
+    description: myDescription,
+    creator: "@collegetsainfo",
     images: {
       url: `${process.env.NEXT_PUBLIC_API_URL}/images/logo.png`,
       alt: "Preview image for College TSA",

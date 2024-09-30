@@ -1,3 +1,4 @@
+import { capitalizeWords } from "@/frontend/utility";
 import dynamic from "next/dynamic";
 const CourseList = dynamic(() => import("@/frontend/section/CourseList"), {
   ssr: false,
@@ -15,10 +16,23 @@ const getCourse = async (id) => {
 
 export async function generateMetadata({ params }) {
   const data = await getCourse(params?.id);
+  const myTitle = capitalizeWords(
+    `Best ${params?.id} courses in ${new Date().getFullYear()}`
+  );
+  const myDescription = `Explore the best ${
+    params?.id
+  } courses for ${new Date().getFullYear()}. Discover top-rated programs, expert reviews, and career insights to help you choose the right course with the college for your future success.`;
+  const myKeywords = [
+    `Top ${capitalizeWords(params?.id)} courses in ${new Date().getFullYear()}`,
+    `List of ${capitalizeWords(
+      params?.id
+    )} courses in ${new Date().getFullYear()}`,
+    ...data?.map((item) => item?.courseData?.courseName),
+  ];
   return {
-    title: data?.collegeData?.collegeName,
-    description: data?.collegeData?.content?.slice(0, 159),
-    keywords: data?.keywords,
+    title: myTitle,
+    description: myDescription,
+    keywords: myKeywords,
     robots: {
       index: true,
       follow: true,
@@ -33,19 +47,19 @@ export async function generateMetadata({ params }) {
       },
     },
     metadataBase: new URL(
-      `${process.env.NEXT_PUBLIC_API_URL}/college/${data?.pageUrl}`
+      `${process.env.NEXT_PUBLIC_API_URL}/course/${params?.id}`
     ),
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_API_URL}/college/${data?.pageUrl}`,
+      canonical: `${process.env.NEXT_PUBLIC_API_URL}/course/${params?.id}`,
       languages: {
-        "en-US": `${process.env.NEXT_PUBLIC_API_URL}/college/${data?.pageUrl}/en-US`,
-        "de-DE": `${process.env.NEXT_PUBLIC_API_URL}/college/${data?.pageUrl}/de-DE`,
+        "en-US": `${process.env.NEXT_PUBLIC_API_URL}/course/${params?.id}/en-US`,
+        "de-DE": `${process.env.NEXT_PUBLIC_API_URL}/course/${params?.id}/de-DE`,
       },
     },
     openGraph: {
-      title: data?.collegeData?.collegeName,
-      description: data?.collegeData?.content?.slice(0, 159),
-      url: `${process.env.NEXT_PUBLIC_API_URL}/college/${data?.pageUrl}`,
+      title: myTitle,
+      description: myDescription,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/course/${params?.id}`,
       siteName: "collegetsa.com",
       type: "website",
       images: [
@@ -62,10 +76,10 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      site: "collegetsa.com",
-      title: data?.collegeData?.collegeName,
-      description: data?.collegeData?.content?.slice(0, 159),
-      creator: "@collegetsa",
+      site: "@collegetsainfo",
+      title: myTitle,
+      description: myDescription,
+      creator: "@collegetsainfo",
       images: {
         url: `${process.env.NEXT_PUBLIC_API_URL}/images/logo.png`,
         alt: "Preview image for College TSA",
