@@ -25,7 +25,7 @@
     "react-modal": "^3.16.1",
     "react-quill": "^2.0.0",
     "react-redux": "^9.1.2",
-    "use-debounce": "^10.0.3"
+    "use-debounce": "^10.0.4"
   },
   "devDependencies": {
     "@types/node": "22.1.0",

@@ -4,31 +4,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { setForm, setIsPreview } from "../redux/AppSlice";
 import Course from "./Course";
 import Table from "./Table";
-import Footer from "./Footer";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useDebounce } from "use-debounce";
 
-export default function Home({ CollegeLists, CourseLists }) {
+export default function Home({ courseCount }) {
   const router = useRouter();
   const disPatch = useDispatch();
   const auth = useSelector((state) => state.app.auth);
+
   const [search, setSearch] = useState("");
+  const [_search] = useDebounce(search, 1000);
+  const [data, setData] = useState([]);
+  const [data2, setData2] = useState([]);
 
-  const filterdSearchList =
-    CollegeLists &&
-    CollegeLists?.filter((item) => {
-      return item?._id?.collegeName
-        ?.toLowerCase()
-        ?.includes(search?.toLowerCase());
-    });
+  useEffect(() => {
+    if (_search.length > 0) {
+      const fetchedCourse = async () => {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/course?type=search&search=${_search}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setData(data);
+        }
+      };
+      const fetchedCollege = async () => {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/college?type=search&search=${_search}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setData2(data);
+        }
+      };
+      fetchedCourse();
+      fetchedCollege();
+    }
+  }, [_search]);
 
-  const filterdSearchCourse =
-    CourseLists &&
-    CourseLists?.filter((item) => {
-      return item?._id?.courseName
-        ?.toLowerCase()
-        ?.includes(search?.toLowerCase());
-    });
   return (
     <React.Fragment>
       <div className="home-bg">
@@ -122,7 +136,7 @@ export default function Home({ CollegeLists, CourseLists }) {
             onChange={(e) => setSearch(e.target.value)}
           />
           <div className="select-search">
-            {filterdSearchList?.map((item, index) => (
+            {data2?.map((item, index) => (
               <div
                 style={{ display: "flex", alignItems: "center" }}
                 className="pl-10 pr-10 pt-10 pb-10"
@@ -148,7 +162,7 @@ export default function Home({ CollegeLists, CourseLists }) {
                 <span className="ml-10">{item?._id?.collegeName}</span>
               </div>
             ))}
-            {filterdSearchCourse?.map((item, index) => (
+            {data?.map((item, index) => (
               <div
                 style={{ display: "flex", alignItems: "center" }}
                 className="pl-10 pr-10 pt-10 pb-10"
@@ -169,14 +183,13 @@ export default function Home({ CollegeLists, CourseLists }) {
                 <span className="ml-10">{item?._id?.courseName}</span>
               </div>
             ))}
-            {filterdSearchList?.length === 0 &&
-              filterdSearchCourse?.length === 0 && (
-                <div
-                  style={{ display: "flex", alignItems: "center" }}
-                  className="pl-10 pr-10 pt-10 pb-10">
-                  <span>No results found!</span>
-                </div>
-              )}
+            {/* {data?.length === 0 && data2?.length === 0 && (
+              <div
+                style={{ display: "flex", alignItems: "center" }}
+                className="pl-10 pr-10 pt-10 pb-10">
+                <span>No results found!</span>
+              </div>
+            )} */}
           </div>
         </div>
         <div className="mt-20">
@@ -210,7 +223,7 @@ export default function Home({ CollegeLists, CourseLists }) {
           </button>
         </div>
       </div>
-      <Course CourseLists={CourseLists} />
+      <Course courseCount={courseCount} />
       <div className="text-image-group">
         <div>
           <h2>

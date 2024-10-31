@@ -17,6 +17,7 @@ const AuthPage = ({ authType }) => {
     email: "",
     password: "",
   });
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setUserData((prev) => {
@@ -51,8 +52,8 @@ const AuthPage = ({ authType }) => {
           email: "",
           password: "",
         });
-        accountCreated()
-        router.push("/login")
+        accountCreated();
+        router.push("/login");
       }
       if (!response.ok) {
         alreadyExist();
@@ -82,7 +83,7 @@ const AuthPage = ({ authType }) => {
         email: "",
         password: "",
       });
-      loginSuccessfull()
+      loginSuccessfull();
     } else {
       invalidCredentials();
     }
@@ -125,12 +126,22 @@ const AuthPage = ({ authType }) => {
             placeholder=""
             value={userData.password}
             name="password"
-            type="password"
+            type={isShowPassword ? "text" : "password"}
             onChange={handleChange}
             className="did-floating-input"
           />
+          <div
+            style={{ display: "flex", alignItems: "center" }}
+            className="mt-10">
+            <input
+              type="checkbox"
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            />
+            <spa>Show Password</spa>
+          </div>
           <label className="did-floating-label input-password">Password*</label>
         </div>
+
         {WeekPassword && authType === "register" && (
           <React.Fragment>
             <span>Password must contain the following:</span>

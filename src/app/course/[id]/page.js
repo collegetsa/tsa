@@ -22,17 +22,9 @@ export async function generateMetadata({ params }) {
   const myDescription = `Explore the best ${
     params?.id
   } courses for ${new Date().getFullYear()}. Discover top-rated programs, expert reviews, and career insights to help you choose the right course with the college for your future success.`;
-  const myKeywords = [
-    `Top ${capitalizeWords(params?.id)} courses in ${new Date().getFullYear()}`,
-    `List of ${capitalizeWords(
-      params?.id
-    )} courses in ${new Date().getFullYear()}`,
-    ...data?.map((item) => item?.courseData?.courseName),
-  ];
   return {
     title: myTitle,
     description: myDescription,
-    keywords: myKeywords,
     robots: {
       index: true,
       follow: true,

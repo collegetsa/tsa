@@ -116,7 +116,7 @@ const CreateCourse = ({ type, editData }) => {
           </tr>
           <tr>
             <td>
-              <div className="did-floating-label-content mb-0">
+              <div className="did-floating-label-content mb-20">
                 <select
                   className="did-floating-select"
                   name="interest"
@@ -128,46 +128,25 @@ const CreateCourse = ({ type, editData }) => {
                   <option value="medical">Medical</option>
                   <option value="agriculture">Agriculture</option>
                   <option value="law">Law</option>
-                  <option value="design">Design</option>
                   <option value="hotel-management">Hotel Management</option>
                   <option value="animation">Animation</option>
                   <option value="marine">Marine</option>
-                  <option value="dental">Dental</option>
                   <option value="education">Education</option>
-                  <option value="management">Management</option>
-                  <option value="commerce">Commerce</option>
-                  <option value="pharmacy">Pharmacy</option>
                 </select>
                 <label className="did-floating-label input-course">
                   Course Field*
                 </label>
               </div>
-            </td>
-            <td>
-              <div className="did-floating-label-content mb-0">
-                <input
-                  className="did-floating-input"
-                  type="text"
-                  placeholder=""
-                  value={data?.courseName}
-                  onChange={handleChange}
-                  name="courseName"
-                />
-                <label className="did-floating-label input-college">
-                  Course Name*
-                </label>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className="did-floating-label-content mb-0">
+              <div className="did-floating-label-content mb-20">
                 <select
                   className="did-floating-select"
                   name="duration"
                   value={data?.duration}
                   onChange={handleChange}>
                   <option value="">Select</option>
+                  <option value="2 Months">2 Months</option>
+                  <option value="3 Months">3 Months</option>
+                  <option value="6 Months">6 Months</option>
                   <option value="1 Year">1 Year</option>
                   <option value="2 Years">2 Years</option>
                   <option value="3 Years">3 Years</option>
@@ -181,31 +160,7 @@ const CreateCourse = ({ type, editData }) => {
                   Course Duration*
                 </label>
               </div>
-            </td>
-            <td>
-              <div className="did-floating-label-content mb-0">
-                <select
-                  className="did-floating-select"
-                  name="level"
-                  value={data?.level}
-                  onChange={handleChange}>
-                  <option value="">Select</option>
-                  <option value="Under Graduate[UG]">Under Graduate[UG]</option>
-                  <option value="Post Graduate[PG]">Post Graduate[PG]</option>
-                  <option value="PhD">PhD</option>
-                  <option value="Diploma">Diploma</option>
-                  <option value="Post Diploma">Post Diploma</option>
-                  <option value="Certificate Course">Certificate Course</option>
-                </select>
-                <label className="did-floating-label input-address">
-                  Course Level*
-                </label>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div className="did-floating-label-content mb-0">
+              <div className="did-floating-label-content mb-10">
                 <select
                   className="did-floating-select"
                   name="elgibility"
@@ -223,7 +178,38 @@ const CreateCourse = ({ type, editData }) => {
               </div>
             </td>
             <td>
-              <div className="did-floating-label-content mb-0">
+              <div className="did-floating-label-content mb-20">
+                <input
+                  className="did-floating-input"
+                  type="text"
+                  placeholder=""
+                  value={data?.courseName}
+                  onChange={handleChange}
+                  name="courseName"
+                />
+                <label className="did-floating-label input-college">
+                  Course Name*
+                </label>
+              </div>
+              <div className="did-floating-label-content mb-20">
+                <select
+                  className="did-floating-select"
+                  name="level"
+                  value={data?.level}
+                  onChange={handleChange}>
+                  <option value="">Select</option>
+                  <option value="Under Graduate[UG]">Under Graduate[UG]</option>
+                  <option value="Post Graduate[PG]">Post Graduate[PG]</option>
+                  <option value="PhD">PhD</option>
+                  <option value="Diploma">Diploma</option>
+                  <option value="Post Diploma">Post Diploma</option>
+                  <option value="Certificate Course">Certificate Course</option>
+                </select>
+                <label className="did-floating-label input-address">
+                  Course Level*
+                </label>
+              </div>
+              <div className="did-floating-label-content mb-10">
                 <select
                   className="did-floating-select"
                   name="mode"

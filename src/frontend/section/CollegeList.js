@@ -104,15 +104,10 @@ const CollegeList = ({ CollegeLists, searchParams }) => {
                   <option value="medical">Medical</option>
                   <option value="agriculture">Agriculture</option>
                   <option value="law">Law</option>
-                  <option value="design">Design</option>
                   <option value="hotel-management">Hotel Management</option>
                   <option value="animation">Animation</option>
                   <option value="marine">Marine</option>
-                  <option value="dental">Dental</option>
                   <option value="education">Education</option>
-                  <option value="management">Management</option>
-                  <option value="commerce">Commerce</option>
-                  <option value="pharmacy">Pharmacy</option>
                 </select>
                 <label className="did-floating-label input-course">
                   Field of Interest*

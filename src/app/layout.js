@@ -14,27 +14,6 @@ export const metadata = {
   title: "College TSA - Find Your Best College, Course and Career Path",
   description:
     "College TSA helps you find the best colleges, courses, and career opportunities. Explore top institutions, compare programs, and get expert advice to guide your academic journey and future career. Start shaping your success today!",
-  keywords: [
-    "collegetsa",
-    "collegetsa.com",
-    "admission",
-    "cutoff marks",
-    "college",
-    "course",
-    `admission ${new Date().getFullYear()}-${new Date().getFullYear() + 1}`,
-    "college admissions",
-    "top colleges in tamilnadu",
-    "career guidance",
-    "how to find the best college for my career",
-    "career advice for college students",
-    "how to choose the right college course",
-    `best courses in ${new Date().getFullYear()}-${
-      new Date().getFullYear() + 1
-    }`,
-    `best colleges in ${new Date().getFullYear()}-${
-      new Date().getFullYear() + 1
-    }`,
-  ],
   robots: {
     index: true,
     follow: true,

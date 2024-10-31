@@ -54,16 +54,6 @@ const myDescription = `Discover the top universities of ${new Date().getFullYear
 export const metadata = {
   title: `Top University Lists in ${new Date().getFullYear()} | College TSA`,
   description: myDescription,
-  keywords: [
-    ...UniversityList,
-    "collegetsa",
-    `best courses in ${new Date().getFullYear()}-${
-      new Date().getFullYear() + 1
-    }`,
-    `best colleges in ${new Date().getFullYear()}-${
-      new Date().getFullYear() + 1
-    }`,
-  ],
   robots: {
     index: true,
     follow: true,

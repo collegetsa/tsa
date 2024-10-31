@@ -17,7 +17,6 @@ export async function generateMetadata({ params }) {
   return {
     title: data?.collegeData?.collegeName,
     description: data?.collegeData?.content?.slice(0, 159),
-    keywords: data?.keywords,
     robots: {
       index: true,
       follow: true,

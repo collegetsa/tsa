@@ -1,5 +1,6 @@
 import { Database } from "@/backend/Database";
 import College from "@/backend/schema/College";
+import { stopWords } from "@/frontend/utility";
 import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
@@ -8,10 +9,7 @@ export const POST = async (request) => {
     const { ...newData } = await request.json();
     const isExist = await College.findOne({ pageUrl: newData?.pageUrl });
     if (isExist) {
-      return NextResponse.json(
-        { message: "Already exist" },
-        { status: 404 }
-      );
+      return NextResponse.json({ message: "Already exist" }, { status: 404 });
     }
     await College.create(newData);
     return NextResponse.json(
@@ -44,8 +42,6 @@ export const GET = async (request) => {
     const ownership = getQueryParam("ownership");
     const university = getQueryParam("university");
 
-    // let searchWords = search?.split(" ");
-
     let data;
     const query = {
       pageUrl: { $regex: new RegExp(pageUrl, "i") },
@@ -53,7 +49,6 @@ export const GET = async (request) => {
 
     if (search) {
       query["$or"] = [
-        { keywords: { $regex: new RegExp(search, "i") } },
         { "collegeData.collegeName": { $regex: new RegExp(search, "i") } },
         { "collegeData.location": { $regex: new RegExp(search, "i") } },
         { "collegeData.ownership": { $regex: new RegExp(search, "i") } },
@@ -103,27 +98,115 @@ export const GET = async (request) => {
           },
         },
       ]);
-    } else if (type === "home-search") {
-      data = await College.aggregate([
-        {
-          $group: {
-            _id: {
-              pageUrl: "$pageUrl",
-              logo: "$collegeData.logo",
-              collegeName: "$collegeData.collegeName",
+    } else if (type === "search") {
+      let query2 = {};
+      const keywords = search
+        .split(/\s+/)
+        .filter((word) => !stopWords.includes(word.toLowerCase()) && word);
+
+      if (!keywords.length) {
+        data = [];
+      } else {
+        query2["$or"] = [
+          {
+            pageUrl: {
+              $in: keywords.map((word) => new RegExp(word, "i")),
             },
           },
-        },
-      ]);
+          {
+            "collegeData.collegeName": {
+              $in: keywords.map((word) => new RegExp(word, "i")),
+            },
+          },
+          {
+            "collegeData.content": {
+              $in: keywords.map((word) => new RegExp(word, "i")),
+            },
+          },
+        ];
+
+        data = await College.aggregate([
+          {
+            $match: query2,
+          },
+          {
+            // Add a score field based on the number of matching keywords
+            $addFields: {
+              score: {
+                $add: [
+                  {
+                    $size: {
+                      $filter: {
+                        input: keywords,
+                        as: "keyword",
+                        cond: {
+                          $regexMatch: {
+                            input: "$pageUrl",
+                            regex: "$$keyword",
+                            options: "i",
+                          },
+                        },
+                      },
+                    },
+                  },
+                  {
+                    $size: {
+                      $filter: {
+                        input: keywords,
+                        as: "keyword",
+                        cond: {
+                          $regexMatch: {
+                            input: "$collegeData.collegeName",
+                            regex: "$$keyword",
+                            options: "i",
+                          },
+                        },
+                      },
+                    },
+                  },
+                  {
+                    $size: {
+                      $filter: {
+                        input: keywords,
+                        as: "keyword",
+                        cond: {
+                          $regexMatch: {
+                            input: "$collegeData.content",
+                            regex: "$$keyword",
+                            options: "i",
+                          },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          {
+            $group: {
+              _id: {
+                pageUrl: "$pageUrl",
+                logo: "$collegeData.logo",
+                collegeName: "$collegeData.collegeName",
+              },
+              score: { $first: "$score" },
+            },
+          },
+          {
+            $sort: { score: -1, "_id.field": 1 },
+          },
+        ]);
+      }
     } else if (type === "location-list") {
       data = await College.aggregate([
         {
           $group: {
-            _id: "$collegeData.location", // Group by location
+            _id: "$collegeData.location",
           },
         },
         {
-          $sort: { _id: 1 }, // Optional: Sort the locations alphabetically
+          $sort: { _id: 1 },
         },
       ]);
     } else if (type === "view-list") {
@@ -187,7 +270,7 @@ export const GET = async (request) => {
           },
         },
         {
-          $sort: { _id: 1 }, // Sort by collegeName (1 = ascending, -1 = descending)
+          $sort: { _id: 1 },
         },
         {
           $skip: offset,

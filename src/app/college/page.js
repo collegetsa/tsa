@@ -8,27 +8,6 @@ const myDescription =
 export const metadata = {
   title: myTitle,
   description: myDescription,
-  keywords: [
-    "collegetsa",
-    `admission ${new Date().getFullYear()}-${new Date().getFullYear() + 1}`,
-    "college admissions",
-    `best colleges in ${new Date().getFullYear()}-${
-      new Date().getFullYear() + 1
-    }`,
-    "best colleges in tamilnadu",
-    "best engineering colleges in tamilnadu",
-    "best medical colleges in tamilnadu",
-    "best law colleges in tamilnadu",
-    "best mba colleges in tamilnadu",
-    "best nursing colleges in tamilnadu",
-    "best aeronautical engineering colleges in tamilnadu",
-    "best engineering colleges in tamilnadu with low fees",
-    "best agriculture college in tamilnadu",
-    "best architecture colleges in tamilnadu",
-    "best arts colleges in tamilnadu",
-    "best marine colleges in tamilnadu",
-    "best hotel management colleges in tamilnadu",
-  ],
   robots: {
     index: true,
     follow: true,

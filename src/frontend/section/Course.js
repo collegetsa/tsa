@@ -3,9 +3,10 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Course({ CourseLists }) {
-  const courseCount = (filed) => {
-    return CourseLists?.filter((item) => item?._id?.field === filed);
+export default function Course({ courseCount }) {
+  const getCount = (filed) => {
+    const data = courseCount?.filter((item) => item?._id === filed);
+    return data[0]?.count;
   };
 
   const courseType = [
@@ -13,86 +14,56 @@ export default function Course({ CourseLists }) {
       img: "/images/engineering.png",
       text: "Engineering",
       pageUrl: "engineering",
-      count: courseCount("engineering"),
+      count: getCount("engineering"),
     },
     {
       img: "/images/arts-science.png",
       text: "Arts & Science",
       pageUrl: "arts-science",
-      count: courseCount("arts-science"),
+      count: getCount("arts-science"),
     },
     {
       img: "/images/medical.png",
       text: "Medical",
       pageUrl: "medical",
-      count: courseCount("medical"),
+      count: getCount("medical"),
     },
     {
       img: "/images/agriculture.png",
       text: "Agriculture",
       pageUrl: "agriculture",
-      count: courseCount("agriculture"),
+      count: getCount("agriculture"),
     },
 
     {
       img: "/images/law.png",
       text: "Law",
       pageUrl: "law",
-      count: courseCount("law"),
-    },
-    {
-      img: "/images/design.png",
-      text: "Design",
-      pageUrl: "design",
-      count: courseCount("design"),
+      count: getCount("law"),
     },
     {
       img: "/images/hotel-management.png",
       text: "Hotel Management",
       pageUrl: "hotel-management",
-      count: courseCount("hotel-management"),
+      count: getCount("hotel-management"),
     },
     {
       img: "/images/animation.png",
       text: "Animation",
       pageUrl: "animation",
-      count: courseCount("animation"),
+      count: getCount("animation"),
     },
     {
       img: "/images/marine.png",
       text: "Marine",
       pageUrl: "marine",
-      count: courseCount("marine"),
-    },
-    {
-      img: "/images/dental.png",
-      text: "Dental",
-      pageUrl: "dental",
-      count: courseCount("dental"),
+      count: getCount("marine"),
     },
     {
       img: "/images/education.png",
       text: "Education",
       pageUrl: "education",
-      count: courseCount("education"),
-    },
-    {
-      img: "/images/management.png",
-      text: "Management",
-      pageUrl: "management",
-      count: courseCount("management"),
-    },
-    {
-      img: "/images/commerce.png",
-      text: "Commerce",
-      pageUrl: "commerce",
-      count: courseCount("commerce"),
-    },
-    {
-      img: "/images/pharmecy.png",
-      text: "Pharmecy",
-      pageUrl: "pharmecy",
-      count: courseCount("pharmecy"),
+      count: getCount("education"),
     },
   ];
 
@@ -109,7 +80,7 @@ export default function Course({ CourseLists }) {
               className="mb-15"
             />
             <p>{field?.text}</p>
-            <small>{field?.count?.length} Courses</small>
+            <small style={{ color: "#727272" }}>{field?.count} Courses</small>
           </div>
         </Link>
       ))}

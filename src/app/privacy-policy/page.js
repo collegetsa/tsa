@@ -6,27 +6,6 @@ const myDescription =
 export const metadata = {
   title: myTitle,
   description: myDescription,
-  keywords: [
-    "collegetsa",
-    "collegetsa.com",
-    "admission",
-    "cutoff marks",
-    "college",
-    "course",
-    `admission ${new Date().getFullYear()}-${new Date().getFullYear() + 1}`,
-    "college admissions",
-    "top colleges in tamilnadu",
-    "career guidance",
-    "how to find the best college for my career",
-    "career advice for college students",
-    "how to choose the right college course",
-    `best courses in ${new Date().getFullYear()}-${
-      new Date().getFullYear() + 1
-    }`,
-    `best colleges in ${new Date().getFullYear()}-${
-      new Date().getFullYear() + 1
-    }`,
-  ],
   robots: {
     index: true,
     follow: true,

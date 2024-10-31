@@ -111,24 +111,14 @@ const CourseList = ({ data, fieldText }) => {
     textShow = "Agriculture";
   } else if (fieldText?.includes("law")) {
     textShow = "Law";
-  } else if (fieldText?.includes("design")) {
-    textShow = "Design";
-  } else if (fieldText?.includes("hotel")) {
+  }  else if (fieldText?.includes("hotel")) {
     textShow = "Hotel Management";
   } else if (fieldText?.includes("animation")) {
     textShow = "Animation";
   } else if (fieldText?.includes("marine")) {
     textShow = "Marine";
-  } else if (fieldText?.includes("dental")) {
-    textShow = "Dental";
   } else if (fieldText?.includes("education")) {
     textShow = "Education";
-  } else if (fieldText?.includes("management")) {
-    textShow = "Management";
-  } else if (fieldText?.includes("commerce")) {
-    textShow = "Commerce";
-  } else if (fieldText?.includes("pharmacy")) {
-    textShow = "Pharmacy";
   }
   return (
     <React.Fragment>
@@ -196,47 +186,22 @@ const CourseList = ({ data, fieldText }) => {
               )}
               {text < 6 && (
                 <span>
-                  <Link href="/course/design">Design</Link>
+                  <Link href="/course/hotel-management">Hotel Management</Link>
                 </span>
               )}
               {text < 7 && (
                 <span>
-                  <Link href="/course/hotel-management">Hotel Management</Link>
+                  <Link href="/course/animation">Animation</Link>
                 </span>
               )}
               {text < 8 && (
                 <span>
-                  <Link href="/course/animation">Animation</Link>
+                  <Link href="/course/marine">Marine</Link>
                 </span>
               )}
               {text < 9 && (
                 <span>
-                  <Link href="/course/marine">Marine</Link>
-                </span>
-              )}
-              {text < 10 && (
-                <span>
-                  <Link href="/course/dental">Dental</Link>
-                </span>
-              )}
-              {text < 11 && (
-                <span>
                   <Link href="/course/education">Education</Link>
-                </span>
-              )}
-              {text < 12 && (
-                <span>
-                  <Link href="/course/management">Management</Link>
-                </span>
-              )}
-              {text < 13 && (
-                <span>
-                  <Link href="/course/commerce">Commerce</Link>
-                </span>
-              )}
-              {text < 14 && (
-                <span>
-                  <Link href="/course/pharmacy">Pharmacy</Link>
                 </span>
               )}
             </div>
@@ -246,11 +211,11 @@ const CourseList = ({ data, fieldText }) => {
               height={25}
               alt=""
               onClick={() => {
-                if (text < 11) {
+                if (text < 6) {
                   setText(text + 1);
                 }
               }}
-              className={`${text === 11 ? "disabled" : "cursor-pointer"}`}
+              className={`${text === 6 ? "disabled" : "cursor-pointer"}`}
             />
           </div>
         </div>
@@ -278,14 +243,17 @@ const CourseList = ({ data, fieldText }) => {
                   value={select.duration}
                   onChange={handleChange}>
                   <option value="">Select</option>
-                  <option value="1">1 Year</option>
-                  <option value="2">2 Years</option>
-                  <option value="3">3 Years</option>
-                  <option value="4">4 Years</option>
-                  <option value="5">5 Years</option>
-                  <option value="6">6 Years</option>
-                  <option value="7">7 Years</option>
-                  <option value="8">8 Years</option>
+                  <option value="2 Months">2 Months</option>
+                  <option value="3 Months">3 Months</option>
+                  <option value="6 Months">6 Months</option>
+                  <option value="1 Year">1 Year</option>
+                  <option value="2 Years">2 Years</option>
+                  <option value="3 Years">3 Years</option>
+                  <option value="4 Years">4 Years</option>
+                  <option value="5 Years">5 Years</option>
+                  <option value="6 Years">6 Years</option>
+                  <option value="7 Years">7 Years</option>
+                  <option value="8 Years">8 Years</option>
                 </select>
                 <label className="did-floating-label input-course">
                   Course Duration*
@@ -370,7 +338,7 @@ const CourseList = ({ data, fieldText }) => {
               <th>Course Level</th>
               <th>Eligibility</th>
               <th>Mode</th>
-              <th>Top Colleges</th>
+              <th>College</th>
             </tr>
             {filtered?.map((item, index) => (
               <tr
@@ -383,7 +351,7 @@ const CourseList = ({ data, fieldText }) => {
                 <td onClick={() => openForm(item)}>{index + 1}</td>
                 <td onClick={() => openForm(item)}>
                   <div
-                    className="hide-text pt-7 pb-7"
+                    className="hide-text pt-10 pb-10"
                     style={{ width: "450px" }}>
                     {item?.courseData?.courseName}
                   </div>
@@ -481,7 +449,7 @@ const CourseList = ({ data, fieldText }) => {
                       height={15}
                       alt=""
                     />
-                    <span className="ml-7">Get Colleges</span>
+                    <u className="ml-7">Get</u>
                   </div>
                 </td>
               </tr>
