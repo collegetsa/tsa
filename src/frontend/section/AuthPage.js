@@ -7,10 +7,11 @@ import { setAuth } from "../redux/AppSlice";
 import { jwtDecode } from "jwt-decode";
 import toast, { Toaster } from "react-hot-toast"; 
 import { useCookies } from "next-client-cookies";
+import Image from "next/image";
 
 const AuthPage = ({ authType }) => {
   const cookies = useCookies();
-  const disPatch = useDispatch()
+  const disPatch = useDispatch();
   const router = useRouter();
   const [userData, setUserData] = useState({
     userName: "",
@@ -121,7 +122,9 @@ const AuthPage = ({ authType }) => {
           />
           <label className="did-floating-label input-email">Email*</label>
         </div>
-        <div className="did-floating-label-content">
+        <div
+          className="did-floating-label-content"
+          style={{ position: "relative" }}>
           <input
             placeholder=""
             value={userData.password}
@@ -130,18 +133,15 @@ const AuthPage = ({ authType }) => {
             onChange={handleChange}
             className="did-floating-input"
           />
-          <div
-            style={{ display: "flex", alignItems: "center" }}
-            className="mt-10">
-            <input
-              type="checkbox"
-              onClick={() => setIsShowPassword(!isShowPassword)}
-            />
-            <spa>Show Password</spa>
-          </div>
+          <Image
+            src={`/images/${isShowPassword ? "preview" : "hide"}.png`}
+            width="20"
+            height="20"
+            className="show-password"
+            onClick={() => setIsShowPassword(!isShowPassword)}
+          />
           <label className="did-floating-label input-password">Password*</label>
         </div>
-
         {WeekPassword && authType === "register" && (
           <React.Fragment>
             <span>Password must contain the following:</span>

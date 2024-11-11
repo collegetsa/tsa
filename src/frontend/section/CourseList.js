@@ -391,49 +391,15 @@ const CourseList = ({ data, fieldText }) => {
                   )}
                 </td>
                 <td onClick={() => openForm(item)}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Image
-                      src="/images/duration.png"
-                      width={15}
-                      height={15}
-                      alt=""
-                    />
-                    <span className="ml-7">{item?.courseData?.duration}</span>
-                  </div>
+                  {item?.courseData?.duration}
                 </td>
                 <td onClick={() => openForm(item)}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Image
-                      src="/images/level.png"
-                      width={15}
-                      height={15}
-                      alt=""
-                    />
-                    <span className="ml-7">{item?.courseData?.level}</span>
-                  </div>
+                  {item?.courseData?.level}
                 </td>
                 <td onClick={() => openForm(item)}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Image
-                      src="/images/elgibility.png"
-                      width={15}
-                      height={15}
-                      alt=""
-                    />
-                    <span className="ml-7">{item?.courseData?.elgibility}</span>
-                  </div>
+                  {item?.courseData?.elgibility}
                 </td>
-                <td onClick={() => openForm(item)}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Image
-                      src="/images/mode.png"
-                      width={15}
-                      height={15}
-                      alt=""
-                    />
-                    <span className="ml-7">{item?.courseData?.mode}</span>
-                  </div>
-                </td>
+                <td onClick={() => openForm(item)}>{item?.courseData?.mode}</td>
                 <td
                   onClick={() => {
                     router?.push(
@@ -442,15 +408,7 @@ const CourseList = ({ data, fieldText }) => {
                       )}`
                     );
                   }}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Image
-                      src="/images/college.png"
-                      width={15}
-                      height={15}
-                      alt=""
-                    />
-                    <u className="ml-7">Get</u>
-                  </div>
+                  <u>Get</u>
                 </td>
               </tr>
             ))}

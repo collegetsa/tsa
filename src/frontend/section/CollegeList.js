@@ -6,14 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsPreview } from "../redux/AppSlice";
 import { useDebounce } from "use-debounce";
 import { capitalizeWords } from "../utility";
+import PaginatedItems from "./PaginatedItems";
 
-const CollegeList = ({ CollegeLists, searchParams }) => {
+const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
   const router = useRouter();
   const disPatch = useDispatch();
   const auth = useSelector((state) => state.app.auth);
   const courseField = useSelector((state) => state.app.courseField);
-
   const [search, setSearch] = useState(searchParams?.search || "");
+
   const [select, setSelect] = useState({
     collegeType: courseField,
     location: "",
@@ -22,9 +23,7 @@ const CollegeList = ({ CollegeLists, searchParams }) => {
   });
 
   const [locations, setLocations] = useState([]);
-  const [page, setPage] = useState(0);
   const [_search] = useDebounce(search, 1000);
-  const [_page] = useDebounce(page, 500);
 
   function updateParams(name, value) {
     const updatedSelect = {
@@ -34,12 +33,11 @@ const CollegeList = ({ CollegeLists, searchParams }) => {
 
     const params = new URLSearchParams({
       search: _search,
+      page: searchParams?.page || "",
       collegetype: updatedSelect.collegeType,
       location: updatedSelect.location,
       ownership: updatedSelect.ownership,
       university: updatedSelect.university,
-      offset: page,
-      limit: 25,
     });
 
     router.push(`/college/?${params.toString()}`);
@@ -47,7 +45,7 @@ const CollegeList = ({ CollegeLists, searchParams }) => {
 
   useEffect(() => {
     updateParams();
-  }, [_search, select, page, _page]);
+  }, [_search, select]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -214,7 +212,7 @@ const CollegeList = ({ CollegeLists, searchParams }) => {
                     router.push(`/college/${item?._id?.pageUrl}`);
                   }
                 }}>
-                <td>{index + 1 + _page}</td>
+                <td>{index + 1}</td>
                 <td style={{ minWidth: "500px" }}>
                   <div
                     style={{ display: "flex", alignItems: "start" }}
@@ -312,37 +310,10 @@ const CollegeList = ({ CollegeLists, searchParams }) => {
         </table>
       </div>
       <div className="table mb-30">
-        <div className="pagination mt-20">
-          <Image
-            src="/images/left.png"
-            width={25}
-            height={25}
-            alt=""
-            className={`cursor-pointer ${page > 0 ? "" : "disabled"}`}
-            onClick={() => {
-              if (page > 0) {
-                setPage(page - 25);
-              }
-            }}
-          />
-          <span>
-            {page} - {page + 25}
-          </span>
-          <Image
-            src="/images/right.png"
-            width={25}
-            height={25}
-            alt=""
-            className={`cursor-pointer ${
-              CollegeLists?.length === 25 ? "" : "disabled"
-            }`}
-            onClick={() => {
-              if (CollegeLists?.length === 25) {
-                setPage(page + 25);
-              }
-            }}
-          />
-        </div>
+        <PaginatedItems
+          totalColleges={totalColleges}
+          searchParams={searchParams}
+        />
       </div>
     </React.Fragment>
   );

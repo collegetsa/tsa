@@ -237,7 +237,7 @@ const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
               flexDirection: "column",
             }}>
             <div
-              className="mt-20 content-page"
+              className="mt-20 content-page content-page-html"
               dangerouslySetInnerHTML={{ __html: data?.content }}></div>
             {data?.course?.length > 0 && (
               <div

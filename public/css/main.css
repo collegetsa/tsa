@@ -1087,6 +1087,10 @@ a {
     color: #236bde !important;
 }
 
+.content-page-html img {
+    width: 100%;
+    height: max-content;
+}
 .content-page h1 {
     font-size: 22px;
     margin-bottom: auto !important;
@@ -1159,7 +1163,7 @@ a {
     height: 50px;
     border-radius: 50%;
     border: 5px solid #ddd;
-    border-top-color: rgb(255, 140, 0);
+    border-top-color: #F13095;
     animation: loading 0.3s linear infinite;
 }
 
@@ -1188,4 +1192,9 @@ a {
 
 .table a {
     color: #000 !important;
+}
+.zoom-fit-image {
+    object-position: 5% 50%;
+    object-fit: cover;
+    aspect-ratio: 2 / 1;
 }

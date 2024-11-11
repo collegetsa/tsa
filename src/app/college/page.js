@@ -76,9 +76,9 @@ const getCollegeList = async (searchParams) => {
   const location = searchParams?.location || "";
   const ownership = searchParams?.ownership || "";
   const university = searchParams?.university || "";
-  const offset = searchParams?.offset || "";
-  const limit = searchParams?.limit || "";
-  const query = `type=view-list&search=${search}&collegetype=${collegetype}&location=${location}&ownership=${ownership}&university=${university}&offset=${offset}&limit=${limit}`;
+
+  const page = searchParams?.page || "";
+  const query = `type=view-list&search=${search}&collegetype=${collegetype}&location=${location}&ownership=${ownership}&university=${university}&page=${page}`;
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/college?${query}`,
@@ -91,9 +91,27 @@ const getCollegeList = async (searchParams) => {
   }
 };
 
+const getCollegesCount = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/college?type=get-length`,
+    {
+      cache: "no-store",
+    }
+  );
+  if (response.ok) {
+    return response.json();
+  }
+};
+
 export default async function page({ searchParams }) {
   const CollegeLists = await getCollegeList(searchParams);
+  const totalColleges = await getCollegesCount(searchParams);
+  console.log("COUNT", totalColleges[0]?.totalCount);
   return (
-    <CollegeList CollegeLists={CollegeLists} searchParams={searchParams} />
+    <CollegeList
+      CollegeLists={CollegeLists}
+      searchParams={searchParams}
+      totalColleges={totalColleges[0]?.totalCount}
+    />
   );
 }

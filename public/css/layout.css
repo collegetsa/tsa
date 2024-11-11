@@ -660,5 +660,95 @@ input[type=file]::file-selector-button {
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     /* border: #d9d9d9 1px solid; */
+}
 
+/* PAGINATION */
+.active-pagination {
+    background-color: #d4eff9;
+    color: #FFFFFF;
+    padding: 10px;
+    min-width: 15px;
+    text-align: center;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.active-pagination .react-paginate a {
+    color: #fff !important;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.react-paginate {
+    display: flex;
+    align-items: center;
+    column-gap: 25px;
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.react-paginate li {
+    margin: 0 5px;
+}
+
+.react-paginate a {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.react-paginate .active a {
+    background-color: #007bff;
+    color: white;
+}
+
+.react-paginate .disabled a {
+    cursor: not-allowed;
+    color: #ccc;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .react-paginate {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .react-paginate li {
+        margin: 5px;
+    }
+
+    .react-paginate a {
+        padding: 8px 10px;
+    }
+
+        .pagination {
+            padding: 0 20px;
+        }
+        }
+    
+        @media (max-width: 480px) {
+            .react-paginate a {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
+    
+            .pagination {
+                padding: 0 10px;
+            }
+        }
+    
+        .show-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
 }

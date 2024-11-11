@@ -32,8 +32,10 @@ export const GET = async (request) => {
       return value ? value : defaultValue;
     };
 
-    const offset = parseInt(getQueryParam("offset")) || 0;
-    const limit = parseInt(getQueryParam("limit")) || 25;
+    const page = parseInt(getQueryParam("page")) || 1;
+    const itemsPerPage = 10;
+    const offset = (page - 1) * itemsPerPage;
+
     const type = getQueryParam("type");
     const pageUrl = getQueryParam("pageUrl");
     const search = decodeURIComponent(getQueryParam("search"));
@@ -87,8 +89,18 @@ export const GET = async (request) => {
         $regex: new RegExp(collegetype, "i"),
       };
     }
-
-    if (type === "sitemap") {
+    if (type === "get-length") {
+      data = await College.aggregate([
+        {
+          $group: {
+            _id: "$pageUrl",
+          },
+        },
+        {
+          $count: "totalCount",
+        },
+      ]);
+    } else if (type === "sitemap") {
       data = await College.aggregate([
         {
           $group: {
@@ -276,7 +288,7 @@ export const GET = async (request) => {
           $skip: offset,
         },
         {
-          $limit: limit,
+          $limit: itemsPerPage,
         },
       ]);
     } else {
