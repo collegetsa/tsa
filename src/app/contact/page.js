@@ -79,10 +79,10 @@ const Page = () => {
         <h2>T.S.A SERVICES EDUCATIONAL & CAREER GUIDANCE</h2>
         <p>
           T.S.A Service Educational and Career Guidance COLLEGE ADMISSION
-          GUIDANCE We are established the educational consultancy since 2015.We
+          GUIDANCE We are established the educational consultancy since 2014.We
           are the no.1 educational consultant in TIRUVANNAMALAI, Arani, ambur,
-          hosur, chennai, Salem, vellore and dharmapuri. For the past 6 years we
-          are admitted more than hundreds of students in various departments
+          hosur, chennai, Salem, vellore and dharmapuri. For the past 10 years
+          we are admitted more than hundreds of students in various departments
           like medical, engineering, dental, arts and science and law,
           management, information technology, agriculture and research programs.
           We also help the students and job seekers getting placement in various

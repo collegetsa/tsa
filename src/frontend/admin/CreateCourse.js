@@ -114,7 +114,7 @@ const CreateCourse = ({ type, editData }) => {
               </div>
             </th>
           </tr>
-          <tr>
+          <tr className="disable-table-hover">
             <td>
               <div className="did-floating-label-content mb-20">
                 <select

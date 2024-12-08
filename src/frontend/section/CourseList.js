@@ -123,15 +123,31 @@ const CourseList = ({ data, fieldText }) => {
   return (
     <React.Fragment>
       <div className="template">
-        <h2 className="text-center mt-0">Best {textShow} Courses in 2024</h2>
-        <button
-          className="btn"
-          onClick={() => {
-            router?.push("/college");
-            disPatch(setCourseField(fieldText));
-          }}>
-          Get Top {textShow} Colleges
-        </button>
+        <div style={{ display: "flex" }}>
+          <div className="course-field-image mt-10">
+            <Image
+              src={`/images/${fieldText}.png`}
+              width={50}
+              height={50}
+              alt={`Top ${textShow} Colleges`}
+            />
+          </div>
+          <div className="ml-25">
+            <h1 className="font-head">{textShow} Courses in 2024</h1>
+            <div>
+              <span>{data?.length} Courses</span>
+              <span className="ml-20">Top {textShow} Exams</span>
+            </div>
+            <button
+              className="btn mt-20"
+              onClick={() => {
+                router?.push("/college");
+                disPatch(setCourseField(fieldText));
+              }}>
+              Top {textShow} Colleges
+            </button>
+          </div>
+        </div>
       </div>
       <div
         style={{ backgroundColor: "aliceblue", fontSize: "12px" }}
@@ -351,7 +367,7 @@ const CourseList = ({ data, fieldText }) => {
                 <td onClick={() => openForm(item)}>{index + 1}</td>
                 <td onClick={() => openForm(item)}>
                   <div
-                    className="hide-text pt-10 pb-10"
+                    className="hide-text pt-7 pb-7"
                     style={{ width: "450px" }}>
                     {item?.courseData?.courseName}
                   </div>

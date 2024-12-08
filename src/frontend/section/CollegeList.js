@@ -43,9 +43,9 @@ const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
     router.push(`/college/?${params.toString()}`);
   }
 
-  useEffect(() => {
-    updateParams();
-  }, [_search, select]);
+  // useEffect(() => {
+  //   updateParams();
+  // }, [_search, select]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
@@ -73,7 +73,8 @@ const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
   return (
     <React.Fragment>
       <div
-        className="table mt-20 sticky-header"
+        className="table mt-20"
+        // className="table mt-20 sticky-header"
         style={{ backgroundColor: "#fff" }}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <Image
@@ -231,7 +232,7 @@ const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
                           marginBottom: "auto",
                           maxWidth: "450px",
                         }}
-                        className="hide-text">
+                        className="hide-text font-head">
                         {item?._id.collegeName}
                       </h4>
                       <div

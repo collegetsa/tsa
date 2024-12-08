@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 import { useCookies } from "next-client-cookies";
 import { customStyles } from "../utility";
+import Display from "./Display";
 
 export default function Form() {
   const cookies = useCookies();
@@ -200,9 +201,7 @@ export default function Form() {
             alt=""
             unoptimized
           />
-          <small>
-            <b>Free Counseling Form {new Date().getFullYear()}</b>
-          </small>
+          <small>Free Counseling Form {new Date().getFullYear()}</small>
         </div>
         <Image
           src="/images/close.png"
@@ -225,10 +224,10 @@ export default function Form() {
       </div>
       {isValid ? (
         <React.Fragment>
-          <h2 className="mb-10" style={{ color: "#00547A" }}>
+          <h2 className="mb-10" style={{ color: "#04aa6d" }}>
             Thanks for Applying!
           </h2>
-          <h3 style={{ color: "#00547A" }}>Our team contact you soon!</h3>
+          <h3 style={{ color: "#04aa6d" }}>Our team contact you soon!</h3>
         </React.Fragment>
       ) : (
         <React.Fragment>
@@ -237,6 +236,7 @@ export default function Form() {
               overflowY: "auto",
               scrollbarWidth: "thin",
               paddingTop: "10px",
+              paddingBottom: "5px",
               marginBottom: "20px",
             }}>
             <div className="did-floating-label-content">
@@ -380,9 +380,7 @@ export default function Form() {
             alt=""
             unoptimized
           />
-          <small>
-            <b>Admission Form {new Date().getFullYear()}</b>
-          </small>
+          <small>Admission Form {new Date().getFullYear()}</small>
         </div>
         <Image
           src="/images/close.png"
@@ -405,7 +403,7 @@ export default function Form() {
       </div>
       {isValid ? (
         <React.Fragment>
-          <h2 className="mb-30" style={{ color: "#00547A" }}>
+          <h2 className="mb-30" style={{ color: "#04aa6d" }}>
             Your Admission Submitted Successfully!
           </h2>
           <a
@@ -425,6 +423,7 @@ export default function Form() {
               overflowY: "auto",
               scrollbarWidth: "thin",
               paddingTop: "10px",
+              paddingBottom: "5px",
               marginBottom: "20px",
             }}>
             <div className="did-floating-label-content">
@@ -671,62 +670,116 @@ export default function Form() {
       ariaHideApp={false}>
       <div className="form">
         <div className="form-left">
-          <h2 className="mt-70">WHY COLLEGE TSA?</h2>
-          <span>For your best Course, College, Exams & Future</span>
-          <div className="social-group mb-15 mt-30">
-            <a href="https://www.facebook.com/Tsaservices" target="_blank">
-              <Image
-                src="/images/facebook.svg"
-                alt="telegram-collegetsa"
-                title="telegram-collegetsa"
-                width={20}
-                height={20}
-              />
-            </a>
-            <a href="https://t.me/tsaservices" target="_blank">
-              <Image
-                src="/images/telegram.svg"
-                alt="telegram-collegetsa"
-                title="telegram-collegetsa"
-                width={20}
-                height={20}
-              />
-            </a>
-            <a
-              href="https://www.youtube.com/@TSASERVICES/featured"
-              target="_blank">
-              <Image
-                src="/images/youtube.svg"
-                alt="youtube-collegetsa"
-                title="youtube-collegetsa"
-                width={20}
-                height={20}
-              />
-            </a>
-            <a
-              href="https://www.instagram.com/tsa_services_education_gudie?igsh=MTluN25yN2E0MDlzZg=="
-              target="_blank">
-              <Image
-                src="/images/instagram.svg"
-                alt="instagram-collegetsa"
-                title="instagram-collegetsa"
-                width={20}
-                height={20}
-              />
-            </a>
-            <a href="https://wa.me/qr/XAKKC4YOZ5OBG1" target="_blank">
-              <Image
-                src="/images/whatsapp.svg"
-                alt="whatsapp-collegetsa"
-                title="whatsapp-collegetsa"
-                width={20}
-                height={20}
-              />
-            </a>
+          <div className="form-left-content">
+            <h1 className="font-head fw-600">Why Choose CollegeTSA?</h1>
+            <p>
+              CollegeTSA is your trusted partner in finding the best colleges
+              and courses based on your marks and interest.
+            </p>
+            <div className="promotion-group mt-30">
+              <div className="promotion">
+                <Image
+                  src="/images/24-7.png"
+                  width={40}
+                  height={40}
+                  alt="24/7 free counseling"
+                />
+                <p>
+                  <small>Free Counseling</small>
+                </p>
+              </div>
+              <div className="promotion">
+                <Image
+                  src="/images/experience.png"
+                  width={40}
+                  height={40}
+                  alt="10 years experince in carrier guidance"
+                />
+                <p>
+                  <small>10 Years+ Experince</small>
+                </p>
+              </div>
+              <div className="promotion">
+                <Image
+                  src="/images/check.png"
+                  width={40}
+                  height={40}
+                  alt="best college & course with your marks"
+                />
+                <p>
+                  <small>Find best college & course</small>
+                </p>
+              </div>
+            </div>
+            <div
+              className="mt-30"
+              style={{ display: "flex", columnGap: "10px" }}>
+              <a href="tel:9677869617" style={{ color: "#fff" }}>
+                <span>
+                  <Image
+                    src="/images/phone.png"
+                    width={15}
+                    height={15}
+                    alt="collegetsa-call"
+                    className="template-icons"
+                  />
+                </span>
+                <span className="call-text">+91 9677869617</span>
+              </a>
+              <a href="https://www.facebook.com/Tsaservices" target="_blank">
+                <Image
+                  src="/images/facebook.svg"
+                  alt="telegram-collegetsa"
+                  title="telegram-collegetsa"
+                  width={20}
+                  height={20}
+                />
+              </a>
+              <a href="https://t.me/tsaservices" target="_blank">
+                <Image
+                  src="/images/telegram.svg"
+                  alt="telegram-collegetsa"
+                  title="telegram-collegetsa"
+                  width={20}
+                  height={20}
+                />
+              </a>
+              <a
+                href="https://www.youtube.com/@TSASERVICES/featured"
+                target="_blank">
+                <Image
+                  src="/images/youtube.svg"
+                  alt="youtube-collegetsa"
+                  title="youtube-collegetsa"
+                  width={20}
+                  height={20}
+                />
+              </a>
+              <a
+                href="https://www.instagram.com/tsa_services_education_gudie?igsh=MTluN25yN2E0MDlzZg=="
+                target="_blank">
+                <Image
+                  src="/images/instagram.svg"
+                  alt="instagram-collegetsa"
+                  title="instagram-collegetsa"
+                  width={20}
+                  height={20}
+                />
+              </a>
+              <a href="https://wa.me/qr/XAKKC4YOZ5OBG1" target="_blank">
+                <Image
+                  src="/images/whatsapp.svg"
+                  alt="whatsapp-collegetsa"
+                  title="whatsapp-collegetsa"
+                  width={20}
+                  height={20}
+                />
+              </a>
+            </div>
+            <p className="font-12 mt-30">
+              Copyright © {new Date().getFullYear()} collegetsa.com
+            </p>
           </div>
-          <p className="font-12">
-            Copyright © {new Date().getFullYear()} collegetsa.com
-          </p>
         </div>
         {form?.type === "admission" ? admissionLayout : freeCounselingLayout}
       </div>

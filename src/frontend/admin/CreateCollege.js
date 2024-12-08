@@ -188,7 +188,7 @@ const CreateCollege = ({ type, editData }) => {
             <div className="table mt-20">
               <table id="customers" className="mb-0">
                 <tbody>
-                  <tr>
+                  <tr className="disable-table-hover">
                     <th colSpan={2}>
                       <div
                         style={{
@@ -216,7 +216,7 @@ const CreateCollege = ({ type, editData }) => {
                       </div>
                     </th>
                   </tr>
-                  <tr>
+                  <tr className="disable-table-hover">
                     <td style={{ width: "50%" }}>
                       <div className="did-floating-label-content mb-20">
                         <input
@@ -387,7 +387,7 @@ const CreateCollege = ({ type, editData }) => {
                       <tr
                         key={index}
                         style={{ backgroundColor: "#fff" }}
-                        className="pb-0">
+                        className="pb-0 disable-table-hover">
                         <td>
                           <div className="did-floating-label-content mb-0">
                             <input

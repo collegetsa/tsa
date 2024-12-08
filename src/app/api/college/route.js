@@ -199,7 +199,7 @@ export const GET = async (request) => {
             $group: {
               _id: {
                 pageUrl: "$pageUrl",
-                logo: "$collegeData.logo",
+                // logo: "$collegeData.logo",
                 collegeName: "$collegeData.collegeName",
               },
               score: { $first: "$score" },

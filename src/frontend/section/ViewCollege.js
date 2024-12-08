@@ -104,7 +104,7 @@ const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
               />
               <div className="ml-20">
                 <h1
-                  className="two-line-text cursor-pointer"
+                  className="two-line-text cursor-pointer font-head"
                   onClick={() => {
                     disPatch(
                       setForm({
@@ -182,22 +182,8 @@ const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
               </div>
             </div>
             <div className="template-action-group content-page mt-30">
-              <span
-                className="ml-20 cursor-pointer"
-                onClick={() => {
-                  disPatch(
-                    setForm({
-                      isForm: true,
-                      title: data?.collegeName,
-                      type: "counseling",
-                      logo: data?.logo,
-                    })
-                  );
-                }}>
-                <u>Get FreeCounseling</u>
-              </span>
-              <span
-                className="ml-20 cursor-pointer"
+              <button
+                className="btn"
                 onClick={() => {
                   disPatch(
                     setForm({
@@ -208,25 +194,25 @@ const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
                     })
                   );
                 }}>
-                <u>Addmission {new Date().getFullYear()}</u>
-              </span>
-              <span
-                className="ml-20 cursor-pointer"
+                Apply College
+              </button>
+              <button
+                className="btn ml-20"
                 onClick={() =>
                   document
                     .getElementById("course-list")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }>
-                <u>Courses</u>
-              </span>
-              <span
-                className="ml-20 cursor-pointer"
+                Available Courses
+              </button>
+              <button
+                className="btn ml-20"
                 onClick={() => {
                   router.push("/college");
                   disPatch(setCourseField(""));
                 }}>
-                <u>Get More Colleges...</u>
-              </span>
+                More Colleges
+              </button>
             </div>
           </div>
           <div

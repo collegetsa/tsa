@@ -1,6 +1,8 @@
 import { Database } from "@/backend/Database";
 import FreeCounseling from "@/backend/schema/FreeCounseling";
+import { mailOptions, transporterOptions } from "@/frontend/utility";
 import { NextResponse } from "next/server";
+const nodemailer = require("nodemailer");
 
 export const POST = async (request) => {
   try {
@@ -19,6 +21,16 @@ export const POST = async (request) => {
       status,
       appliedDate: newDate,
     });
+    const transporter = nodemailer.createTransport(transporterOptions);
+    await transporter.sendMail(
+      mailOptions(email, "free-counseling", {
+        studentName,
+        email,
+        phone,
+        interest,
+        message,
+      })
+    );
     return NextResponse.json(
       { message: "User added successfully" },
       { status: 201 }

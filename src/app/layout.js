@@ -6,6 +6,7 @@ import ReduxProvider from "@/frontend/redux/ReduxProvider";
 import dynamic from "next/dynamic";
 import { CookiesProvider } from "next-client-cookies/server";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Display from "@/frontend/section/Display";
 
 const Header = dynamic(() => import("@/frontend/section/Header"));
 const Footer = dynamic(() => import("@/frontend/section/Footer"));
@@ -91,6 +92,18 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
           rel="stylesheet"
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Slab:wght@100..900&display=swap"
+          rel="stylesheet"
+        />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Aoboshi+One&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Slab:wght@100..900&display=swap"
+          rel="stylesheet"></link>
       </head>
       <GoogleAnalytics gaId="G-P3XPYXDE9Q" />
       <body>
@@ -99,6 +112,7 @@ export default function RootLayout({ children }) {
             <Header />
             <div style={{ minHeight: "100vh" }}>{children}</div>
             <Footer />
+            <Display />
           </ReduxProvider>
         </CookiesProvider>
       </body>

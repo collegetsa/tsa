@@ -193,4 +193,51 @@ const stopWords = [
   "yourselves",
 ];
 
-export { capitalizeWords, customStyles, stopWords };
+const transporterOptions = {
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "collegetsainfo@gmail.com@gmail.com",
+    pass: "mqkukeayecsdknzc",
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+};
+
+const mailOptions = (to, type, postData) => {
+  let subject;
+  let html;
+  console.log(postData);
+  if (type === "free-counseling") {
+    subject = "You are Successfully Applied Free Counsling!";
+    html = `<h4>Hi ${to}</h4>
+   `;
+  } else if (type === "new-post") {
+    subject = "Check Out Our Latest Post on FindbestOne! 🌟";
+    html = `<h1><a href=${postData?.pageUrl}>${postData?.blogData?.title}</a></h1>
+    <p>${postData?.blogData?.description}</p>
+    <p><a href=${postData?.pageUrl}>View More...</a></p>
+    <a href=${postData?.pageUrl}><img src=${postData?.blogData?.titleImage}/></a>
+    <p>Thank you for being part of our community. We can't wait to hear what you think!</p>
+    <p>Warm regards,</p>
+    <b>The FindbestOne Team</b>`;
+  }
+
+  const options = {
+    from: "collegetsainfo@gmail.com@gmail.com",
+    to: to,
+    subject: subject,
+    html: html,
+  };
+  return options;
+};
+
+export {
+  capitalizeWords,
+  customStyles,
+  stopWords,
+  transporterOptions,
+  mailOptions,
+};

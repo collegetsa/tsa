@@ -1,14 +1,22 @@
 @media (max-width: 600px) {
     .home-bg {
-        background-image: url(../images/home2.webp);
+        background-position: 30px 350px;
+            height: 650px;
     }
 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .home-bg-group {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    position: absolute;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    left: 15px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    top: 50px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width: 95%;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .animation {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height: 25px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    font-size: 17px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
     .ReactModal__Content {
         width: 100% !important;
-    }
-
-    .input-search-select {
-        width: 95%;
     }
 
     .select-search {
@@ -39,18 +47,23 @@
 
     .course-field-group {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: auto;
         justify-content: space-evenly;
-        margin: 5% 5%;
     }
 
     .form-left {
         display: none;
     }
 
-    .text-image-group {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .text-image-group-content {
         display: flex;
         flex-direction: column;
+        width: 90%;
+        }
+        
+        .text-image-group-content img {
+            width: 90% !important;
+            height: auto;
     }
 
     .table {
@@ -90,7 +103,7 @@
     }
 
     .template {
-        padding: 25px 0px;
+        padding: 40px 10px;
     }
 
     .template-icons-group {
@@ -102,19 +115,29 @@
     .separete-line {
         display: none;
     }
+.social-group-template {
+    display: flex;
+    flex-direction: column-reverse;
+    row-gap: 10px;
+}
 }
 
 @media (min-width: 600px) and (max-width: 768px) {
-    .menu-icon {
-            display: block;
-            cursor: pointer;
-        }
     .home-bg {
-        background-image: url(../images/home2.webp);
-    }
+            background-position: 50px 300px;
+            height: 100vh;
+        }
+    
+        .home-bg-group {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            width: 90%;
+        }
+    .menu-icon {
+        display: block;
+            cursor: pointer;
 
-    .input-search-select {
-        width: 80%;
     }
 
     .select-search {
@@ -123,15 +146,27 @@
 
     .course-field-group {
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: auto auto;
+            margin: 2% 5%;
     }
 
     .form-left {
-        width: 240px;
+        display: none;
     }
 
     .form-right {
-        width: 300px;
+        width: 400px;
+        }
+        
+        .text-image-group-content {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+        }
+        
+        .text-image-group-content img {
+            width: 90% !important;
+            height: auto;
     }
 
     .table {
@@ -152,23 +187,25 @@
         align-items: start;
     }
 
-    .template h1 {
-        font-size: 18px;
-    }
-
     .separete-line {
         display: none;
     }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
+    .home-bg {
+            background-position: 450px 0px;
+        }
+    
+        .home-bg-group {
+            position: absolute;
+            left: 50px;
+            top: 100px;
+            width: 500px;
+        }
     .course-field-group {
         display: grid;
-        grid-template-columns: auto auto auto auto;
-    }
-
-    .input-search-select {
-        width: 60%;
+        grid-template-columns: auto auto;
     }
 
     .select-search {
@@ -183,6 +220,10 @@
         width: 350px;
     }
 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .text-image-group-content {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display: flex;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    flex-direction: column;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
     .content-page {
         width: 90%;
     }
@@ -192,13 +233,24 @@
     }
 }
 
+
 @media (min-width: 992px) and (max-width: 1200px) {
-    .course-field-group {
-        display: grid;
-        grid-template-columns: auto auto auto auto auto;
+    .home-bg {
+            background-position: 500px 0px;
+        }
+    
+        .home-bg-group {
+            position: absolute;
+            left: 50px;
+            top: 100px;
+            width: 500px;
     }
 
     .content-page {
         width: 80%;
     }
+.text-image-group-content {
+    display: flex;
+    flex-direction: column;
+}
 }

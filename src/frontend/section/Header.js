@@ -23,6 +23,18 @@ function Header() {
     }
   }, []);
 
+  const CourseList = [
+    { courseField: "Enginnering", url: "engineering" },
+    { courseField: "Arts & Science", url: "arts-science" },
+    { courseField: "Medical", url: "medical" },
+    { courseField: "Agriculture", url: "agriculture" },
+    { courseField: "Law", url: "law" },
+    { courseField: "Hotel Management", url: "hotel-management" },
+    { courseField: "Animation", url: "animation" },
+    { courseField: "Marine", url: "marine" },
+    { courseField: "Education", url: "education" },
+  ];
+
   return (
     <React.Fragment>
       <Toaster />
@@ -36,7 +48,7 @@ function Header() {
                 height={40}
                 alt="CollegeTSA"
               />
-              <span className="logo-text ml-10">COLLEGE TSA</span>
+              <h3 className="font-head font-20">College TSA</h3>
             </div>
           </Link>
           {!showNavbar ? (
@@ -63,20 +75,79 @@ function Header() {
               <li onClick={() => setShowNavbar(false)}>
                 <Link href="/">Home</Link>
               </li>
-              <li
-                onClick={() => {
-                  setShowNavbar(false);
-                  disPatch(setCourseField(""));
-                }}>
-                <Link href="/college">Colleges</Link>
+              <li className="dropdown">
+                <div className="dropdown-arrow">
+                  <span>Colleges</span>
+                  <Image
+                    src="/images/down-arrow.png"
+                    width={20}
+                    height={20}
+                    alt=""
+                    className="cursor-pointer dropbtn ml-5"
+                  />
+                </div>
+                <div className="dropdown-content">
+                  <div>
+                    <Link href="/college">Top Colleges in 2024</Link>
+                  </div>
+                  {CourseList?.map((item, index) => (
+                    <div className="mt-20" key={index}>
+                      <Link href={`/college?collegetype=${item?.url}`}>
+                        {item?.courseField} Colleges in 2024
+                      </Link>
+                    </div>
+                  ))}
+                </div>
               </li>
-              <li onClick={() => setShowNavbar(false)}>Updates</li>
-              <li onClick={() => setShowNavbar(false)}>Exams</li>
-              <li onClick={() => setShowNavbar(false)}>
-                <Link href="/university">University</Link>
+              <li className="dropdown">
+                <div className="dropdown-arrow">
+                  <span>Course</span>
+                  <Image
+                    src="/images/down-arrow.png"
+                    width={20}
+                    height={20}
+                    alt=""
+                    className="cursor-pointer dropbtn ml-5"
+                  />
+                </div>
+                <div className="dropdown-content">
+                  {CourseList?.map((item, index) => (
+                    <div className={index !== 0 && "mt-20"} key={index}>
+                      <Link href={`/course/${item?.url}`}>
+                        {item?.courseField} Courses in 2024
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </li>
+              <li className="dropdown">
+                <div className="dropdown-arrow">
+                  <span>Updates</span>
+                  <Image
+                    src="/images/down-arrow.png"
+                    width={20}
+                    height={20}
+                    alt=""
+                    className="cursor-pointer dropbtn ml-5"
+                  />
+                </div>
+                <div className="dropdown-content">
+                  <div>
+                    <Link href="/university">Top Universities in 2024</Link>
+                  </div>
+                  <div className="mt-20">
+                    <Link href="/exams">Top Exams</Link>
+                  </div>
+                  <div className="mt-20">
+                    <Link href="/latest-news">Latest News</Link>
+                  </div>
+                </div>
               </li>
               <li onClick={() => setShowNavbar(false)}>
-                <Link href="/aboard">Aboard</Link>
+                <Link href="/abroad">Abroad</Link>
+              </li>
+              <li onClick={() => setShowNavbar(false)}>
+                <Link href="/contact">Contact Us</Link>
               </li>
               {auth?.email ? (
                 <React.Fragment>
@@ -93,7 +164,7 @@ function Header() {
                       </span>
                       <span>
                         <Image
-                          src="/images/drop-down-arrow.png"
+                          src="/images/down-arrow.png"
                           width={20}
                           height={20}
                           alt=""
@@ -101,7 +172,7 @@ function Header() {
                         />
                       </span>
                     </div>
-                    <div className="dropdown-content">
+                    <div className="dropdown-content" style={{ right: "0" }}>
                       <div
                         style={{ display: "flex", alignItems: "center" }}
                         className="cursor-pointer mb-20"

@@ -33,7 +33,9 @@ export default function Table() {
               }}>
               <td>{item.id}</td>
               <td>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="pt-5 pb-5">
                   <Image
                     src={item.logo}
                     width={30}

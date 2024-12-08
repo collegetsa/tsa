@@ -93,9 +93,9 @@ const AuthPage = ({ authType }) => {
   return (
     <div className="auth-page mt-30 mb-30">
       <div className="auth-group">
-        <h2 className="text-center mb-40">
+        <h2 className="text-center">
           {authType === "login"
-            ? "Log in to your account"
+            ? "Log in to Your Account"
             : "Create New Acoount"}
         </h2>
         {authType === "register" && (
@@ -159,8 +159,8 @@ const AuthPage = ({ authType }) => {
             <button onClick={login} className="btn auth-btn">
               Login
             </button>
-            <p>
-              Don’t have an Account? <Link href="/register">Register Now!</Link>
+            <p className="text-underline-hover">
+              Don't have an Account? <Link href="/register">Register Now!</Link>
             </p>
           </React.Fragment>
         )}
@@ -169,7 +169,7 @@ const AuthPage = ({ authType }) => {
             <button onClick={register} className="btn auth-btn">
               Register
             </button>
-            <p>
+            <p className="text-underline-hover">
               Already have an account? <Link href="/login">Login Now!</Link>
             </p>
           </React.Fragment>
