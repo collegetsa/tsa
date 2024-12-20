@@ -40,6 +40,7 @@ export const GET = async (request) => {
     const pageUrl = getQueryParam("pageUrl");
     const search = decodeURIComponent(getQueryParam("search"));
     const collegetype = getQueryParam("collegetype");
+    console.log("collegetype", collegetype);
     const location = getQueryParam("location");
     const ownership = getQueryParam("ownership");
     const university = getQueryParam("university");
@@ -91,6 +92,9 @@ export const GET = async (request) => {
     }
     if (type === "get-length") {
       data = await College.aggregate([
+        {
+          $match: query,
+        },
         {
           $group: {
             _id: "$pageUrl",

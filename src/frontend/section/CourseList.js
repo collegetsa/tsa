@@ -141,7 +141,7 @@ const CourseList = ({ data, fieldText }) => {
             <button
               className="btn mt-20"
               onClick={() => {
-                router?.push("/college");
+                router?.push(`/college?collegeType=${fieldText}`);
                 disPatch(setCourseField(fieldText));
               }}>
               Top {textShow} Colleges

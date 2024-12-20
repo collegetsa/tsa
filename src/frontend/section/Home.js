@@ -7,6 +7,7 @@ import Table from "./Table";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
+import CounterComponent from "../component/CounterComponent";
 
 export default function Home({ courseCount }) {
   const router = useRouter();
@@ -168,8 +169,7 @@ export default function Home({ courseCount }) {
         <div className="text-image-group-content">
           <div>
             <h2 className="font-head">
-              Why it is important to choose the Right College for your
-              professional carrier?
+              Why it is important to choose the Right Course and College?
             </h2>
             <p>
               Choosing a quality college is one of the significant decisions
@@ -185,10 +185,45 @@ export default function Home({ courseCount }) {
           </div>
           <Image
             src="/images/why-important.svg"
-            width={600}
-            height={300}
+            width={500}
+            height={250}
             alt=""
           />
+        </div>
+      </div>
+      <div className="counter-animation mb-50 mt-50">
+        <div>
+          <Image
+            src="/images/students.png"
+            width={50}
+            height={50}
+            alt=""
+            className="mb-7"
+          />
+          <CounterComponent start={1800} end={2000} time={1500} />
+          <p className="m-auto">Students Applied</p>
+        </div>
+        <div>
+          <Image
+            src="/images/experience-years.png"
+            width={50}
+            height={50}
+            alt=""
+            className="mb-7"
+          />
+          <CounterComponent start={0} end={10} time={1500} />
+          <p className="m-auto">Years Experience</p>
+        </div>
+        <div>
+          <Image
+            src="/images/countries.png"
+            width={50}
+            height={50}
+            alt=""
+            className="mb-7"
+          />
+          <CounterComponent start={0} end={8} time={1500} />
+          <p className="m-auto">Countries</p>
         </div>
       </div>
       <Table />

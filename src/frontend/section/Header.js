@@ -48,7 +48,7 @@ function Header() {
                 height={40}
                 alt="CollegeTSA"
               />
-              <h3 className="font-head font-20">College TSA</h3>
+              <h3 className="font-20">College TSA</h3>
             </div>
           </Link>
           {!showNavbar ? (
@@ -87,11 +87,14 @@ function Header() {
                   />
                 </div>
                 <div className="dropdown-content">
-                  <div>
+                  <div onClick={() => setShowNavbar(false)}>
                     <Link href="/college">Top Colleges in 2024</Link>
                   </div>
                   {CourseList?.map((item, index) => (
-                    <div className="mt-20" key={index}>
+                    <div
+                      className="mt-20"
+                      key={index}
+                      onClick={() => setShowNavbar(false)}>
                       <Link href={`/college?collegetype=${item?.url}`}>
                         {item?.courseField} Colleges in 2024
                       </Link>
@@ -112,7 +115,10 @@ function Header() {
                 </div>
                 <div className="dropdown-content">
                   {CourseList?.map((item, index) => (
-                    <div className={index !== 0 && "mt-20"} key={index}>
+                    <div
+                      className={index !== 0 && "mt-20"}
+                      key={index}
+                      onClick={() => setShowNavbar(false)}>
                       <Link href={`/course/${item?.url}`}>
                         {item?.courseField} Courses in 2024
                       </Link>
@@ -132,13 +138,13 @@ function Header() {
                   />
                 </div>
                 <div className="dropdown-content">
-                  <div>
+                  <div onClick={() => setShowNavbar(false)}>
                     <Link href="/university">Top Universities in 2024</Link>
                   </div>
-                  <div className="mt-20">
+                  <div className="mt-20" onClick={() => setShowNavbar(false)}>
                     <Link href="/exams">Top Exams</Link>
                   </div>
-                  <div className="mt-20">
+                  <div className="mt-20" onClick={() => setShowNavbar(false)}>
                     <Link href="/latest-news">Latest News</Link>
                   </div>
                 </div>

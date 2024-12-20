@@ -198,8 +198,8 @@ const transporterOptions = {
   port: 465,
   secure: true,
   auth: {
-    user: "collegetsainfo@gmail.com@gmail.com",
-    pass: "mqkukeayecsdknzc",
+    user: "collegetsainfo@gmail.com",
+    pass: "qpeezjnqkpflpdzh",
   },
   tls: {
     rejectUnauthorized: false,
@@ -209,11 +209,23 @@ const transporterOptions = {
 const mailOptions = (to, type, postData) => {
   let subject;
   let html;
-  console.log(postData);
   if (type === "free-counseling") {
-    subject = "You are Successfully Applied Free Counsling!";
-    html = `<h4>Hi ${to}</h4>
-   `;
+    subject = "Thank you for Applied Free Counseling - CollegeTSA";
+    html = `<h4>Congratulations! 🎉 ${postData?.studentName}</h4>
+            <p>You have successfully applied for Free Counseling with <b>CollegeTSA!</b></p>
+            <p>Our team of experts will soon reach out to guide you in choosing the best courses and colleges based on your marks, interests, and goals. We are committed to helping students like you achieve academic and career success.</p>
+            <h4>📞 What's Next?</h4>
+            <ul>
+              <li>One of our experienced counselors will reach out to you shortly.</li>
+              <li>We will guide you through tailored advice, course suggestions, and college recommendations.</li>
+            </ul>
+            <h4>💡 Why Choose CollegeTSA?</h4>
+            <ul>
+            <li>Expert career guidance from professionals.</li>
+            <li>Personalized course and college recommendations.</li>
+            <li>A seamless counseling experience to help you make the right choice for your future.</li>
+            </ul>
+            <p>Stay tuned! We're here to make your educational journey effortless and successful.</p>`;
   } else if (type === "new-post") {
     subject = "Check Out Our Latest Post on FindbestOne! 🌟";
     html = `<h1><a href=${postData?.pageUrl}>${postData?.blogData?.title}</a></h1>
@@ -223,10 +235,18 @@ const mailOptions = (to, type, postData) => {
     <p>Thank you for being part of our community. We can't wait to hear what you think!</p>
     <p>Warm regards,</p>
     <b>The FindbestOne Team</b>`;
+  } else if (type === "admin-alert") {
+    subject = "New Student Alert! Applied for Free Counseling";
+    html = `<h4>Hi Admin</h4>
+    <p>${postData?.studentName} applied for free counseling. Please find below for student detail.</p>
+    <p><b>Name:</b> ${postData?.studentName}</p>
+    <p><b>Phone:</b> <a href='tel:${postData?.phone}'>${postData?.phone}</a></p>
+    <p><b>Email:</b> ${postData?.email}</p>
+    <p><b>Interest:</b> ${postData?.interest}</p>`;
   }
 
   const options = {
-    from: "collegetsainfo@gmail.com@gmail.com",
+    from: "collegetsainfo@gmail.com",
     to: to,
     subject: subject,
     html: html,

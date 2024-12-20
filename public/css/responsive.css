@@ -1,20 +1,21 @@
 @media (max-width: 600px) {
     .home-bg {
         background-position: 30px 350px;
-            height: 650px;
+        height: 650px;
     }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .home-bg-group {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    position: absolute;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    left: 15px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    top: 50px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    width: 95%;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .animation {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    height: 25px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    font-size: 17px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+    .home-bg-group {
+        position: absolute;
+        left: 15px;
+        top: 50px;
+        width: 95%;
+    }
+
+    .animation {
+        height: 25px;
+        font-size: 17px;
+    }
+
     .ReactModal__Content {
         width: 100% !important;
     }
@@ -55,15 +56,15 @@
         display: none;
     }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .text-image-group-content {
+    .text-image-group-content {
         display: flex;
         flex-direction: column;
         width: 90%;
-        }
-        
-        .text-image-group-content img {
-            width: 90% !important;
-            height: auto;
+    }
+
+    .text-image-group-content img {
+        width: 90% !important;
+        height: auto;
     }
 
     .table {
@@ -104,6 +105,7 @@
 
     .template {
         padding: 40px 10px;
+        height: 350px;
     }
 
     .template-icons-group {
@@ -112,31 +114,42 @@
         align-items: start;
     }
 
+    .template-action-group {
+        display: none;
+    }
+
     .separete-line {
         display: none;
     }
-.social-group-template {
-    display: flex;
-    flex-direction: column-reverse;
-    row-gap: 10px;
-}
+
+    .social-group-template {
+        display: flex;
+        flex-direction: column-reverse;
+        row-gap: 10px;
+    }
+
+    .template-action-group-sm {
+        display: block;
+    }
+
 }
 
 @media (min-width: 600px) and (max-width: 768px) {
     .home-bg {
-            background-position: 50px 300px;
-            height: 100vh;
-        }
-    
-        .home-bg-group {
-            position: absolute;
-            left: 30px;
-            top: 30px;
-            width: 90%;
-        }
+        background-position: 50px 300px;
+        height: 100vh;
+    }
+
+    .home-bg-group {
+        position: absolute;
+        left: 30px;
+        top: 30px;
+        width: 90%;
+    }
+
     .menu-icon {
         display: block;
-            cursor: pointer;
+        cursor: pointer;
 
     }
 
@@ -147,7 +160,7 @@
     .course-field-group {
         display: grid;
         grid-template-columns: auto auto;
-            margin: 2% 5%;
+        margin: 2% 5%;
     }
 
     .form-left {
@@ -156,17 +169,17 @@
 
     .form-right {
         width: 400px;
-        }
-        
-        .text-image-group-content {
-            display: flex;
-            flex-direction: column;
-            width: 90%;
-        }
-        
-        .text-image-group-content img {
-            width: 90% !important;
-            height: auto;
+    }
+
+    .text-image-group-content {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .text-image-group-content img {
+        width: 90% !important;
+        height: auto;
     }
 
     .table {
@@ -179,6 +192,7 @@
 
     .template {
         padding: 40px 5%;
+        height: 375px !important;
     }
 
     .template-icons-group {
@@ -187,22 +201,35 @@
         align-items: start;
     }
 
+    .template-action-group {
+        display: none;
+    }
+
     .separete-line {
         display: none;
+    }
+
+    .template {
+        height: 350px;
+    }
+
+    .template-action-group-sm {
+        display: block;
     }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
     .home-bg {
-            background-position: 450px 0px;
-        }
-    
-        .home-bg-group {
-            position: absolute;
-            left: 50px;
-            top: 100px;
-            width: 500px;
-        }
+        background-position: 450px 0px;
+    }
+
+    .home-bg-group {
+        position: absolute;
+        left: 50px;
+        top: 100px;
+        width: 500px;
+    }
+
     .course-field-group {
         display: grid;
         grid-template-columns: auto auto;
@@ -220,10 +247,11 @@
         width: 350px;
     }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                .text-image-group-content {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    display: flex;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    flex-direction: column;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+    .text-image-group-content {
+        display: flex;
+        flex-direction: column;
+    }
+
     .content-page {
         width: 90%;
     }
@@ -236,21 +264,22 @@
 
 @media (min-width: 992px) and (max-width: 1200px) {
     .home-bg {
-            background-position: 500px 0px;
-        }
-    
-        .home-bg-group {
-            position: absolute;
-            left: 50px;
-            top: 100px;
-            width: 500px;
+        background-position: 500px 0px;
+    }
+
+    .home-bg-group {
+        position: absolute;
+        left: 50px;
+        top: 100px;
+        width: 500px;
     }
 
     .content-page {
         width: 80%;
     }
-.text-image-group-content {
-    display: flex;
-    flex-direction: column;
-}
+
+    .text-image-group-content {
+        display: flex;
+        flex-direction: column;
+    }
 }

@@ -31,6 +31,15 @@ export const POST = async (request) => {
         message,
       })
     );
+     await transporter.sendMail(
+       mailOptions("collegetsainfo@gmail.com", "admin-alert", {
+         studentName,
+         email,
+         phone,
+         interest,
+         message,
+       })
+     );
     return NextResponse.json(
       { message: "User added successfully" },
       { status: 201 }

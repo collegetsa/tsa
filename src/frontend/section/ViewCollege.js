@@ -179,40 +179,70 @@ const ViewCollege = ({ data, addCollege, deleteCollege, type }) => {
                     </span>
                   </div>
                 </div>
+                <div className="template-action-group mt-30">
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      disPatch(
+                        setForm({
+                          isForm: true,
+                          title: data?.collegeName,
+                          type: "admission",
+                          logo: data?.logo,
+                        })
+                      );
+                    }}>
+                    Apply College
+                  </button>
+                  <button
+                    className="btn ml-20"
+                    onClick={() =>
+                      document
+                        .getElementById("course-list")
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }>
+                    Available Courses
+                  </button>
+                  <button
+                    className="btn ml-20"
+                    onClick={() => {
+                      router.push("/college");
+                      disPatch(setCourseField(""));
+                    }}>
+                    More Colleges
+                  </button>
+                </div>
+                <div className="template-action-group-sm mt-30">
+                  <p
+                    onClick={() => {
+                      disPatch(
+                        setForm({
+                          isForm: true,
+                          title: data?.collegeName,
+                          type: "admission",
+                          logo: data?.logo,
+                        })
+                      );
+                    }}>
+                    <u>Apply</u>
+                  </p>
+                  <p
+                    onClick={() =>
+                      document
+                        .getElementById("course-list")
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }>
+                    <u>Available Courses</u>
+                  </p>
+                  <p
+                    onClick={() => {
+                      router.push("/college");
+                      disPatch(setCourseField(""));
+                    }}>
+                    <u>More Colleges</u>
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="template-action-group content-page mt-30">
-              <button
-                className="btn"
-                onClick={() => {
-                  disPatch(
-                    setForm({
-                      isForm: true,
-                      title: data?.collegeName,
-                      type: "admission",
-                      logo: data?.logo,
-                    })
-                  );
-                }}>
-                Apply College
-              </button>
-              <button
-                className="btn ml-20"
-                onClick={() =>
-                  document
-                    .getElementById("course-list")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }>
-                Available Courses
-              </button>
-              <button
-                className="btn ml-20"
-                onClick={() => {
-                  router.push("/college");
-                  disPatch(setCourseField(""));
-                }}>
-                More Colleges
-              </button>
             </div>
           </div>
           <div

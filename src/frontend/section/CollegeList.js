@@ -25,36 +25,40 @@ const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
   const [locations, setLocations] = useState([]);
   const [_search] = useDebounce(search, 1000);
 
+  useEffect(() => {
+    if (_search?.length > 0) {
+      updateParams("search", _search);
+    }
+  }, [_search]);
+
   function updateParams(name, value) {
-    const updatedSelect = {
-      ...select,
-      [name]: value,
-    };
+    const queryParams = new URLSearchParams(searchParams);
+    const searchRemove = [
+      "ownership",
+      "collegeType",
+      "location",
+      "university",
+      "page",
+      "search",
+    ];
 
-    const params = new URLSearchParams({
-      search: _search,
-      page: searchParams?.page || "",
-      collegetype: updatedSelect.collegeType,
-      location: updatedSelect.location,
-      ownership: updatedSelect.ownership,
-      university: updatedSelect.university,
-    });
+    if (name === "clearAll") {
+      searchRemove?.forEach((key) => queryParams?.delete(key));
+    }
 
-    router.push(`/college/?${params.toString()}`);
+    if (value) {
+      queryParams.set(name, value);
+    } else {
+      queryParams.delete(name);
+    }
+
+    router.push(`/college/?${queryParams.toString()}`);
   }
-
-  // useEffect(() => {
-  //   updateParams();
-  // }, [_search, select]);
-
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSelect((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      return { ...prev, [name]: value };
     });
     updateParams(name, value);
   };
@@ -68,6 +72,10 @@ const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
       setLocations(data);
     };
     fetchLocation();
+  }, []);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -120,9 +128,7 @@ const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
                   onChange={handleChange}>
                   <option value="">Select</option>
                   {locations?.map((item, index) => (
-                    <option
-                      key={index}
-                      value={item?._id?.toLowerCase()?.split(",")[0]}>
+                    <option key={index} value={item?._id?.toLowerCase()}>
                       {item?._id}
                     </option>
                   ))}
@@ -167,7 +173,6 @@ const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
             </div>
           </div>
           <div
-            style={{ display: "flex", alignItems: "center" }}
             className="ml-20 cursor-pointer"
             onClick={() => {
               setSelect({
@@ -177,9 +182,9 @@ const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
                 university: "",
               });
               setSearch("");
+              updateParams("clearAll");
             }}>
             <Image src="/images/reset.png" width={20} height={20} alt="" />
-            <span className="ml-7">Clear All</span>
           </div>
         </div>
         <input
@@ -189,6 +194,9 @@ const CollegeList = ({ CollegeLists, searchParams, totalColleges }) => {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
+            if (e.target.value?.length === 0) {
+              updateParams("search", e.target.value);
+            }
           }}
         />
       </div>

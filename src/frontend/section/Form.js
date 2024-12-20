@@ -671,11 +671,13 @@ export default function Form() {
       <div className="form">
         <div className="form-left">
           <div className="form-left-content">
-            <h1 className="font-head fw-600">Why Choose CollegeTSA?</h1>
-            <p>
+            <h1 className="font-head fw-600">
+              Dream Comes True with CollegeTSA
+            </h1>
+            {/* <p>
               CollegeTSA is your trusted partner in finding the best colleges
               and courses based on your marks and interest.
-            </p>
+            </p> */}
             <div className="promotion-group mt-30">
               <div className="promotion">
                 <Image
@@ -711,9 +713,7 @@ export default function Form() {
                 </p>
               </div>
             </div>
-            <div
-              className="mt-30"
-              style={{ display: "flex", columnGap: "10px" }}>
+            <div style={{ display: "flex", columnGap: "10px" }}>
               <a href="tel:9677869617" style={{ color: "#fff" }}>
                 <span>
                   <Image

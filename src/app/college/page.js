@@ -72,7 +72,7 @@ export const metadata = {
 
 const getCollegeList = async (searchParams) => {
   const search = searchParams?.search || "";
-  const collegetype = searchParams?.collegetype || "";
+  const collegetype = searchParams?.collegeType || "";
   const location = searchParams?.location || "";
   const ownership = searchParams?.ownership || "";
   const university = searchParams?.university || "";
@@ -91,9 +91,18 @@ const getCollegeList = async (searchParams) => {
   }
 };
 
-const getCollegesCount = async () => {
+const getCollegesCount = async (searchParams) => {
+  const search = searchParams?.search || "";
+  const collegetype = searchParams?.collegeType || "";
+  const location = searchParams?.location || "";
+  const ownership = searchParams?.ownership || "";
+  const university = searchParams?.university || "";
+
+  const page = searchParams?.page || "";
+  const query = `type=get-length&search=${search}&collegetype=${collegetype}&location=${location}&ownership=${ownership}&university=${university}&page=${page}`;
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/college?type=get-length`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/college?${query}`,
     {
       cache: "no-store",
     }
@@ -106,7 +115,6 @@ const getCollegesCount = async () => {
 export default async function page({ searchParams }) {
   const CollegeLists = await getCollegeList(searchParams);
   const totalColleges = await getCollegesCount(searchParams);
-  console.log("COUNT", totalColleges[0]?.totalCount);
   return (
     <CollegeList
       CollegeLists={CollegeLists}

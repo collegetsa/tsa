@@ -36,7 +36,9 @@ body {
     display: flex;
     align-items: center;
     color: #EC2F8D !important;
-        column-gap: 10px;
+    column-gap: 10px;
+    font-family: 'Geist' !important;
+        font-size: 22px;
 }
 
 .menu-icon {
