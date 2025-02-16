@@ -133,7 +133,9 @@ const CourseList = ({ data, fieldText }) => {
             />
           </div>
           <div className="ml-25">
-            <h1 className="font-head">{textShow} Courses in 2024</h1>
+            <h1 className="font-head">
+              {textShow} Courses in {new Date().getFullYear()}
+            </h1>
             <div>
               <span>{data?.length} Courses</span>
               <span className="ml-20">Top {textShow} Exams</span>

@@ -254,10 +254,32 @@ const mailOptions = (to, type, postData) => {
   return options;
 };
 
+const currentDate = () => {
+  const monthName = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const day = new Date().getDate();
+  const Month = monthName[new Date().getMonth()];
+  const year = new Date().getFullYear();
+  return day + " " + Month + ", " + year;
+};
+
 export {
   capitalizeWords,
   customStyles,
   stopWords,
   transporterOptions,
   mailOptions,
+  currentDate,
 };

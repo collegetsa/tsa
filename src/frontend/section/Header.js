@@ -88,7 +88,9 @@ function Header() {
                 </div>
                 <div className="dropdown-content">
                   <div onClick={() => setShowNavbar(false)}>
-                    <Link href="/college">Top Colleges in 2024</Link>
+                    <Link href="/college">
+                      Top Colleges in {new Date().getFullYear()}
+                    </Link>
                   </div>
                   {CourseList?.map((item, index) => (
                     <div
@@ -96,7 +98,8 @@ function Header() {
                       key={index}
                       onClick={() => setShowNavbar(false)}>
                       <Link href={`/college?collegetype=${item?.url}`}>
-                        {item?.courseField} Colleges in 2024
+                        {item?.courseField} Colleges in{" "}
+                        {new Date().getFullYear()}
                       </Link>
                     </div>
                   ))}
@@ -120,7 +123,8 @@ function Header() {
                       key={index}
                       onClick={() => setShowNavbar(false)}>
                       <Link href={`/course/${item?.url}`}>
-                        {item?.courseField} Courses in 2024
+                        {item?.courseField} Courses in{" "}
+                        {new Date().getFullYear()}
                       </Link>
                     </div>
                   ))}
@@ -139,7 +143,9 @@ function Header() {
                 </div>
                 <div className="dropdown-content">
                   <div onClick={() => setShowNavbar(false)}>
-                    <Link href="/university">Top Universities in 2024</Link>
+                    <Link href="/university">
+                      Top Universities in {new Date().getFullYear()}
+                    </Link>
                   </div>
                   <div className="mt-20" onClick={() => setShowNavbar(false)}>
                     <Link href="/exams">Top Exams</Link>
@@ -265,6 +271,23 @@ function Header() {
                                 />
                               </span>
                               <span>Create Course</span>
+                            </Link>
+                          </div>
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                            className="cursor-pointer mb-20"
+                            onClick={() => setShowNavbar(false)}>
+                            <Link href="/admin/update/create">
+                              <span>
+                                <Image
+                                  src="/images/update.png"
+                                  width={20}
+                                  height={20}
+                                  alt=""
+                                  className="mr-10"
+                                />
+                              </span>
+                              <span>Create Update</span>
                             </Link>
                           </div>
                         </React.Fragment>

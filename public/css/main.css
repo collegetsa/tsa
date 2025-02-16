@@ -975,6 +975,11 @@
     font-size: 20px;
 }
 
+.font-25 {
+    font-size: 25px;
+}
+
+
 .font-12 {
     font-size: 12px !important;
 }
@@ -1023,6 +1028,10 @@ a {
     text-decoration: none;
     display: contents !important;
     color: #000;
+}
+
+.border-0 {
+    border-radius: 2px !important;
 }
 
 .text-center {
@@ -1080,7 +1089,7 @@ a {
 }
 
 .content-page {
-    width: 70%;
+    width: 60%;
     line-height: 2.2 !important;
 }
 

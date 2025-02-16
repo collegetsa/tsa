@@ -18,6 +18,7 @@ const EditorQuill = ({ data, setData }) => {
         modules={EditorQuill.modules}
         formats={EditorQuill.formats}
         bounds={".app"}
+        placeholder="Enter your data..."
       />
     </React.Fragment>
   );

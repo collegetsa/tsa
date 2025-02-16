@@ -70,7 +70,8 @@ export default function Display() {
         </a>
       </div>
       <button
-        className="btn home-btn"
+        className="btn"
+        style={{ borderRadius: "1px", padding: "10px 20px" }}
         onClick={() => {
           disPatch(
             setForm({

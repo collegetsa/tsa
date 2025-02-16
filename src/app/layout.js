@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { CookiesProvider } from "next-client-cookies/server";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Display from "@/frontend/section/Display";
+import GoogleAnalyticsInitialized from "@/frontend/component/GoogleAnalyticsInitialized";
 
 const Header = dynamic(() => import("@/frontend/section/Header"));
 const Footer = dynamic(() => import("@/frontend/section/Footer"));
@@ -113,6 +114,7 @@ export default function RootLayout({ children }) {
         {/* <script src="https://cdn.tailwindcss.com"></script> */}
       </head>
       <GoogleAnalytics gaId="G-P3XPYXDE9Q" />
+      <GoogleAnalyticsInitialized />
       <body>
         <CookiesProvider>
           <ReduxProvider>

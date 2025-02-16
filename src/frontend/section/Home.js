@@ -8,8 +8,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import CounterComponent from "../component/CounterComponent";
+import { CardCarousal } from "../component/CardCarousal";
+import { trackGAEvent } from "../google-analytics";
 
-export default function Home({ courseCount }) {
+export default function Home({ courseCount, updates }) {
   const router = useRouter();
   const disPatch = useDispatch();
   const auth = useSelector((state) => state.app.auth);
@@ -191,6 +193,8 @@ export default function Home({ courseCount }) {
           />
         </div>
       </div>
+      <h2 className="text-center mt-50">Latest Updates & News</h2>
+      <CardCarousal updates={updates} />
       <div className="counter-animation mb-50 mt-50">
         <div>
           <Image
